@@ -7,6 +7,7 @@ abstract class AbsPlayer {
     protected String name;
     protected int DialogueID; //for calling character specfic/player type specfifc dialogue
     protected ArrayList<Card> hand;
+    protected String catchphrase;
 
     public void drawCards(ArrayList<Card> cardsGiven){
         hand = cardsGiven;
