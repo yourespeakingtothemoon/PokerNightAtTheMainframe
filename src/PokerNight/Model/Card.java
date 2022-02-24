@@ -11,6 +11,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return this.rank + " of " + this.suit; //e.g. ACE of CLUBS, KING of HEARTS
+        return this.rank.toString() + this.suit.toString(); //e.g. ACE of CLUBS, KING of HEARTS
     }
 }
