@@ -1,4 +1,4 @@
 package PokerNight.Model;
 
-public interface IPlayer {
+public class Dialogue {
 }
