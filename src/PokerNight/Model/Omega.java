@@ -1,4 +1,10 @@
 package PokerNight.Model;
 
-public class Omega {
+import java.util.ArrayList;
+
+public class Omega extends AbsPlayer {
+    @Override
+    public void turn(ArrayList<Card> openCards) {
+
+    }
 }

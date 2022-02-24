@@ -2,7 +2,7 @@ package PokerNight.Model;
 
 import java.util.ArrayList;
 
-abstract class AbsPlayer {
+public abstract class AbsPlayer {
     //Player Properties
     protected String name;
     protected int DialogueID; //for calling character specfic/player type specfifc dialogue
@@ -14,4 +14,28 @@ abstract class AbsPlayer {
     }
 
     abstract public void turn(ArrayList<Card> openCards);
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getDialogueID() {
+        return DialogueID;
+    }
+
+    public void setDialogueID(int dialogueID) {
+        DialogueID = dialogueID;
+    }
+
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
+
+    public void setHand(ArrayList<Card> hand) {
+        this.hand = hand;
+    }
 }
