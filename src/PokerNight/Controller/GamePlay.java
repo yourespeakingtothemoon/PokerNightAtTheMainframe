@@ -28,6 +28,7 @@ public class GamePlay {
         //Increase blinds
         //Reset board, burned cards, pocket cards, deck, pot
         //loop through players, doing turns
+            //If player folds, allow them to skip to next round
         //Drop players (probably from a new ArrayList like remainingPlayers) when they fold
         //Keep track of money, check each player's hand by combining board and pocket to determine best hand
         //After first betting round, do flop
@@ -38,6 +39,7 @@ public class GamePlay {
         //Check at the beginning of a round if only one player has money, throw win condition
             //If Human is the last remaining player, allow them to add acronym to save high score
             //We need to figure out how we want to do score lmao
+            //If human player is out, allow them to spectate or leave the game
 
         //Return to main menu
 

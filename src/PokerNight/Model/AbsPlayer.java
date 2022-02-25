@@ -14,7 +14,7 @@ public abstract class AbsPlayer {
         pocket = cardsGiven;
     }
 
-    abstract public void turn(ArrayList<Card> openCards);
+    abstract public void turn(ArrayList<Card> openCards); //Implemented in each concrete class
 
     public String getName() {
         return name;
