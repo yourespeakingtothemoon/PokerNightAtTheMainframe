@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>112</x>
+      <y>672</y>
+      <w>70</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes>_Model_
+--
+Card
+Deck
+Rank 
+Suit
+--
+--
+absPlayer
+^implements^
+Human
+Alpha
+Beta
+Sigma
+Omega
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>189</x>
+      <y>672</y>
+      <w>56</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes>_Controller_
+--
+StartApp
+GamePlay
+Checks
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>252</x>
+      <y>672</y>
+      <w>49</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes>_View_
+--
+UI
+Dialogue
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>308</x>
+      <y>672</y>
+      <w>56</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes>_DAL_
+--
+DAPoker
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>112</x>
+      <y>630</y>
+      <w>252</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>_PokerNight_
+--
+Main
+bg=black</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>112</x>
+      <y>385</y>
+      <w>196</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>_object: ABSPlayer_
+--
+# String name
+# int dialogueID
+# ArrayList&lt;Card&gt; hand
+# String catchphrase
+# int personalityCore
+--
++ drawHand(ArrayList&lt;Card&gt; cardsGiven)
+--
+/_+ turn(ArrayList&lt;Card&gt; openCards)_/
+
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>399</x>
+      <y>252</y>
+      <w>224</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>_object: Human_
+--
++ Human()
++ Human(String name, String catchphrase)
+--
++ turn()
+
+
+
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>399</x>
+      <y>567</y>
+      <w>224</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>_object: Omega_
+--
+Omega()
+Omega(String name, int ID, String catchphrase)
+--
++ turn()
+
+
+
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>399</x>
+      <y>483</y>
+      <w>224</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>_object: Beta_
+--
+Beta()
+Beta(String name, int ID, String catchphrase)
+--
++ turn()
+
+
+
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>399</x>
+      <y>392</y>
+      <w>224</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>_object: Sigma_
+--
+Sigma()
+Sigma(String name, int ID, String catchphrase)
+--
++ turn()
+--
+- int sigmaGrindset
+
+
+
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>399</x>
+      <y>322</y>
+      <w>224</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>_object: Alpha_
+--
+Alpha()
+Alpha(String name, int ID, String catchphrase)
+--
++ turn()
+
+
+
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>301</x>
+      <y>469</y>
+      <w>112</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>140.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>301</x>
+      <y>308</y>
+      <w>112</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>301</x>
+      <y>364</y>
+      <w>112</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>301</x>
+      <y>441</y>
+      <w>112</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>301</x>
+      <y>504</y>
+      <w>112</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>140.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>805</x>
+      <y>392</y>
+      <w>168</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes>_object: Card_
+--
+- Suit suit;
+- Rank rank
+--
++ Card(Suit suit, Rank rank)
+--
+@Override
++ String toString()
+
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>805</x>
+      <y>560</y>
+      <w>168</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>_object: Deck_
+--
+ArrayList&lt;Card&gt; deckList
+--
++ ArrayList&lt;Card&gt; GenerateDeck()
+
+
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>980</x>
+      <y>392</y>
+      <w>84</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+_Rank_
+--
+ACE
+DEUCE
+THREE
+FOUR
+FIVE
+SIX
+SEVEN
+EIGHT
+NINE
+TEN
+JACK
+QUEEN
+KING
+
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>980</x>
+      <y>581</y>
+      <w>84</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+_Rank_
+--
+HEARTS
+CLUBS
+SPADES
+DIAMONDS
+
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>252</y>
+      <w>182</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>_object: Dialogue_
+--
+- ArrayList&lt;String&gt; quoteList
+- ArrayList&lt;String&gt; appendList
+--
++ setDialogueArray(int ID, String name)
+- ArrayList&lt;String&gt; getTextArray(int ID)
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>819</x>
+      <y>252</y>
+      <w>245</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>_object: DAPoker_
+--
+_+ ArrayList&lt;String&gt; getLines(int ID, String parameter)_
+--
+_+ setHighScores(String newScore)_
+_+ ArrayList&lt;String&gt; getHighScores()_
+
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>392</y>
+      <w>168</w>
+      <h>273</h>
+    </coordinates>
+    <panel_attributes>_object: Checks_
+--
++ boolean checkForWinCond()
++ int canIWin()
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>399</x>
+      <y>784</y>
+      <w>336</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>_object: StartApp_
+--
+_+ launch()_
+_+ mainMenu()_
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>742</x>
+      <y>784</y>
+      <w>322</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>_object: GamePlay_
+--
+_+ generateGame()_
+_+ round()_
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>399</x>
+      <y>672</y>
+      <w>665</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>_object: UI_
+--
+BufferedReader bread
+--
++ char menuSel(String prompt)
++ int intIn(String prompt, int min, int max)
++ String stringIn(String prompt)
+--
++ showCards(ArrayList&lt;Card&gt;)
++ dialoguePrint(String quote, String append)
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>399</x>
+      <y>196</y>
+      <w>665</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>_object: Main_
+--
+_+ main(String[] args)_
+bg=black</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1085</x>
+      <y>196</y>
+      <w>147</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>_Dialogue.json_
+--
+Dialogue Sets 1-16
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1085</x>
+      <y>252</y>
+      <w>147</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>_Dialogue.json_
+--
+Dialogue Sets 1-16
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
