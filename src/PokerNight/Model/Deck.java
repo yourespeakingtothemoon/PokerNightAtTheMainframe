@@ -3,7 +3,7 @@ package PokerNight.Model;
 import java.util.ArrayList;
 
 public class Deck {
-    ArrayList<Card> deckList = new ArrayList<>(52);
+    private ArrayList<Card> deckList = new ArrayList<>(52);
 
     public ArrayList<Card> GenerateDeck(ArrayList<Card> deckList) { //Generates a full deck of 52 different cards
         for (int x = 0; x < Suit.values().length; x++) { //For each suit
@@ -13,5 +13,13 @@ public class Deck {
             }
         }
         return deckList;
+    }
+
+    public ArrayList<Card> getDeckList() {
+        return deckList;
+    }
+
+    public void setDeckList(ArrayList<Card> deckList) {
+        this.deckList = deckList;
     }
 }

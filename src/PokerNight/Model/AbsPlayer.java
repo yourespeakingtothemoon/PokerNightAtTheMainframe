@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public abstract class AbsPlayer {
     //Player Properties
     protected String name;
-    protected int DialogueID; //for calling character specfic/player type specfifc dialogue
-    protected ArrayList<Card> hand;
+    protected int DialogueID; //for calling character specific/player type specific dialogue
+    protected ArrayList<Card> pocket;
 
     public void drawCards(ArrayList<Card> cardsGiven){
-        hand = cardsGiven;
+        pocket = cardsGiven;
     }
 
     abstract public void turn(ArrayList<Card> openCards);
@@ -30,11 +30,11 @@ public abstract class AbsPlayer {
         DialogueID = dialogueID;
     }
 
-    public ArrayList<Card> getHand() {
-        return hand;
+    public ArrayList<Card> getPocket() {
+        return pocket;
     }
 
-    public void setHand(ArrayList<Card> hand) {
-        this.hand = hand;
+    public void setPocket(ArrayList<Card> pocket) {
+        this.pocket = pocket;
     }
 }
