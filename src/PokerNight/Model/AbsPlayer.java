@@ -5,8 +5,10 @@ import java.util.ArrayList;
 public abstract class AbsPlayer {
     //Player Properties
     protected String name;
+
     protected int DialogueID; //for calling character specific/player type specific dialogue
     protected ArrayList<Card> pocket;
+    protected String catchphrase;
 
     public void drawCards(ArrayList<Card> cardsGiven){
         pocket = cardsGiven;
