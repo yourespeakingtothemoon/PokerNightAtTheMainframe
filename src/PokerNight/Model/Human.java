@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Human extends AbsPlayer {
 
     @Override
-    public void turn(ArrayList<Card> openCards) { //Might return the amount the player bets instead of nothing
+    public void turn(ArrayList<Card> board, int blinds, ArrayList<Card> gameDeck) { //Might return the amount the player bets instead of nothing
         while (true) {
             switch(ConsoleIO.promptForString("a: Call\n" +
                     "b: Bet\n" +

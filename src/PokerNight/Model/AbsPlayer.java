@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public abstract class AbsPlayer {
     //Player Properties
     protected String name;
+    protected int money;
 
     protected int DialogueID; //for calling character specific/player type specific dialogue
     protected ArrayList<Card> pocket;
@@ -14,7 +15,7 @@ public abstract class AbsPlayer {
         pocket = cardsGiven;
     }
 
-    abstract public void turn(ArrayList<Card> openCards); //Implemented in each concrete class
+    abstract public void turn(ArrayList<Card> board, int blinds, ArrayList<Card> gameDeck); //Implemented in each concrete class
 
     public String getName() {
         return name;
@@ -22,6 +23,14 @@ public abstract class AbsPlayer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
     }
 
     public int getDialogueID() {

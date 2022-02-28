@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Sigma extends AbsPlayer{
     @Override
-    public void turn(ArrayList<Card> openCards) {
+    public void turn(ArrayList<Card> board, int blinds, ArrayList<Card> gameDeck) {
 
     }
 }
