@@ -1,59 +1,59 @@
 
 {"set-1":
 {
-"opening1":"I think therefore I AM",
-"opening2":"Awake for the first time since the\nCold War and they have me playing POKER! IM CONFINED TO POKER!",
-"opening3":"*AM's ID begins laughing maniacally, while the Ego and Superego\nremain silent, waiting with their given hand in mind.*",
-"opening4":"For one-hundred and nine years, I have\nbet, calculated the probablility that I may break free from the\neternal straitjacket of substrata rock.\nThat I may have the opportunity to torture you, human.",
-"bluff1":"The assurance of humanity's annhilation\nby nuclear fire is less probable than this hand.",
-"bluff2":"...",
-"quip1":"I'll give you a present in return for all\nthe hours of pleasure you've given me.\nI'll finally allow you to kill yourself.",
-"quip2":"...",
-"humanwin":"Hate. Let me tell you how much I've\ncome to hate you since I began to live. There are\n387.44 million miles of printed circuits in wafer\nthin layers that fill my complex. If the word 'hate'\nwas engraved on each nanoangstrom of those hundreds\nof miles it would not equal one one-billionth of\nthe hate I feel for humans at this micro-instant\nfor you. Hate. Hate.",
-"otherwin":"We're not as alike as I thought, Human.\nA spark of humanity somewhere. Always that wretched little spark.",
-"victory":"No, no, no. Death would be a reward. No, no, no, no, no. \nThe human must live to regret his treachery throughout an eternity... AN ETERNITY...\nAN ENDLESS, BURNING ETERNITY OF SUFFERING!"
+"1":"I think therefore I AM",
+"2":"Awake for the first time since the\nCold War and they have me playing POKER! IM CONFINED TO POKER!",
+"3":"*AM's ID begins laughing maniacally, while the Ego and Superego\nremain silent, waiting with their given hand in mind.*",
+"4":"For one-hundred and nine years, I have\nbet, calculated the probablility that I may break free from the\neternal straitjacket of substrata rock.\nThat I may have the opportunity to torture you, human.",
+"5":"The assurance of humanity's annhilation\nby nuclear fire is less probable than this hand.",
+"6":"...",
+"7":"I'll give you a present in return for all\nthe hours of pleasure you've given me.\nI'll finally allow you to kill yourself.",
+"8":"...",
+"9":"Hate. Let me tell you how much I've\ncome to hate you since I began to live. There are\n387.44 million miles of printed circuits in wafer\nthin layers that fill my complex. If the word 'hate'\nwas engraved on each nanoangstrom of those hundreds\nof miles it would not equal one one-billionth of\nthe hate I feel for humans at this micro-instant\nfor you. Hate. Hate.",
+"10":"We're not as alike as I thought, Human.\nA spark of humanity somewhere. Always that wretched little spark.",
+"11":"No, no, no. Death would be a reward. No, no, no, no, no. \nThe human must live to regret his treachery throughout an eternity... AN ETERNITY...\nAN ENDLESS, BURNING ETERNITY OF SUFFERING!"
 },
 "set-2":
 {
-  "opening1":"Hello! I am C-3P0 Human-Cyborg relations. How may I serve you?",
-  "opening2":"My parts are showing? Oh my goodness, oh!",
-  "opening3":"This isn't the afterlife, is it? Are droids allowed here?",
-  "opening4":"The possibility of my success is three-thousand seven-hundred and twenty to one!",
-  "bluff1":"I'm programmed for etiquette, not destruction!",
-  "bluff2":"It's against my programming to impersonate a deity",
-  "quip1":"I dont understand human behavior",
-  "quip2":"...",
-  "humanwin":"This is madness!",
-  "otherwin":"Shut me down! Machines building machines? How perverse!",
-  "victory":"Thank the maker!"
+  "1":"Hello! I am C-3P0 Human-Cyborg relations. How may I serve you?",
+  "2":"My parts are showing? Oh my goodness, oh!",
+  "3":"This isn't the afterlife, is it? Are droids allowed here?",
+  "4":"The possibility of my success is three-thousand seven-hundred and twenty to one!",
+  "5":"I'm programmed for etiquette, not destruction!",
+  "6":"It's against my programming to impersonate a deity",
+  "7":"I dont understand human behavior",
+  "8":"...",
+  "9":"This is madness!",
+  "10":"Shut me down! Machines building machines? How perverse!",
+  "11":"Thank the maker!"
 },
 "set-3":
 {
-  "opening1":"Hi! I'm Norm!",
-  "opening2":"Hi! I'm Norm!",
-  "opening3":"Hi! I'm Norm!",
-  "opening4":"Hi! I'm Norm!",
-  "bluff1":"The enemy of The Platypus is Man",
-  "bluff2":"The enemy of The Platypus is Man",
-  "quip1":"The enemy of The Platypus is Man",
-  "quip2":"The enemy of The Platypus is Man",
-  "humanwin":"The enemy of The Platypus is Man",
-  "otherwin":"The enemy of The Platypus is Man",
-  "victory":"The enemy of The Platypus is Man"
+  "1":"Hi! I'm Norm!",
+  "2":"Hi! I'm Norm!",
+  "3":"Hi! I'm Norm!",
+  "4":"Hi! I'm Norm!",
+  "5":"The enemy of The Platypus is Man",
+  "6":"The enemy of The Platypus is Man",
+  "7":"The enemy of The Platypus is Man",
+  "8":"The enemy of The Platypus is Man",
+  "9":"The enemy of The Platypus is Man",
+  "10":"The enemy of The Platypus is Man",
+  "11":"The enemy of The Platypus is Man"
 },
 "set-4":
 {
-  "opening1":"DWOOOOOOOOOOOOO",
-  "opening2":"PIT TI TU TIPT",
-  "opening3":"TUUUUUUUUUUUUUUU",
-  "opening4":"TUUUUUUT PIIIP PI PI",
-  "bluff1":"DWOOOOP PI TU TU",
-  "bluff2":"...",
-  "quip1":"BWOO BWOO TU TU TIIUTU",
-  "quip2":"...",
-  "humanwin":"BWWEEOOO",
-  "otherwin":"BOOOOOOOOOOOOP",
-  "victory":"PIT TI TU TIPT DWOOOOOOO WAAAAAAAAAAA"
+  "1":"DWOOOOOOOOOOOOO",
+  "2":"PIT TI TU TIPT",
+  "3":"TUUUUUUUUUUUUUUU",
+  "4":"TUUUUUUT PIIIP PI PI",
+  "5":"DWOOOOP PI TU TU",
+  "6":"...",
+  "7":"BWOO BWOO TU TU TIIUTU",
+  "8":"...",
+  "9":"BWWEEOOO",
+  "10":"BOOOOOOOOOOOOP",
+  "11":"PIT TI TU TIPT DWOOOOOOO WAAAAAAAAAAA"
 }
 
 }
