@@ -1,58 +1,46 @@
 package PokerNight.Controller;
 
-import PokerNight.Model.AbsPlayer;
-import PokerNight.Model.Card;
-import PokerNight.Model.Deck;
+import PokerNight.Model.*;
 import PokerNight.View.UI;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class GamePlay {
-    Deck deck = new Deck();
 
     public void StartGame() {
+        Game game = new Game();
         UI ui = new UI();
-        deck.setDeckList(deck.GenerateDeck(new ArrayList<>())); //Generates deck, shuffles it
-        Collections.shuffle(deck.getDeckList());
 
-        ArrayList<AbsPlayer> players = new ArrayList<>();
+        game.getPlayers().add(new Human()); //for testing
         //Select players (one bot of each archetype) as well as the Human player
         //Add them to players
 
-        MainGamePlayLoop(deck.getDeckList(), players, ui);
+        MainGamePlayLoop(game, ui);
     }
 
-    public void MainGamePlayLoop(ArrayList<Card> gameDeck, ArrayList<AbsPlayer> players, UI ui) {
-        ArrayList<Card> board = new ArrayList<>(); //Initialize board ArrayList, blinds/bet amount, pot
-        ArrayList<Card> burnedCards = new ArrayList<>();
-        int pot = 0;
-        int blinds = 0;
-
-        for (int x = 0; x < players.size(); x++) { //Give each player 2 (pocket) cards, $10k to bet
-            players.get(x).setMoney(10000);
-            players.get(x).setPocket(new ArrayList<>(DrawCard(2, gameDeck)));
+    public void MainGamePlayLoop(Game game, UI ui) {
+        for (int x = 0; x < game.getPlayers().size(); x++) { //Give each player an empty hand, $10k to bet
+            game.getPlayers().get(x).setPocket(new ArrayList<>());
+            game.getPlayers().get(x).setMoney(10000);
         }
 
         while (true) {
-            ///////////////////////////// Reset for new round /////////////////////////////
-            blinds += 200; //Increase blinds -- Normally is increased every 15-20 minutes, we'll just increase every round
-            board.clear(); //Reset board, burned cards, pocket cards, deck, pot
-            burnedCards.clear();
-            for (int x = 0; x < players.size(); x++) {
-                players.get(x).getPocket().clear();
+            game.NewRound(); //Resets just about everything
+
+            for (int x = 0; x < game.getPlayers().size(); x++) { //Give each player 2 (pocket) cards
+                game.getPlayers().get(x).setPocket(new ArrayList<>(DrawCard(2, game.getGameDeck())));
             }
-            gameDeck.clear();
-            deck.GenerateDeck(gameDeck);
-            pot = 0;
-            ///////////////////////////// Start game /////////////////////////////
-            ui.DisplayGame();
-            BettingRoundOne(players, gameDeck, board, pot, blinds);
+
+            ui.DisplayGame(game);
+            BettingRoundOne(game, ui);
+            ui.DisplayGame(game);
+            BettingRoundOne(game, ui); //For testing
         }
 
         //Drop players (probably from a new ArrayList like remainingPlayers) when they fold
-        //Keep track of money, check each player's hand by combining board and pocket to determine best hand
-        //After first betting round, do flop
+        //Keep track of money --DONE--
+        //Check each player's hand by combining board and pocket to determine best hand
+        //After first betting round, do flop --DONE--
         //Do another betting round, do turn
         //Do another betting round, do river
         //Do another betting round, show cards and determine winner of pot
@@ -66,12 +54,11 @@ public class GamePlay {
 
     }
 
-    public void BettingRoundOne(ArrayList<AbsPlayer> players, ArrayList<Card> gameDeck, ArrayList<Card> board, int pot, int blinds) {
-        for (int x = 0; x < players.size(); x++) { //loop through players, doing turns
-            //May also add in dialogue here
-            players.get(x).turn(board, blinds, gameDeck);
+    public void BettingRoundOne(Game game, UI ui) { //Loops through players, doing turns, then does flop
+        for (int x = 0; x < game.getPlayers().size(); x++) {
+            game.setPot(game.getPot() + game.getPlayers().get(x).turn(game.getBoard(), game.getMinBet(), game.getGameDeck(), ui));
         }
-        board.addAll(DrawCard(3, gameDeck)); //The Flop
+        game.setBoard(DrawCard(3, game.getGameDeck()));
     }
 
     public ArrayList<Card> DrawCard(int cardsToDraw, ArrayList<Card> gameDeck) { //Draws x amount of cards, removing them from the deck
@@ -81,5 +68,15 @@ public class GamePlay {
             gameDeck.remove(0); //Removes top card from deck
         }
         return returnArrayList;
+    }
+
+    public ArrayList<AbsPlayer> SetRemainingPlayers(ArrayList<AbsPlayer> players) {
+        ArrayList<AbsPlayer> remainingPlayers = new ArrayList<>();
+        for (int x = 0; x < players.size(); x++) {
+            if (!players.get(x).isSkipRound()) {
+                remainingPlayers.add(players.get(x));
+            }
+        }
+        return remainingPlayers;
     }
 }

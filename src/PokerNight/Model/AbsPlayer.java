@@ -1,11 +1,14 @@
 package PokerNight.Model;
 
+import PokerNight.View.UI;
+
 import java.util.ArrayList;
 
 public abstract class AbsPlayer {
     //Player Properties
     protected String name;
     protected int money;
+    protected boolean skipRound = false;
 
     protected int DialogueID; //for calling character specific/player type specific dialogue
     protected ArrayList<Card> pocket;
@@ -15,7 +18,7 @@ public abstract class AbsPlayer {
         pocket = cardsGiven;
     }
 
-    abstract public void turn(ArrayList<Card> board, int blinds, ArrayList<Card> gameDeck); //Implemented in each concrete class
+    abstract public int turn(ArrayList<Card> board, int blinds, ArrayList<Card> gameDeck, UI ui); //Implemented in each concrete class
 
     public String getName() {
         return name;
@@ -31,6 +34,14 @@ public abstract class AbsPlayer {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public boolean isSkipRound() {
+        return skipRound;
+    }
+
+    public void setSkipRound(boolean skipRound) {
+        this.skipRound = skipRound;
     }
 
     public int getDialogueID() {
