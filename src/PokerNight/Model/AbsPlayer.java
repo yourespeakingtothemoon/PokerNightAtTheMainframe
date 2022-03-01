@@ -18,7 +18,8 @@ public abstract class AbsPlayer {
         pocket = cardsGiven;
     }
 
-    abstract public int turn(ArrayList<Card> board, int blinds, ArrayList<Card> gameDeck, UI ui); //Implemented in each concrete class
+    abstract public int turn(ArrayList<Card> board, int blinds, ArrayList<Card> gameDeck, UI ui, int round); //Implemented in each concrete class
+    //Board, gameDeck not needed for Human. Remove if not needed for other players
 
     public String getName() {
         return name;

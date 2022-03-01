@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Alpha extends AbsPlayer{
     @Override
-    public int turn(ArrayList<Card> board, int blinds, ArrayList<Card> gameDeck, UI ui) {
+    public int turn(ArrayList<Card> board, int blinds, ArrayList<Card> gameDeck, UI ui, int round) {
         return 0;
     }
 }
