@@ -8,7 +8,7 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) throws IOException, ParseException, InterruptedException {
 
        /* Dialogue.printDialogue(1,9,1,"AM");
         Dialogue.printDialogue(1,3,1,"AM");*/
