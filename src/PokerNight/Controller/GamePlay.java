@@ -7,21 +7,24 @@ import java.util.ArrayList;
 
 public class GamePlay {
 
-    public void StartGame() {
+    public void StartGame() throws InterruptedException {
         Game game = new Game();
         UI ui = new UI();
 
         game.getPlayers().add(new Human()); //for testing
         game.getPlayers().add(new Omega()); //for testing
+        game.getPlayers().add(new Sigma()); //for testing
+        game.getPlayers().add(new Alpha()); //for testing
+        game.getPlayers().add(new Beta()); //for testing
         //Select players (one bot of each archetype) as well as the Human player
         //Add them to players
 
         MainGamePlayLoop(game, ui);
     }
 
-    public void MainGamePlayLoop(Game game, UI ui) {
+    public void MainGamePlayLoop(Game game, UI ui) throws InterruptedException {
         for (int x = 0; x < game.getPlayers().size(); x++) { //Give each player an empty hand, $10k to bet
-            game.getPlayers().get(x).setPocket(new ArrayList<>());
+            game.getPlayers().get(x).setPocket(new ArrayList<>()); //this could be added to a constructor instead for new AbsPlayers
             game.getPlayers().get(x).setMoney(10000);
         }
 
@@ -30,6 +33,7 @@ public class GamePlay {
                 //If they're human, save high score, etc.
             RemovePlayers(game); //Permanent removal of players
             game.NewRound(); //Resets just about everything
+            System.out.println(game.getRemainingPlayers());
 
             for (int x = 0; x < game.getPlayers().size(); x++) { //Give each player 2 (pocket) cards
                 game.getPlayers().get(x).setPocket(new ArrayList<>(DrawCard(2, game.getGameDeck())));
@@ -52,24 +56,27 @@ public class GamePlay {
         //Do another betting round, do turn --DONE--
         //Do another betting round, do river --DONE--
         //Do another betting round, show cards and determine winner of pot --HALF DONE--
-        //Loop, resetting remainingPlayers to every player that still has money and increasing blinds
+        //Loop, resetting remainingPlayers to every player that still has money and increasing blinds --DONE--
         //Check at the beginning of a round if only one player has money, throw win condition
             //If Human is the last remaining player, allow them to add acronym to save high score
             //We need to figure out how or if we want to do score lmao
-            //If human player is out, allow them to spectate or leave the game
+            //If human player is out, allow them to spectate or leave the game --MAYBE--
 
         //Return to main menu
 
     }
 
-    public void BettingRound(Game game, UI ui) { //Loops through players, doing turns, then does flop
+    public void BettingRound(Game game, UI ui) throws InterruptedException { //Loops through players, doing turns, then does flop
         game.setRound(game.getRound() + 1); //Adds 1 to the round
         for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
-            game.setPot(game.getPot() + game.getRemainingPlayers().get(x).turn(game.getBoard(), game.getMinBet(), game.getGameDeck(), ui, game.getRound()));
+//            Thread.sleep(3000);
+            game.setPot(game.getPot() + game.getRemainingPlayers().get(x).turn(game, ui));
         }
         if (game.getRound() == 1) { //If it's round 1, do the Flop
+            game.getMuck().add(DrawCard(1, game.getGameDeck()).get(0)); //Throws one card out, as per poker rules
             game.setBoard(DrawCard(3, game.getGameDeck())); //The Flop
         } else if (game.getRound() < 4) { //If it's any other round besides the final betting round, only add 1 card
+            game.getMuck().add(DrawCard(1, game.getGameDeck()).get(0));
             game.getBoard().add(DrawCard(1, game.getGameDeck()).get(0)); //Draws 1 card, adds it to the board
         }
     }

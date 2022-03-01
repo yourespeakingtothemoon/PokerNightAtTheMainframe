@@ -8,7 +8,7 @@ public class StartApp {
 //        MainMenu();
 //    }
 
-    public void MainMenu() {
+    public void MainMenu() throws InterruptedException {
         GamePlay gamePlay = new GamePlay();
         while (true) {
             switch(ConsoleIO.promptForString("Welcome to Poker Night at the Mainframe! Please input a letter to select an option:\n" +

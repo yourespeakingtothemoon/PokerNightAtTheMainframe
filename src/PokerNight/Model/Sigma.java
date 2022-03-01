@@ -2,7 +2,6 @@ package PokerNight.Model;
 
 import PokerNight.View.UI;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Sigma extends AbsPlayer{
@@ -57,7 +56,7 @@ public class Sigma extends AbsPlayer{
     }
 
     @Override
-    public int turn(ArrayList<Card> board, int blinds, ArrayList<Card> gameDeck, UI ui, int round) {
+    public int turn(Game game, UI ui) {
         return 0;
     }
 }
