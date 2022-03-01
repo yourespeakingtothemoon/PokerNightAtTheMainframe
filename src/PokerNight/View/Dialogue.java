@@ -35,7 +35,46 @@ public class Dialogue {
                             dialogue = "\"" + quoteToAppend + "\"," + name + " blurted out";
                             break;
                     }
-
+                    break;
+            case 2:
+                switch (new Random().nextInt(2) + 1) {
+                    case 1:
+                        dialogue = "\"" + quoteToAppend + "\"," + name + " exclaimed.";
+                        break;
+                    case 2:
+                        dialogue = "With a tinge of sarcasm " + name + " said,\n" + "\"" + quoteToAppend + "\"";
+                        break;
+                    case 3:
+                        dialogue = "\"" + quoteToAppend + "\"," + name + "said. ";
+                        break;
+                }
+                break;
+            case 3:
+                switch (new Random().nextInt(2) + 1) {
+                    case 1:
+                        dialogue = "\"" + quoteToAppend + "\"," + "sounded out from "+ name+"'s chassis";
+                        break;
+                    case 2:
+                        dialogue = "Chirping in binary, " + name + " seemed to laugh out,\n" + "\"" + quoteToAppend + "\"";
+                        break;
+                    case 3:
+                        dialogue = "\"" + quoteToAppend + "\"," + name + " beeped.";
+                        break;
+                }
+                break;
+            case 4:
+            switch (new Random().nextInt(2) + 1) {
+                case 1:
+                    dialogue = "\"" + quoteToAppend + "\"," + name + " said plainly.";
+                    break;
+                case 2:
+                    dialogue = "Without emotion,remorse or care, " + name + " said in a tinny, uncaring voice,\n" + "\"" + quoteToAppend.toUpperCase() + "\"";
+                    break;
+                case 3:
+                    dialogue = name + " said,"+"\"" + quoteToAppend + "\"," ;
+                    break;
+            }
+            break;
                 }
         }
         return dialogue;
