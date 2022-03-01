@@ -12,6 +12,7 @@ public class GamePlay {
         UI ui = new UI();
 
         game.getPlayers().add(new Human()); //for testing
+        game.getPlayers().add(new Omega()); //for testing
         //Select players (one bot of each archetype) as well as the Human player
         //Add them to players
 
@@ -25,40 +26,52 @@ public class GamePlay {
         }
 
         while (true) {
+            //Check if there's only 1 player in game.getPlayers() -- if so, they win!
+                //If they're human, save high score, etc.
+            RemovePlayers(game); //Permanent removal of players
             game.NewRound(); //Resets just about everything
 
             for (int x = 0; x < game.getPlayers().size(); x++) { //Give each player 2 (pocket) cards
                 game.getPlayers().get(x).setPocket(new ArrayList<>(DrawCard(2, game.getGameDeck())));
             }
 
-            ui.DisplayGame(game);
-            BettingRoundOne(game, ui);
-            ui.DisplayGame(game);
-            BettingRoundOne(game, ui); //For testing
+            for (int x = 0; x < 4; x++) {
+                ui.DisplayGame(game);
+                BettingRound(game, ui);
+                SetRemainingPlayers(game);
+            }
+            //Do checks, pay out the betters, end round
         }
 
-        //Drop players (probably from a new ArrayList like remainingPlayers) when they fold
+        //Choose person to start, make 2 starting players pay big and small blind
+            //Sort players in game.getPlayers() so they start at a specific person?
+        //Drop players (probably from a new ArrayList like remainingPlayers) when they fold --DONE--
         //Keep track of money --DONE--
         //Check each player's hand by combining board and pocket to determine best hand
         //After first betting round, do flop --DONE--
-        //Do another betting round, do turn
-        //Do another betting round, do river
-        //Do another betting round, show cards and determine winner of pot
+        //Do another betting round, do turn --DONE--
+        //Do another betting round, do river --DONE--
+        //Do another betting round, show cards and determine winner of pot --HALF DONE--
         //Loop, resetting remainingPlayers to every player that still has money and increasing blinds
         //Check at the beginning of a round if only one player has money, throw win condition
             //If Human is the last remaining player, allow them to add acronym to save high score
-            //We need to figure out how we want to do score lmao
+            //We need to figure out how or if we want to do score lmao
             //If human player is out, allow them to spectate or leave the game
 
         //Return to main menu
 
     }
 
-    public void BettingRoundOne(Game game, UI ui) { //Loops through players, doing turns, then does flop
-        for (int x = 0; x < game.getPlayers().size(); x++) {
-            game.setPot(game.getPot() + game.getPlayers().get(x).turn(game.getBoard(), game.getMinBet(), game.getGameDeck(), ui));
+    public void BettingRound(Game game, UI ui) { //Loops through players, doing turns, then does flop
+        game.setRound(game.getRound() + 1); //Adds 1 to the round
+        for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
+            game.setPot(game.getPot() + game.getRemainingPlayers().get(x).turn(game.getBoard(), game.getMinBet(), game.getGameDeck(), ui, game.getRound()));
         }
-        game.setBoard(DrawCard(3, game.getGameDeck()));
+        if (game.getRound() == 1) { //If it's round 1, do the Flop
+            game.setBoard(DrawCard(3, game.getGameDeck())); //The Flop
+        } else if (game.getRound() < 4) { //If it's any other round besides the final betting round, only add 1 card
+            game.getBoard().add(DrawCard(1, game.getGameDeck()).get(0)); //Draws 1 card, adds it to the board
+        }
     }
 
     public ArrayList<Card> DrawCard(int cardsToDraw, ArrayList<Card> gameDeck) { //Draws x amount of cards, removing them from the deck
@@ -70,13 +83,20 @@ public class GamePlay {
         return returnArrayList;
     }
 
-    public ArrayList<AbsPlayer> SetRemainingPlayers(ArrayList<AbsPlayer> players) {
-        ArrayList<AbsPlayer> remainingPlayers = new ArrayList<>();
-        for (int x = 0; x < players.size(); x++) {
-            if (!players.get(x).isSkipRound()) {
-                remainingPlayers.add(players.get(x));
+    //May move these to the Game class
+    public void SetRemainingPlayers(Game game) { //Sets the remaining players for the TURN, not the game
+        for (int x = 0; x < game.getPlayers().size(); x++) {
+            if (game.getPlayers().get(x).isSkipRound()) {
+                game.getRemainingPlayers().remove(game.getPlayers().get(x));
             }
         }
-        return remainingPlayers;
+    }
+
+    public void RemovePlayers(Game game) { //Permanently removes players from the game if their money is 0
+        for (int x = 0; x < game.getPlayers().size(); x++) {
+            if (game.getPlayers().get(x).getMoney() <= 0 ) { //Should never be less than 0, but just in case
+                game.getPlayers().remove(game.getPlayers().get(x));
+            }
+        }
     }
 }

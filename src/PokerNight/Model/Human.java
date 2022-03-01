@@ -14,12 +14,11 @@ public class Human extends AbsPlayer {
     }
 
     @Override
-    public int turn(ArrayList<Card> board, int minBet, ArrayList<Card> gameDeck, UI ui) { //Might return the amount the player bets instead of nothing
+    public int turn(ArrayList<Card> board, int minBet, ArrayList<Card> gameDeck, UI ui, int round) { //Might return the amount the player bets instead of nothing
         while (true) {
             switch(ConsoleIO.promptForString("a: Call\n" +
                     "b: Bet\n" +
-                    "c: Fold\n" +
-                    "d: Check\n", false)) {
+                    "c: Fold\n", false)) {
                 case "a": //Call
                     //Stay in the game, equal the bet of the previous player
                     this.setMoney(this.getMoney() - minBet);
@@ -35,9 +34,9 @@ public class Human extends AbsPlayer {
                     this.setSkipRound(true);
                     return 0;
                 case "d": //Check
-                    //Only possible after flop... Somehow only show this option after betting round 1?
-                    //Stay in game without betting
-                    return 0;
+                    if (!(round == 1)) { //Only possible after flop
+                        return 0; //Stay in game without betting
+                    }
             }
         }
     }

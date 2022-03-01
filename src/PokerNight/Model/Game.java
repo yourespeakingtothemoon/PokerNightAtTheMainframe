@@ -8,8 +8,10 @@ public class Game {
     private int pot = 0;
     private int minBet = 0;
     private int blinds = 0;
+    private int round = 0;
     private ArrayList<Card> gameDeck = new ArrayList<>();
     private ArrayList<AbsPlayer> players = new ArrayList<>();
+    private ArrayList<AbsPlayer> remainingPlayers = new ArrayList<>();
     private ArrayList<Card> board = new ArrayList<>();
     private ArrayList<Card> muck = new ArrayList<>();
     private Deck deck = new Deck();
@@ -18,8 +20,10 @@ public class Game {
         this.pot = 0;
         this.blinds += 200;
         this.minBet = this.blinds;
+        this.round = 0;
         deck.GenerateDeck(gameDeck);
         Collections.shuffle(gameDeck);
+        this.remainingPlayers = this.players; //Sets players for the turn. This list can be changed while leaving the overall players ArrayList alone
         this.board = new ArrayList<>();
         this.muck = new ArrayList<>();
     }
@@ -48,6 +52,14 @@ public class Game {
         this.blinds = blinds;
     }
 
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
+    }
+
     public ArrayList<Card> getGameDeck() {
         return gameDeck;
     }
@@ -62,6 +74,14 @@ public class Game {
 
     public void setPlayers(ArrayList<AbsPlayer> players) {
         this.players = players;
+    }
+
+    public ArrayList<AbsPlayer> getRemainingPlayers() {
+        return remainingPlayers;
+    }
+
+    public void setRemainingPlayers(ArrayList<AbsPlayer> remainingPlayers) {
+        this.remainingPlayers = remainingPlayers;
     }
 
     public ArrayList<Card> getBoard() {
