@@ -52,7 +52,7 @@ public class Sigma extends AbsPlayer{
         }
         //return string based on new ID and random number
         int stringVal = rand.nextInt(10)+1;
-        // after completeing the dialog print class and methods, send in i.e. printSigmaDia(ID,stringVal)
+        // after completing the dialog print class and methods, send in i.e. printSigmaDia(ID,stringVal)
     }
 
     @Override
