@@ -9,6 +9,17 @@ public class Card {
         this.rank = rank;
     }
 
+    //getters
+
+
+    public Rank getRank() {
+        return rank;
+    }
+
+    public Suit getSuit() {
+        return suit;
+    }
+
     @Override
     public String toString() {
         return this.rank.toString() + this.suit.toString(); //e.g. ACE of CLUBS, KING of HEARTS
