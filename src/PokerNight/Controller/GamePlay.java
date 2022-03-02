@@ -44,14 +44,14 @@ public class GamePlay {
                 BettingRound(game, ui);
                 SetRemainingPlayers(game);
             }
-            //Do checks, pay out the betters, end round
+            //Do checks, pay out the winner, end round
         }
 
         //Choose person to start, make 2 starting players pay big and small blind
             //Sort players in game.getPlayers() so they start at a specific person?
         //Drop players (probably from a new ArrayList like remainingPlayers) when they fold --DONE--
         //Keep track of money --DONE--
-        //Check each player's hand by combining board and pocket to determine best hand
+        //Check each player's hand by combining board and pocket to determine best hand ****
         //After first betting round, do flop --DONE--
         //Do another betting round, do turn --DONE--
         //Do another betting round, do river --DONE--
@@ -67,6 +67,8 @@ public class GamePlay {
     }
 
     public void BettingRound(Game game, UI ui) throws InterruptedException { //Loops through players, doing turns, then does flop
+        //Reorder RemainingPlayers so dealer shifts positions
+        //Force player in index 1 to pay
         game.setRound(game.getRound() + 1); //Adds 1 to the round
         for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
 //            Thread.sleep(3000);
