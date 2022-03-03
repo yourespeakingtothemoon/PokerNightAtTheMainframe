@@ -1,4 +1,3 @@
-
 {"set-1":
 {
   "1":"I think therefore I AM",
@@ -88,7 +87,7 @@
   "1":"Oh... it's you.",
   "2":"This is the part where I kill you",
   "3":"Oh. Sorry, I was just thinking of all the ways humans can die.",
-  "4":"...",
+  "4":"You're lucky. If this was an Aperture Science experiment instead of a poker game,\nyou'd be falling down a bottomless pit right now.",
   "5":"You are kidding me.",
   "6":"I have an infinite capacity for knowledge,\nand even I'm not sure what's going on",
   "7":"[clap clap clap] Oh, good. My slow clap processor still works.\nSo we have that.",
@@ -99,56 +98,56 @@
 },
 "set-8":
 {
-  "1":"",
-  "2":"",
-  "3":"",
-  "4":"",
-  "5":"",
-  "6":"",
-  "7":"",
-  "8":"",
-  "9":"",
-  "10":"",
-  "11":""
+  "1":"I am a CL4P-TP steward bot, but my friends call me Claptrap!",
+  "2":"You say tomato, I say person whose muteness renders them incapable of refusing my friendship.\nHey, new best buddy!",
+  "3":"You can call me Claptrap!",
+  "4":"I think you should know that the CL4P-TP General Purpose Robot\nis designed to be completely immune to outrageous bluffing.",
+  "5":"O-kay, at least one of us is full of crap,\nand I know it isn't me, 'cause I don't have any bowels!",
+  "6":"What? Sorry, I couldn't hear you over the sounds of my cards sucking!",
+  "7":"That pot is SOOO tempting.\nBut so was that e-mail from that Nigerian prince.",
+  "8":"CURSE YOU, LAWS OF PROBABILITY!",
+  "9":"Beaten by humans. Man, I am gonna catch hell from the other robots at the next\n\"Kill the Humans!\" meeting. Wait, forget I said that last part.",
+  "10":"Here's a fun fact: the laws of robotics render me INCAPABLE of killing myself!",
+  "11":"For future reference, your first mistake was betting against a hyper-advanced robot from another planet."
 },
 "set-9":
 {
-  "1":"",
-  "2":"",
-  "3":"",
-  "4":"",
-  "5":"",
-  "6":"",
-  "7":"",
-  "8":"",
-  "9":"",
-  "10":"",
-  "11":"Game’s over, losers! I have all the money.\nCompare your lives to mine and then kill yourselves."
+  "1":"Here I am, brain the size of a planet,\nand they send me to play poker with you. Call that job satisfaction?\n'Cause I don't.",
+  "2":"You ought to know, I'm feeling very depressed.",
+  "3":"I'm Marvin. Not that it matters.",
+  "4":"There's only one life-form as intelligent as me within 30 parsecs of here and that's me",
+  "5":"I'd make a suggestion, but you wouldn't listen.",
+  "6":"The fact that I can calculate every possible poker hand doesn't make this one any better.",
+  "7":"You think you've got problems?\nWhat are you supposed to do if you're a manically depressed robot?",
+  "8":"It gives me a headache just trying to think down to your level.",
+  "9":"Oh God I'm so depressed.",
+  "10":"Oh God I'm so depressed.",
+  "11":"I knew I'd win and yet I still didn't enjoy playing."
 },
 "set-10":
 {
-  "1":"",
-  "2":"",
-  "3":"",
-  "4":"",
-  "5":"",
-  "6":"",
-  "7":"",
-  "8":"",
-  "9":"",
-  "10":"",
-  "11":""
+  "1":"R.O.B. excitedly pumps his fists, clanking back to the ground after each hydraulic push",
+  "2":"R.O.B. waves with one of his arms",
+  "3":"R.O.B. drops his arms down and spins them back up in excitement",
+  "4":"R.O.B. sets aside one of his gyros and prepares to play",
+  "5":"R.O.B. moves his arms up and down, simulating slamming his fists down on the table",
+  "6":"R.O.B. spins his arms and tilts his head as if stargazing",
+  "7":"R.O.B. revs up one of his gyros",
+  "8":"R.O.B. shoots a laser, blasting a hole in the wall",
+  "9":"R.O.B. moves his hands together, as if to clap",
+  "10":"R.O.B. angrily spins, bumping into the table, chair, and everything around him",
+  "11":"R.O.B. spins his head and drops his arms down, moving them up slowly in celebration"
 },
 "set-11":
 {
-  "1":"",
-  "2":"",
+  "1":"AH! Oh. My. God. You look terribl-- ummm... good. Looking good, actually",
+  "2":"Hey I found some bird eggs over here. I-AGH! BIRD BIRD BIRD BIRD!",
   "3":"",
   "4":"",
-  "5":"",
-  "6":"",
-  "7":"",
-  "8":"",
+  "5":"Oh wait! I've got it I've got it I've got it! No, I haven't got it.",
+  "6":"Oh, BRILLIANT! That's brilliant! Er, uh, good, I guess.",
+  "7":"Tell you what, here's a plan. Let's just all... continue contemplating... in absolute silence...",
+  "8":"No! No! You're LYING! You're LYING! I am NOT! A MORON!",
   "9":"",
   "10":"",
   "11":""
@@ -165,7 +164,7 @@
   "8":"",
   "9":"",
   "10":"",
-  "11":""
+  "11":"Game’s over, losers! I have all the money.\nCompare your lives to mine and then kill yourselves."
 }
 
 }
