@@ -9,15 +9,81 @@ import java.util.List;
 
 public class Checks {
     //Calculate win Probability via finding if hand and board have certain win cond available
-    public static int probScore(int turnNum, ArrayList<Card> hand, ArrayList<Card> board) {
+    public static int probScore(int turnNum, ArrayList<Card> pocket, ArrayList<Card> board) {
+        ArrayList<Card> openCard = new ArrayList<>();
+        openCard.addAll(pocket);
+        openCard.addAll(board);
         switch(turnNum){
-            //nested switch lets go      :gun emoji: :my head emoji:
+            //pre-flop
+            case 0:
+                return probScoreCalc(13,0,13,13,0,0,0,0,pocket);
+            //flop
+            case 1:
+                //turn/fourth street
+            case 2:
+                //final betting round before showdown
+            case 3:
+                return probScoreCalc(13,16,19,22,24,27,30,33,openCard);
+            //winner determination case
+            case 4:
+                return probScoreCalc(14,15,16,17,18,19,20,21,openCard);
+                //this dont need be but hey incase error
+            default:
+                return 0;
         }
-        return 0;
+    }
+//method that pulls valuations for every check that turn. and returns their sum to the main probScore method
+    private static int probScoreCalc( int pairVal, int threeOAKVal, int straightVal, int flushVal, int fullHouseVal, int fourOAKVal, int strFlushVal, int royalVal, ArrayList<Card> opnCards){
+        int probabilityPoints=highCard(ranksList(opnCards));
+        //add points for Of a Kinds
+        switch(OAKofAKind(opnCards)){
+            case "pair":
+                probabilityPoints+=pairVal;
+                break;
+            case "two pairs":
+                probabilityPoints+=pairVal+(pairVal/2);
+                break;
+            case"threeOAK":
+                probabilityPoints+=threeOAKVal;
+                break;
+            case "fourOAK":
+                probabilityPoints+=fourOAKVal;
+                break;
+            case "full house":
+                probabilityPoints+=fullHouseVal;
+                break;
+            case"none":
+            default:
+                break;
+        }
+        //add points for sequences and flushes
+        switch(straightFlush(opnCards)){
+            case "straight":
+                probabilityPoints+=straightVal;
+                break;
+            case "flush":
+                probabilityPoints+=flushVal;
+                break;
+            case "straightFlush":
+                probabilityPoints+=strFlushVal;
+                break;
+            case "royalFlush":
+                probabilityPoints+=royalVal;
+                break;
+            default:
+                break;
+        }
+        return probabilityPoints;
+
+
+
+
+
+
     }
 //Detect methods
     //foundational
-    private ArrayList<Card> ofAKind(ArrayList<Card> opnCard) {
+    private static ArrayList<Card> ofAKind(ArrayList<Card> opnCard) {
         ArrayList<Card> OAKr = new ArrayList<>();
         ArrayList<ArrayList<Card>> OAKArray = new ArrayList<>();
         OAKArray.add(OAKr);
@@ -44,7 +110,7 @@ public class Checks {
         return OAKr;
     }
 
-    private boolean sequence(ArrayList<Rank> opnCardRanks) {
+    private static boolean sequence(ArrayList<Rank> opnCardRanks) {
         Collections.sort(opnCardRanks);
         for (int pos = 1; pos < opnCardRanks.size(); pos++) {
             if (opnCardRanks.get(pos - 1).getNumVal() != opnCardRanks.get(pos).getNumVal() - 1) {
@@ -54,7 +120,7 @@ public class Checks {
         return true;
     }
 
-    private boolean sameSuit(ArrayList<Card> opnCard) {
+    private static boolean sameSuit(ArrayList<Card> opnCard) {
         for (int pos = 1; pos < opnCard.size(); pos++) {
             if (opnCard.get(pos - 1).getRank() != opnCard.get(pos).getRank()) {
                 return false;
@@ -64,7 +130,7 @@ public class Checks {
     }
 
     //check boolean returns
-    private int highCard(ArrayList<Rank> opnCardRanks) {
+    private static int highCard(ArrayList<Rank> opnCardRanks) {
         Collections.sort(opnCardRanks);
         if (opnCardRanks.get(0).getNumVal() == 1) {
             return 14;
@@ -74,9 +140,9 @@ public class Checks {
         }
     }
 
-    private String OAKofAKind(ArrayList<Card> opnCard) {
+    private static String OAKofAKind(ArrayList<Card> opnCard) {
         //first of a kind (OAK) set to find
-        ArrayList<Card> oakOne = new ArrayList<>();
+        ArrayList<Card> oakOne;
         oakOne = ofAKind(opnCard);
         //remove intersection of oakOne and the master set of open cards
         for (int pos = 0; pos < opnCard.size(); pos++) {
@@ -103,6 +169,8 @@ public class Checks {
         switch (oakR.size()) {
             case 2:
                 return "pair";
+            case 3:
+                return "threeOAK";
             case 4:
                 if (oakOne.size() == 2 && oakTwo.size() == 2) {
                     return "two pairs";
@@ -118,14 +186,9 @@ public class Checks {
         // a full house or a single of a kind and send back an String value based on that
     }
 
-    private String straightFlush(ArrayList<Card> opnCard) {
+    private static String straightFlush(ArrayList<Card> opnCard) {
         //check for sequence if straight return "straight"
-        //make list of ranks from the open cards
-        ArrayList<Rank> ranks = new ArrayList<>();
-        for (int pos = 0; pos < opnCard.size(); pos++) {
-            //add rank to list
-            ranks.add(opnCard.get(pos).getRank());
-        }
+        ArrayList<Rank> ranks = ranksList(opnCard);
         boolean seq = sequence(ranks);
         //check for same suit if straightFlush return "straightFlush"
         boolean flush = sameSuit(opnCard);
@@ -144,6 +207,16 @@ public class Checks {
         }
     }
 
+    //other stuff
+    private static ArrayList<Rank> ranksList(ArrayList<Card> opnCard){
+        //make list of ranks from the open cards
+        ArrayList<Rank> ranks = new ArrayList<>();
+        for (int pos = 0; pos < opnCard.size(); pos++) {
+            //add rank to list
+            ranks.add(opnCard.get(pos).getRank());
+        }
+        return ranks;
+    }
 
 }
 
