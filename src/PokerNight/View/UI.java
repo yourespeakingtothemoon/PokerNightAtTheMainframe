@@ -1,6 +1,5 @@
 package PokerNight.View;
 
-import PokerNight.Model.AbsPlayer;
 import PokerNight.Model.Game;
 import lib.ConsoleIO;
 
@@ -15,14 +14,6 @@ public class UI {
         System.out.print("Your money: " + game.getPlayers().get(0).getMoney() + "\t");
         System.out.print("Current pot: " + game.getPot() + "\t");
         System.out.print("Minimum bet: " + game.getMinBet() + "\n");
-    }
-
-    public void DisplayHand(AbsPlayer player) {
-        System.out.println(player.getPocket());
-    }
-
-    public String GetString(String prompt) {
-        return ConsoleIO.promptForString(prompt, false);
     }
 
     public int GetInt(String prompt, int min, int max) {

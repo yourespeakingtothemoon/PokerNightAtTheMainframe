@@ -33,10 +33,10 @@ public class GamePlay {
                 //If they're human, save high score, etc.
             RemovePlayers(game); //Permanent removal of players
             game.NewRound(); //Resets just about everything
-            System.out.println(game.getRemainingPlayers());
 
-            for (int x = 0; x < game.getPlayers().size(); x++) { //Give each player 2 (pocket) cards
+            for (int x = 0; x < game.getRemainingPlayers().size(); x++) { //Give each player 2 (pocket) cards
                 game.getPlayers().get(x).setPocket(new ArrayList<>(DrawCard(2, game.getGameDeck())));
+                game.getPlayers().get(x).setSkipRound(false);
             }
 
             for (int x = 0; x < 4; x++) {
@@ -94,9 +94,9 @@ public class GamePlay {
 
     //May move these to the Game class
     public void SetRemainingPlayers(Game game) { //Sets the remaining players for the TURN, not the game
-        for (int x = 0; x < game.getPlayers().size(); x++) {
-            if (game.getPlayers().get(x).isSkipRound()) {
-                game.getRemainingPlayers().remove(game.getPlayers().get(x));
+        for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
+            if (game.getRemainingPlayers().get(x).isSkipRound()) {
+                game.getRemainingPlayers().remove(x);
             }
         }
     }

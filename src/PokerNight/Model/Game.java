@@ -23,7 +23,8 @@ public class Game {
         this.round = 0;
         deck.GenerateDeck(gameDeck);
         Collections.shuffle(gameDeck);
-        this.remainingPlayers = this.players; //Sets players for the turn. This list can be changed while leaving the overall players ArrayList alone
+        this.remainingPlayers.clear(); //Fuck this, dude
+        this.remainingPlayers.addAll(this.players); //Sets players for the turn. This list can be changed while leaving the overall players ArrayList alone
         this.board = new ArrayList<>();
         this.muck = new ArrayList<>();
     }
