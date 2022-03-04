@@ -16,9 +16,11 @@ public class Human extends AbsPlayer {
     @Override
     public int turn(Game game, UI ui) { //Might return the amount the player bets instead of nothing
         while (true) {
-            switch(ConsoleIO.promptForString("a: Call\n" +
-                    "b: Bet\n" +
-                    "c: Fold\n", false)) {
+            String prompt = "a: Call\nb: Bet\nc: Fold\n";
+            if (!(game.getRound() == 1)) {
+                prompt += "d: Check\n";
+            }
+            switch(ConsoleIO.promptForString(prompt, false)) {
                 case "a": //Call
                     //Stay in the game, equal the bet of the previous player
                     this.setMoney(this.getMoney() - game.getMinBet());
