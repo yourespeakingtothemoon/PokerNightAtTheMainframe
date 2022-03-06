@@ -12,6 +12,7 @@ public class Game {
     private ArrayList<Card> gameDeck = new ArrayList<>();
     private ArrayList<AbsPlayer> players = new ArrayList<>();
     private ArrayList<AbsPlayer> remainingPlayers = new ArrayList<>();
+    private AbsPlayer winner;
     private ArrayList<Card> board = new ArrayList<>();
     private ArrayList<Card> muck = new ArrayList<>();
     private Deck deck = new Deck();
@@ -25,6 +26,7 @@ public class Game {
         Collections.shuffle(gameDeck);
         this.remainingPlayers.clear(); //Fuck this, dude
         this.remainingPlayers.addAll(this.players); //Sets players for the turn. This list can be changed while leaving the overall players ArrayList alone
+        this.winner = new Human(); //CHANGE THIS TO NULL -- MONEY CAN BE STOLEN BY FAKE PLAYER
         this.board = new ArrayList<>();
         this.muck = new ArrayList<>();
     }
@@ -83,6 +85,14 @@ public class Game {
 
     public void setRemainingPlayers(ArrayList<AbsPlayer> remainingPlayers) {
         this.remainingPlayers = remainingPlayers;
+    }
+
+    public AbsPlayer getWinner() {
+        return winner;
+    }
+
+    public void setWinner(AbsPlayer winner) {
+        this.winner = winner;
     }
 
     public ArrayList<Card> getBoard() {

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Human extends AbsPlayer {
 
     public Human() {
+        this.name = "The Player";
         this.money = 0;
         this.pocket = new ArrayList<>();
         this.skipRound = false;
