@@ -9,6 +9,7 @@ public abstract class AbsPlayer {
     protected String name;
     protected int money;
     protected boolean skipRound = false;
+    protected boolean outOfGame = false;
 
     protected int DialogueID; //for calling character specific/player type specific dialogue
     protected ArrayList<Card> pocket;
@@ -43,6 +44,14 @@ public abstract class AbsPlayer {
 
     public void setSkipRound(boolean skipRound) {
         this.skipRound = skipRound;
+    }
+
+    public boolean isOutOfGame() {
+        return outOfGame;
+    }
+
+    public void setOutOfGame(boolean outOfGame) {
+        this.outOfGame = outOfGame;
     }
 
     public int getDialogueID() {
