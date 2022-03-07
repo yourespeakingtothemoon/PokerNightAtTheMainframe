@@ -1,28 +1,32 @@
 package PokerNight.Controller;
 
+import PokerNight.DAL.DAPoker;
 import PokerNight.Model.*;
 import PokerNight.View.UI;
+import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GamePlay {
 
-    public void StartGame() {
+    public void StartGame() throws IOException, ParseException {
         Game game = new Game();
         UI ui = new UI();
-
+        Random rand = new Random();
         game.getPlayers().add(new Human()); //for testing
-        game.getPlayers().add(new Omega()); //for testing
-        game.getPlayers().add(new Sigma()); //for testing
-        game.getPlayers().add(new Alpha()); //for testing
-        game.getPlayers().add(new Beta()); //for testing
+        game.getPlayers().add(DAPoker.playerPull("omega",(rand.nextInt(3)+1))); //for testing
+        game.getPlayers().add(DAPoker.playerPull("alpha",(rand.nextInt(3)+1))); //for testing
+        game.getPlayers().add(DAPoker.playerPull("beta",(rand.nextInt(3)+1))); //for testing
+        game.getPlayers().add(DAPoker.playerPull("sigma",(rand.nextInt(3)+1))); //for testing
         //Select players (one bot of each archetype) as well as the Human player
         //Add them to players
 
         MainGamePlayLoop(game, ui);
     }
 
-    public void MainGamePlayLoop(Game game, UI ui) {
+    public void MainGamePlayLoop(Game game, UI ui) throws IOException, ParseException {
         for (int x = 0; x < game.getPlayers().size(); x++) { //Give each player an empty hand, $10k to bet
             game.getPlayers().get(x).setPocket(new ArrayList<>()); //this could be added to a constructor instead for new AbsPlayers
             game.getPlayers().get(x).setMoney(10000);
@@ -82,7 +86,7 @@ public class GamePlay {
 
     }
 
-    public void BettingRound(Game game, UI ui) { //Loops through players, doing turns, then does flop
+    public void BettingRound(Game game, UI ui) throws IOException, ParseException { //Loops through players, doing turns, then does flop
         game.setRound(game.getRound() + 1); //Adds 1 to the round
         if (game.getRemainingPlayers().size() <= 1) {
             return;
