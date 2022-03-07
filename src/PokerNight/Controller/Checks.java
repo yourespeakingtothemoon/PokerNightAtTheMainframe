@@ -26,7 +26,7 @@ public class Checks {
                 return probScoreCalc(13,16,19,22,24,27,30,33,openCard);
             //winner determination case
             case 4:
-                return probScoreCalc(14,15,16,17,18,19,20,21,openCard);
+                return probScoreCalc(14,16,18,20,22,24,26,28,openCard);
                 //this dont need be but hey incase error
             default:
                 return 0;
@@ -38,19 +38,19 @@ public class Checks {
         //add points for Of a Kinds
         switch(OAKofAKind(opnCards)){
             case "pair":
-                probabilityPoints+=pairVal;
+                probabilityPoints=pairVal;
                 break;
             case "two pairs":
-                probabilityPoints+=pairVal+(pairVal/2);
+                probabilityPoints=pairVal+1;
                 break;
             case"threeOAK":
-                probabilityPoints+=threeOAKVal;
+                probabilityPoints=threeOAKVal;
                 break;
             case "fourOAK":
-                probabilityPoints+=fourOAKVal;
+                probabilityPoints=fourOAKVal;
                 break;
             case "full house":
-                probabilityPoints+=fullHouseVal;
+                probabilityPoints=fullHouseVal;
                 break;
             case"none":
             default:
@@ -59,29 +59,34 @@ public class Checks {
         //add points for sequences and flushes
         switch(straightFlush(opnCards)){
             case "straight":
-                probabilityPoints+=straightVal;
+                probabilityPoints=straightVal;
                 break;
             case "flush":
-                probabilityPoints+=flushVal;
+                probabilityPoints=flushVal;
                 break;
             case "straightFlush":
-                probabilityPoints+=strFlushVal;
+                probabilityPoints=strFlushVal;
                 break;
             case "royalFlush":
-                probabilityPoints+=royalVal;
+                probabilityPoints=royalVal;
                 break;
             default:
                 break;
         }
         return probabilityPoints;
-
-
-
-
-
-
     }
-//Detect methods
+//pair tie
+public static String tieBreak(String name1, ArrayList<Card> hand1, String name2, ArrayList<Card> hand2){
+        if(highCard(ranksList(ofAKind(hand1))) > highCard(ranksList(ofAKind(hand2)))){
+            return name1;
+    }
+    if(highCard(ranksList(ofAKind(hand1))) < highCard(ranksList(ofAKind(hand2)))){
+        return name2;
+    }else{
+        return "tie";
+    }
+}
+    //Detect methods
     //foundational
     private static ArrayList<Card> ofAKind(ArrayList<Card> opnCard) {
         ArrayList<Card> OAKr = new ArrayList<>();
