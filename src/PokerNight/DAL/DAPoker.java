@@ -1,6 +1,7 @@
 package PokerNight.DAL;
 
 
+import PokerNight.Model.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -25,7 +26,22 @@ public class DAPoker {
         return (String) set.get(String.valueOf(val));
 
     }
-
+//character gen take in archetype and a random number 1- however many players in that archetype are available.
+    public static AbsPlayer playerPull(String archetype,int playerNumber) throws IOException, ParseException {
+            FileReader file = new FileReader("players.json");
+            JSONObject set = (JSONObject) new JSONParser().parse(file);
+            JSONObject playerInfo = (JSONObject) set.get(archetype+playerNumber);
+        switch(archetype){
+            case "alpha":
+                return new Alpha((String) playerInfo.get("name"), (Integer) playerInfo.get("ID"),(Integer) playerInfo.get("PID"));
+            case "beta":
+                return new Beta((String) playerInfo.get("name"), (Integer) playerInfo.get("ID"),(Integer) playerInfo.get("PID"));
+            case "omega":
+                return new Omega((String) playerInfo.get("name"), (Integer) playerInfo.get("ID"),(Integer) playerInfo.get("PID"));
+            default:
+                return new Sigma((String) playerInfo.get("name"), (Integer) playerInfo.get("ID"),(Integer) playerInfo.get("PID"));
+        }
+    }
 
 
 }

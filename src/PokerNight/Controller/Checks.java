@@ -15,17 +15,17 @@ public class Checks {
         openCard.addAll(board);
         switch(turnNum){
             //pre-flop
-            case 0:
+            case 1:
                 return probScoreCalc(13,0,13,13,0,0,0,0,pocket);
             //flop
-            case 1:
-                //turn/fourth street
             case 2:
-                //final betting round before showdown
+                //turn/fourth street
             case 3:
+                //final betting round before showdown
+            case 4:
                 return probScoreCalc(13,16,19,22,24,27,30,33,openCard);
             //winner determination case
-            case 4:
+            case 5:
                 return probScoreCalc(14,16,18,20,22,24,26,28,openCard);
                 //this dont need be but hey incase error
             default:

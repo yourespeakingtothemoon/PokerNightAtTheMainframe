@@ -1,44 +1,44 @@
 package PokerNight.Model;
 
+import PokerNight.View.Dialogue;
 import PokerNight.View.UI;
+import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class Alpha extends AbsPlayer{
+    //constructor
+    public Alpha(String name,int DID, int PID) throws IOException, ParseException {
+        super.name = name;
+        super.DialogueID=DID;
+        super.personalityID=PID;
+        Dialogue.printDialogue(super.DialogueID,super.rand.nextInt(4)+1,super.personalityID,super.name);
+    }
+    public Alpha(){}
     @Override
-    public int turn(Game game, UI ui) { //sigma grindset
-        //#heboughtthebank
-        Random rand = new Random(); //randomizer to decide what to do
-        while (true) {
-            switch (rand.nextInt(4)) {
-                case 0: //Call
-                    if (this.getMoney() >= game.getMinBet()) {
-                        this.setMoney(this.getMoney() - game.getMinBet());
-//                        sigmaStringset(rand.nextInt(10) + 1);
-                        return game.getMinBet();
-                    }
-                    int returnAmt = this.getMoney();
-                    this.setMoney(0);
-//                    sigmaStringset(rand.nextInt(10 + 1));
-                    return returnAmt;
-                case 1: //raise
-                    if (this.getMoney() >= game.getMinBet()) { //Disallows the Sigma to bet more than they have
-                        int betAmt = rand.nextInt((this.getMoney() - game.getMinBet()) + 1) + game.getMinBet();
-                        game.setMinBet(betAmt);
-                        this.setMoney(this.getMoney() - game.getMinBet());
-//                        sigmaStringset(rand.nextInt(10) + 1);
-                        return betAmt;
-                    }
-                case 2: //fold
-                    this.setSkipRound(true);
-//                    sigmaStringset(rand.nextInt(10) + 1);
-                    return 0;
-                case 3: //Check
-                    if (!(game.getRound() == 1)) {
-                        return 0; //Stay in the game without betting
-                    }
-            }
+    public int turn(Game game, UI ui) {
+        int raise;
+        int fold;
+        int check;
+        switch (game.getRound()) {
+            case 1:
+                raise = 13;
+                fold = 0;
+                check = 3;
+                break;
+            case 2:
+            case 3:
+            case 4:
+                raise = 16;
+                fold = 6;
+                check = 10;
+            default:
+                raise = 13;
+                fold = 4;
+                check = 6;
         }
+        return super.decide(fold,check,raise,game,ui);
     }
 
     @Override
