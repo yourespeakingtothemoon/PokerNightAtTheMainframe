@@ -23,18 +23,18 @@ public class Alpha extends AbsPlayer{
         int check;
         switch (game.getRound()) {
             case 1:
-                raise = 13;
+                raise = 10;
                 fold = 0;
                 check = 3;
                 break;
             case 2:
             case 3:
             case 4:
-                raise = 16;
-                fold = 6;
-                check = 10;
-            default:
                 raise = 13;
+                fold = 5;
+                check = 7;
+            default:
+                raise = 11;
                 fold = 4;
                 check = 6;
         }

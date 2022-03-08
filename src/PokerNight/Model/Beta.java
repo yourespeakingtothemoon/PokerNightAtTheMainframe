@@ -17,23 +17,24 @@ public class Beta extends AbsPlayer{
     }
     public Beta(){}
     @Override
-    public int turn(Game game, UI ui) {  int raise;
+    public int turn(Game game, UI ui) {
+        int raise;
         int fold;
         int check;
         switch (game.getRound()) {
             case 1:
-                raise = 13;
+                raise = 16;
                 fold = 0;
                 check = 3;
                 break;
             case 2:
             case 3:
             case 4:
-                raise = 16;
-                fold = 6;
-                check = 10;
+                raise = 19;
+                fold = 10;
+                check = 13;
             default:
-                raise = 13;
+                raise = 16;
                 fold = 4;
                 check = 6;
         }
