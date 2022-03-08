@@ -7,15 +7,18 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
-public class Alpha extends AbsPlayer{
+public class Alpha extends AbsPlayer {
     //constructor
-    public Alpha(String name,int DID, int PID) throws IOException, ParseException {
+    public Alpha(String name, int DID, int PID) throws IOException, ParseException {
         super.name = name;
-        super.DialogueID=DID;
-        super.personalityID=PID;
-        Dialogue.printDialogue(super.DialogueID,super.rand.nextInt(4)+1,super.personalityID,super.name);
+        super.DialogueID = DID;
+        super.personalityID = PID;
+        Dialogue.printDialogue(super.DialogueID, super.rand.nextInt(4) + 1, super.personalityID, super.name);
     }
-    public Alpha(){}
+
+    public Alpha() {
+    }
+
     @Override
     public int turn(Game game, UI ui) {
         int raise;
@@ -41,12 +44,19 @@ public class Alpha extends AbsPlayer{
                 check = 6;
                 break;
         }
-        int probScore = Checks.probScore(game.getRound(),super.pocket,game.getBoard());
-                if(probScore>=10){betLimit=.15f;}
-                if(probScore>=15){betLimit=.01f;}
-                if(probScore>20){betLimit=0f;}
-                else{betLimit=.2f;}
-        return super.decide(fold,check,raise,game,ui,betLimit);
+        int probScore = Checks.probScore(game.getRound(), super.pocket, game.getBoard());
+        if (probScore >= 10 && probScore < 15) {
+            betLimit = .15f;
+        }
+        if (probScore >= 15 && probScore < 20) {
+            betLimit = .01f;
+        }
+        if (probScore >= 20) {
+            betLimit = 0f;
+        } else {
+            betLimit = .2f;
+        }
+        return super.decide(fold, check, raise, game, ui, betLimit);
     }
 
     @Override

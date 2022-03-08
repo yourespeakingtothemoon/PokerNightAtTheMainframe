@@ -23,7 +23,7 @@ public class Dialogue {
         } else {
         switch (pID) {
             case 1:
-
+//insane misanthrope
                     switch (new Random().nextInt(2) + 1) {
                         case 1:
                             dialogue = "\"" + quoteToAppend + "\"," + name + " said, malice dripping from its canned voice";
@@ -37,6 +37,7 @@ public class Dialogue {
                     }
                     break;
             case 2:
+                //funny robot you'd wanna drink with
                 switch (new Random().nextInt(2) + 1) {
                     case 1:
                         dialogue = "\"" + quoteToAppend + "\", " + name + " exclaimed.";
@@ -50,6 +51,7 @@ public class Dialogue {
                 }
                 break;
             case 3:
+                //non-verbal beep boop type robot
                 switch (new Random().nextInt(2) + 1) {
                     case 1:
                         dialogue = "\"" + quoteToAppend + "\", sounded out from " + name + "'s chassis";
@@ -63,6 +65,7 @@ public class Dialogue {
                 }
                 break;
             case 4:
+                //emotionless androids and AIs
             switch (new Random().nextInt(2) + 1) {
                 case 1:
                     dialogue = "\"" + quoteToAppend + "\", " + name + " said plainly.";
@@ -77,7 +80,7 @@ public class Dialogue {
             break;
                 }
         }
-        return dialogue;
+        return dialogue+"\n";
     }
 
 

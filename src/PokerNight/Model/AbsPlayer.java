@@ -26,23 +26,28 @@ public abstract class AbsPlayer {
         int raiseAmt = this.getMoney() - game.getMinBet();
         //Call
         int probabilityScore = Checks.probScore(game.getRound(), this.pocket, game.getBoard());
-        if (probabilityScore > fold && probabilityScore < check) {
-            System.out.println(this.getName() + " calls"); //For testing
+
+        if (probabilityScore > check && probabilityScore < raise) {
+            ui.printAction(this.name,"calls");
             if (this.getMoney() >= game.getMinBet()) {
                 this.setMoney(this.getMoney() - game.getMinBet());
                 return game.getMinBet();
             }
             int returnAmt = this.getMoney(); //If the player doesn't have enough to call, they just put in their max amount.
             this.setMoney(0);
+
             return returnAmt;
+
         }
         //raise
         if (probabilityScore >= raise) {
             System.out.println(this.getName() + " bets"); //For testing
+
             if (this.getMoney() >= game.getMinBet()) {
                 int betAmt = rand.nextInt(((raiseAmt)-Math.round(raiseAmt*percentKeep))  + 1) + game.getMinBet();
                 game.setMinBet(betAmt);
                 this.setMoney(this.getMoney() - game.getMinBet());
+                ui.printAction(this.name,"raises to "+ betAmt);
                 return betAmt;
             }
         }
@@ -53,12 +58,8 @@ public abstract class AbsPlayer {
             return 0;
         }
         //Check
-        if (probabilityScore > fold && probabilityScore <= check) {
-            System.out.println(this.getName() + " checks");
-            return 0; //Stay in the game without betting
-        }
         else{
-            return 0;
+            return 0; //exit round without folding
         }
 
     }

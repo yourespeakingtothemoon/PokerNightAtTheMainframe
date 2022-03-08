@@ -60,9 +60,13 @@ public class GamePlay {
             }
             //Do checks, pay out the winner, end round
             //Still need to implement checks
+            int winningScore=0;
             for (int y = 0; y < game.getRemainingPlayers().size(); y++) { //Go through all players
                 if (!game.getRemainingPlayers().get(y).isOutOfGame()) { //For each player that isn't out...
-                    game.setWinner(game.getRemainingPlayers().get(y));//This needs to be replaced with actual checks, lol
+                    if(Checks.probScore(5,game.getRemainingPlayers().get(y).getPocket(),game.getBoard())>winningScore){
+                        game.setWinner(game.getRemainingPlayers().get(y));
+                        winningScore=Checks.probScore(5,game.getWinner().getPocket(),game.getBoard());
+                    }
                 }
             }
             game.getWinner().setMoney(game.getWinner().getMoney() + game.getPot()); //Gives the winner the pot

@@ -30,6 +30,10 @@ public class UI {
         System.out.println(game.getWinner().getName() + " wins the round!\n");
     }
 
+    public void printAction(String name, String action){
+        System.out.println(name+" "+action+".\n");
+    }
+
     public void DisplayWinner(AbsPlayer player) {
         System.out.println(player.getName() + " wins the tournament!");
     }

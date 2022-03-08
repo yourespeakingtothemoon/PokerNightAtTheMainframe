@@ -11,11 +11,14 @@ public class Beta extends AbsPlayer{
     //constructor
     public Beta(String name,int DID, int PID) throws IOException, ParseException {
         super.name = name;
-        super.DialogueID=DID;
-        super.personalityID=PID;
-        Dialogue.printDialogue(super.DialogueID,super.rand.nextInt(4)+1,super.personalityID,super.name);
+        super.DialogueID = DID;
+        super.personalityID = PID;
+        Dialogue.printDialogue(super.DialogueID, super.rand.nextInt(4) + 1, super.personalityID, super.name);
     }
-    public Beta(){}
+
+    public Beta() {
+    }
+
     @Override
 
     public int turn(Game game, UI ui) {
@@ -32,9 +35,9 @@ public class Beta extends AbsPlayer{
             case 2:
             case 3:
             case 4:
-                raise = 19;
+                raise = 21;
                 fold = 10;
-                check = 13;
+                check = 16;
                 break;
             default:
                 raise = 16;
@@ -42,12 +45,19 @@ public class Beta extends AbsPlayer{
                 check = 6;
                 break;
         }
-        int probScore = Checks.probScore(game.getRound(),super.pocket,game.getBoard());
-        if(probScore>=10){betLimit=.75f;}
-        if(probScore>=15){betLimit=.50f;}
-        if(probScore>20){betLimit=.25f;}
-        else{betLimit=.80f;}
-        return super.decide(fold,check,raise,game,ui,betLimit);
+        int probScore = Checks.probScore(game.getRound(), super.pocket, game.getBoard());
+        if (probScore >= 10 && probScore < 15) {
+            betLimit = .75f;
+        }
+        if (probScore >= 15 && probScore < 20) {
+            betLimit = .5f;
+        }
+        if (probScore >= 20) {
+            betLimit = .25f;
+        } else {
+            betLimit = .8f;
+        }
+        return super.decide(fold, check, raise, game, ui, betLimit);
     }
 
     @Override
