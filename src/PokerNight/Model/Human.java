@@ -24,8 +24,13 @@ public class Human extends AbsPlayer {
             switch(ConsoleIO.promptForString(prompt, false)) {
                 case "a": //Call
                     //Stay in the game, equal the bet of the previous player
-                    this.setMoney(this.getMoney() - game.getMinBet());
-                    return game.getMinBet();
+                    if (this.getMoney() >= game.getMinBet()) {
+                        this.setMoney(this.getMoney() - game.getMinBet());
+                        return game.getMinBet();
+                    }
+                    int returnAmt = this.getMoney(); //If the player doesn't have enough to call, they just put in their max amount.
+                    this.setMoney(0);
+                    return returnAmt;
                 case "b": //Bet
                     //Bet an amount that is set as the new minBet
                     game.setMinBet(ui.GetInt("How much would you like to bet?\n", game.getMinBet() * 2, this.getMoney() + game.getMinBet())); //No smaller than min bet, no larger than player money

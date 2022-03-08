@@ -8,7 +8,7 @@ public class UI {
 
     public void DisplayGame(Game game) { //Display all players' money, board, player hand, pot, blinds, etc.
         for (int x = 0; x < game.getPlayers().size(); x++) {
-            System.out.print(game.getPlayers().get(x) + ": " + game.getPlayers().get(x).getMoney() + game.getPlayers().get(x).isSkipRound() + game.getPlayers().get(x).isOutOfGame() + "\t");
+            System.out.print(game.getPlayers().get(x).getName() + ": " + game.getPlayers().get(x).getMoney() + "\t\t");
         } //Needs testing
         System.out.print("\nBoard: ");
         if (game.getBoard() != null) {
@@ -20,10 +20,12 @@ public class UI {
         System.out.print("Minimum bet: " + game.getMinBet() + "\n \n");
     }
 
-    public void DisplayEndRound(Game game) {
+    public void DisplayEndRound(Game game) { //Displays the end of a game -- the hands of every player still in and the winner
         System.out.println("Board: " + game.getBoard());
         for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
-            System.out.println(game.getRemainingPlayers().get(x).getName() + " had: " + game.getRemainingPlayers().get(x).getPocket());
+            if (!game.getRemainingPlayers().get(x).isOutOfGame() && !game.getRemainingPlayers().get(x).isSkipRound()) {
+                System.out.println(game.getRemainingPlayers().get(x).getName() + " had: " + game.getRemainingPlayers().get(x).getPocket()); //Add what their hand is
+            }
         }
         System.out.println(game.getWinner().getName() + " wins the round!\n");
     }

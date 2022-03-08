@@ -22,6 +22,7 @@ public class Game {
         this.blinds += 200;
         this.minBet = this.blinds;
         this.round = 0;
+        this.gameDeck.clear(); //Fuck this, dude x2
         deck.GenerateDeck(gameDeck);
         Collections.shuffle(gameDeck);
         this.remainingPlayers.clear(); //Fuck this, dude
