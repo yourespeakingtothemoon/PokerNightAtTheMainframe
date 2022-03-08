@@ -31,15 +31,17 @@ public class DAPoker {
             FileReader file = new FileReader("players.json");
             JSONObject set = (JSONObject) new JSONParser().parse(file);
             JSONObject playerInfo = (JSONObject) set.get(archetype+playerNumber);
+            Long longDialogue = (Long) playerInfo.get("ID");
+            Long longPersonality=(Long) playerInfo.get("PID");
         switch(archetype){
             case "alpha":
-                return new Alpha((String) playerInfo.get("name"), (Integer) playerInfo.get("ID"),(Integer) playerInfo.get("PID"));
+                return new Alpha((String) playerInfo.get("name"), longDialogue.intValue(),longPersonality.intValue());
             case "beta":
-                return new Beta((String) playerInfo.get("name"), (Integer) playerInfo.get("ID"),(Integer) playerInfo.get("PID"));
+                return new Beta((String) playerInfo.get("name"), longDialogue.intValue(),longPersonality.intValue());
             case "omega":
-                return new Omega((String) playerInfo.get("name"), (Integer) playerInfo.get("ID"),(Integer) playerInfo.get("PID"));
+                return new Omega((String) playerInfo.get("name"), longDialogue.intValue(),longPersonality.intValue());
             default:
-                return new Sigma((String) playerInfo.get("name"), (Integer) playerInfo.get("ID"),(Integer) playerInfo.get("PID"));
+                return new Sigma((String) playerInfo.get("name"), longDialogue.intValue(),longPersonality.intValue());
         }
     }
 
