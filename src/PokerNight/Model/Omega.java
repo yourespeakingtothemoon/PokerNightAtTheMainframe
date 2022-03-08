@@ -25,6 +25,7 @@ public class Omega extends AbsPlayer {
         int raise;
         int fold;
         int check;
+        float betLimit;
         switch (game.getRound()) {
             case 1:
                 raise = 13;
@@ -42,7 +43,12 @@ public class Omega extends AbsPlayer {
                 fold = 4;
                 check = 6;
         }
-      return super.decide(fold,check,raise,game,ui);
+        int probScore = Checks.probScore(game.getRound(),super.pocket,game.getBoard());
+        if(probScore>=10){betLimit=.50f;}
+        if(probScore>=15){betLimit=.2f;}
+        if(probScore>20){betLimit=.1f;}
+        else{betLimit=.6f;}
+        return super.decide(fold,check,raise,game,ui,betLimit);
     }
 
     @Override

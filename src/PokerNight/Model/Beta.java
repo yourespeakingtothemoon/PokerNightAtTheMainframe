@@ -1,5 +1,6 @@
 package PokerNight.Model;
 
+import PokerNight.Controller.Checks;
 import PokerNight.View.Dialogue;
 import PokerNight.View.UI;
 import org.json.simple.parser.ParseException;
@@ -17,27 +18,36 @@ public class Beta extends AbsPlayer{
     }
     public Beta(){}
     @Override
-    public int turn(Game game, UI ui) {  int raise;
+
+    public int turn(Game game, UI ui) {
+        int raise;
         int fold;
         int check;
+        float betLimit;
         switch (game.getRound()) {
             case 1:
-                raise = 13;
+                raise = 16;
                 fold = 0;
                 check = 3;
                 break;
             case 2:
             case 3:
             case 4:
-                raise = 16;
-                fold = 6;
-                check = 10;
+
+                raise = 19;
+                fold = 10;
+                check = 13;
             default:
-                raise = 13;
+                raise = 16;
                 fold = 4;
                 check = 6;
         }
-        return super.decide(fold,check,raise,game,ui);
+        int probScore = Checks.probScore(game.getRound(),super.pocket,game.getBoard());
+        if(probScore>=10){betLimit=.75f;}
+        if(probScore>=15){betLimit=.50f;}
+        if(probScore>20){betLimit=.25f;}
+        else{betLimit=.80f;}
+        return super.decide(fold,check,raise,game,ui,betLimit);
     }
 
     @Override
