@@ -70,6 +70,7 @@ public class Checks {
             case "royalFlush":
                 probabilityPoints=royalVal;
                 break;
+            case "none":
             default:
                 break;
         }
@@ -117,11 +118,21 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
 
     private static boolean sequence(ArrayList<Rank> opnCardRanks) {
         Collections.sort(opnCardRanks);
+        int size;
+        if(opnCardRanks.size()>5){
+            size =5;
+        }else{
+            size=opnCardRanks.size();
+        }
+        int sequenceCount=0;
         for (int pos = 1; pos < opnCardRanks.size(); pos++) {
             if (opnCardRanks.get(pos - 1).getNumVal() != opnCardRanks.get(pos).getNumVal() - 1) {
-                return false;
+                break;
+            }else{
+                sequenceCount++;
             }
         }
+
         return true;
     }
 
@@ -207,8 +218,10 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
         }
         if (flush) {
             return "flush";
-        } else {
+        } if(seq) {
             return "straight";
+        }else{
+            return "none";
         }
     }
 

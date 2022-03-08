@@ -57,17 +57,17 @@
 },
 "set-5":
 {
-  "1":"*pointing to himself* WALL-E",
-  "2":"*pointing to himself* WALL-E",
-  "3":"*pointing to himself* WALL-E",
-  "4":"*pointing to himself* WALL-E",
-  "5":"Wa... WwALL-E",
-  "6":"Wa... WwALL-E",
-  "7":"Ee-Vah?",
-  "8":"Eve. Eve.",
+  "1":"pointing to himself Wall-E says, \"WALL-E\"",
+  "2":"\"WALL-E\",he says pointing to himself",
+  "3":"\"WALL-E\"",
+  "4":"Wall-E points to himself and says, \"WALL-E\"",
+  "5":"\"Wa... WwALL-E\"",
+  "6":"\"Wa... WwALL-E\"",
+  "7":"\"Ee-Vah?\"",
+  "8":"\"Eve. Eve.\"",
   "9":"WALL-E stares at you",
-  "10":"M-O?",
-  "11":"Waaaaaaaall-E!"
+  "10":"\"M-O?\"",
+  "11":"\"Waaaaaaaall-E!\""
 },
 "set-6":
 {
