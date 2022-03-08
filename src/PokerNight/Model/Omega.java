@@ -35,20 +35,29 @@ public class Omega extends AbsPlayer {
             case 2:
             case 3:
             case 4:
-                raise = 16;
+                raise = 19;
                 fold = 6;
                 check = 10;
+                break;
             default:
                 raise = 13;
                 fold = 4;
                 check = 6;
+                break;
         }
-        int probScore = Checks.probScore(game.getRound(),super.pocket,game.getBoard());
-        if(probScore>=10){betLimit=.50f;}
-        if(probScore>=15){betLimit=.2f;}
-        if(probScore>20){betLimit=.1f;}
-        else{betLimit=.6f;}
-        return super.decide(fold,check,raise,game,ui,betLimit);
+        int probScore = Checks.probScore(game.getRound(), super.pocket, game.getBoard());
+        if (probScore >= 10 && probScore < 15) {
+            betLimit = .50f;
+        }
+        if (probScore >= 15 && probScore < 20) {
+            betLimit = .2f;
+        }
+        if (probScore >= 20) {
+            betLimit = .1f;
+        } else {
+            betLimit = .6f;
+        }
+        return super.decide(fold, check, raise, game, ui, betLimit);
     }
 
     @Override
