@@ -46,6 +46,7 @@ public class Beta extends AbsPlayer{
                 break;
         }
         int probScore = Checks.probScore(game.getRound(), super.pocket, game.getBoard());
+        betLimit = .8f;
         if (probScore >= 10 && probScore < 15) {
             betLimit = .75f;
         }
@@ -54,8 +55,6 @@ public class Beta extends AbsPlayer{
         }
         if (probScore >= 20) {
             betLimit = .25f;
-        } else {
-            betLimit = .8f;
         }
         return super.decide(fold, check, raise, game, ui, betLimit);
     }
