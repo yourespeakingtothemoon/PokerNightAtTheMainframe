@@ -6,10 +6,9 @@ import PokerNight.View.UI;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.Random;
 
 public class Omega extends AbsPlayer {
-    //contructors
+    //constructors
     public Omega() {
     }
 

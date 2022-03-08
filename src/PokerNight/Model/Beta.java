@@ -6,11 +6,10 @@ import PokerNight.View.UI;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.Random;
 
-public class Beta extends AbsPlayer {
-    //contructor
-    public Beta(String name, int DID, int PID) throws IOException, ParseException {
+public class Beta extends AbsPlayer{
+    //constructor
+    public Beta(String name,int DID, int PID) throws IOException, ParseException {
         super.name = name;
         super.DialogueID = DID;
         super.personalityID = PID;

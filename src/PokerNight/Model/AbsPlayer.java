@@ -26,6 +26,7 @@ public abstract class AbsPlayer {
         int raiseAmt = this.getMoney() - game.getMinBet();
         //Call
         int probabilityScore = Checks.probScore(game.getRound(), this.pocket, game.getBoard());
+
         if (probabilityScore > check && probabilityScore < raise) {
             ui.printAction(this.name,"calls");
             if (this.getMoney() >= game.getMinBet()) {
@@ -40,6 +41,7 @@ public abstract class AbsPlayer {
         }
         //raise
         if (probabilityScore >= raise) {
+            System.out.println(this.getName() + " bets"); //For testing
 
             if (this.getMoney() >= game.getMinBet()) {
                 int betAmt = rand.nextInt(((raiseAmt)-Math.round(raiseAmt*percentKeep))  + 1) + game.getMinBet();
@@ -51,6 +53,7 @@ public abstract class AbsPlayer {
         }
         //fold
         if (probabilityScore <= fold) {
+            System.out.println(this.getName() + " folds");
             this.setSkipRound(true);
             return 0;
         }

@@ -5,7 +5,6 @@ import PokerNight.View.UI;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.Random;
 
 public class Sigma extends AbsPlayer {
     //Constructor
@@ -20,43 +19,47 @@ public class Sigma extends AbsPlayer {
        sigmaStringset(super.rand.nextInt(9)+1);
     }
 
-//turn abstract thingy -- This is pretty much how it should work for all archetypes
-//Main difference is the way they determine their action
-@Override
-public int turn(Game game, UI ui) throws IOException, ParseException { //sigma grindset
-    //#heboughtthebank
+    //turn abstract thingy -- This is pretty much how it should work for all archetypes
+    //Main difference is the way they determine their action
+    @Override
+    public int turn(Game game, UI ui) throws IOException, ParseException { //sigma grindset
+        //#heboughtthebank
 
-    while (true) {
-        switch (super.rand.nextInt(4)) {
-            case 0: //Call
-                if (this.getMoney() >= game.getMinBet()) {
-                    this.setMoney(this.getMoney() - game.getMinBet());
+        while (true) {
+            switch (super.rand.nextInt(4)) {
+                case 0: //Call
+                    System.out.println(this.getName() + " calls"); //For testing
+                    if (this.getMoney() >= game.getMinBet()) {
+                        this.setMoney(this.getMoney() - game.getMinBet());
+                        sigmaStringset(super.rand.nextInt(10) + 1);
+                        return game.getMinBet();
+                    }
+                    int returnAmt = this.getMoney();
+                    this.setMoney(0);
+                    sigmaStringset(super.rand.nextInt(10 + 1));
+                    return returnAmt;
+                case 1: //raise
+                    System.out.println(this.getName() + " bets"); //For testing
+                    if (this.getMoney() >= game.getMinBet()) { //Disallows the Sigma to bet more than they have
+                        int betAmt = super.rand.nextInt((this.getMoney() - game.getMinBet()) + 1) + game.getMinBet();
+                        game.setMinBet(betAmt);
+                        this.setMoney(this.getMoney() - game.getMinBet());
+                        sigmaStringset(super.rand.nextInt(10) + 1);
+                        return betAmt;
+                    }
+                case 2: //fold
+                    System.out.println(this.getName() + " folds"); //For testing
+                    this.setSkipRound(true);
                     sigmaStringset(super.rand.nextInt(10) + 1);
-                    return game.getMinBet();
-                }
-                int returnAmt = this.getMoney();
-                this.setMoney(0);
-                sigmaStringset(super.rand.nextInt(10 + 1));
-                return returnAmt;
-            case 1: //raise
-                if (this.getMoney() >= game.getMinBet()) { //Disallows the Sigma to bet more than they have
-                    int betAmt = super.rand.nextInt((this.getMoney() - game.getMinBet()) + 1) + game.getMinBet();
-                    game.setMinBet(betAmt);
-                    this.setMoney(this.getMoney() - game.getMinBet());
-                    sigmaStringset(super.rand.nextInt(10) + 1);
-                    return betAmt;
-                }
-            case 2: //fold
-                this.setSkipRound(true);
-                sigmaStringset(super.rand.nextInt(10) + 1);
-                return 0;
-            case 3: //Check
-                if (!(game.getRound() == 1)) {
-                    return 0; //Stay in the game without betting
-                }
+                    return 0;
+                case 3: //Check
+                    System.out.println(this.getName() + " checks"); //For testing
+                    if (!(game.getRound() == 1)) {
+                        return 0; //Stay in the game without betting
+                    }
+            }
         }
     }
-}
 
     private void sigmaStringset(int otherSpeak) throws IOException, ParseException { //Still needs to be implemented
         int ID;
