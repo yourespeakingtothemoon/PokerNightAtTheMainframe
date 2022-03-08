@@ -27,7 +27,7 @@ public class Game {
         Collections.shuffle(gameDeck);
         this.remainingPlayers.clear(); //Fuck this, dude
         this.remainingPlayers.addAll(this.players); //Sets players for the turn. This list can be changed while leaving the overall players ArrayList alone
-        this.winner = new Human(); //CHANGE THIS TO NULL -- MONEY CAN BE STOLEN BY FAKE PLAYER
+        this.winner = null;
         this.board = new ArrayList<>();
         this.muck = new ArrayList<>();
     }

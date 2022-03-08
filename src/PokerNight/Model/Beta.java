@@ -6,10 +6,9 @@ import PokerNight.View.UI;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.Random;
 
 public class Beta extends AbsPlayer{
-    //contructor
+    //constructor
     public Beta(String name,int DID, int PID) throws IOException, ParseException {
         super.name = name;
         super.DialogueID=DID;
@@ -33,14 +32,15 @@ public class Beta extends AbsPlayer{
             case 2:
             case 3:
             case 4:
-
                 raise = 19;
                 fold = 10;
                 check = 13;
+                break;
             default:
                 raise = 16;
                 fold = 4;
                 check = 6;
+                break;
         }
         int probScore = Checks.probScore(game.getRound(),super.pocket,game.getBoard());
         if(probScore>=10){betLimit=.75f;}

@@ -17,10 +17,10 @@ public class GamePlay {
         Random rand = new Random();
         //Select players (one bot of each archetype) as well as the Human player
         game.getPlayers().add(new Human());
-        game.getPlayers().add(DAPoker.playerPull("omega",(rand.nextInt(3)+1)));
         game.getPlayers().add(DAPoker.playerPull("alpha",(rand.nextInt(3)+1)));
         game.getPlayers().add(DAPoker.playerPull("beta",(rand.nextInt(3)+1)));
         game.getPlayers().add(DAPoker.playerPull("sigma",(rand.nextInt(3)+1)));
+        game.getPlayers().add(DAPoker.playerPull("omega",(rand.nextInt(3)+1)));
 
         MainGamePlayLoop(game, ui);
     }
@@ -131,15 +131,5 @@ public class GamePlay {
                 game.getPlayers().get(x).setOutOfGame(true);
             }
         }
-    }
-
-    public int playersInGame(Game game) {
-        int playersInGame = 5;
-        for (int i = 0; i < game.getPlayers().size(); i++) {
-            if (game.getPlayers().get(i).isOutOfGame()) {
-                playersInGame--;
-            }
-        }
-        return playersInGame;
     }
 }

@@ -6,7 +6,6 @@ import PokerNight.View.UI;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.Random;
 
 public class Alpha extends AbsPlayer{
     //constructor
@@ -32,14 +31,15 @@ public class Alpha extends AbsPlayer{
             case 2:
             case 3:
             case 4:
-
                 raise = 13;
                 fold = 5;
                 check = 7;
+                break;
             default:
                 raise = 11;
                 fold = 4;
                 check = 6;
+                break;
         }
         int probScore = Checks.probScore(game.getRound(),super.pocket,game.getBoard());
                 if(probScore>=10){betLimit=.15f;}
