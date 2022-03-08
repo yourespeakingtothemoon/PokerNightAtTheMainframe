@@ -30,6 +30,7 @@ public class Alpha extends AbsPlayer{
             case 2:
             case 3:
             case 4:
+
                 raise = 13;
                 fold = 5;
                 check = 7;

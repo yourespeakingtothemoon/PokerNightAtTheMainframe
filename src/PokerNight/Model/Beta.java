@@ -17,6 +17,7 @@ public class Beta extends AbsPlayer{
     }
     public Beta(){}
     @Override
+
     public int turn(Game game, UI ui) {
         int raise;
         int fold;
@@ -30,6 +31,7 @@ public class Beta extends AbsPlayer{
             case 2:
             case 3:
             case 4:
+
                 raise = 19;
                 fold = 10;
                 check = 13;
