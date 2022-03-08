@@ -27,20 +27,25 @@ public abstract class AbsPlayer {
         //Call
         int probabilityScore = Checks.probScore(game.getRound(), this.pocket, game.getBoard());
         if (probabilityScore > check && probabilityScore < raise) {
+            ui.printAction(this.name,"calls");
             if (this.getMoney() >= game.getMinBet()) {
                 this.setMoney(this.getMoney() - game.getMinBet());
                 return game.getMinBet();
             }
             int returnAmt = this.getMoney(); //If the player doesn't have enough to call, they just put in their max amount.
             this.setMoney(0);
+
             return returnAmt;
+
         }
         //raise
         if (probabilityScore >= raise) {
+
             if (this.getMoney() >= game.getMinBet()) {
                 int betAmt = rand.nextInt(((raiseAmt)-Math.round(raiseAmt*percentKeep))  + 1) + game.getMinBet();
                 game.setMinBet(betAmt);
                 this.setMoney(this.getMoney() - game.getMinBet());
+                ui.printAction(this.name,"raises to "+ betAmt);
                 return betAmt;
             }
         }
