@@ -28,7 +28,8 @@ public abstract class AbsPlayer {
     abstract public int turn(Game game, UI ui) throws IOException, ParseException; //Implemented in each concrete class
 
 
-    protected int decide(int fold,int check, int raise, Game game, UI ui){
+    protected int decide(int fold,int check, int raise, Game game, UI ui, float percentKeep){
+        int raiseAmt = this.getMoney()- game.getMinBet();
         //Call
         int probabilityScore = Checks.probScore(game.getRound(), this.pocket, game.getBoard());
         if (probabilityScore > fold && probabilityScore < check) {
@@ -45,7 +46,7 @@ public abstract class AbsPlayer {
         //raise
         if (probabilityScore >= raise) {
             if (this.getMoney() >= game.getMinBet()) {
-                int betAmt = rand.nextInt((this.getMoney() - game.getMinBet()) + 1) + game.getMinBet();
+                int betAmt = rand.nextInt(((raiseAmt)-Math.round(raiseAmt*percentKeep))  + 1) + game.getMinBet();
                 game.setMinBet(betAmt);
                 this.setMoney(this.getMoney() - game.getMinBet());
 //                        sigmaStringset(rand.nextInt(10) + 1);
