@@ -19,28 +19,20 @@ public abstract class AbsPlayer {
     protected int personalityID;
     protected ArrayList<Card> pocket;
     protected Random rand = new Random(); //randomizer to decide what to say
-   // protected String catchphrase;
-
-    public void drawCards(ArrayList<Card> cardsGiven){
-        pocket = cardsGiven;
-    }
 
     abstract public int turn(Game game, UI ui) throws IOException, ParseException; //Implemented in each concrete class
 
-
     protected int decide(int fold,int check, int raise, Game game, UI ui, float percentKeep){
-        int raiseAmt = this.getMoney()- game.getMinBet();
+        int raiseAmt = this.getMoney() - game.getMinBet();
         //Call
         int probabilityScore = Checks.probScore(game.getRound(), this.pocket, game.getBoard());
         if (probabilityScore > fold && probabilityScore < check) {
             if (this.getMoney() >= game.getMinBet()) {
                 this.setMoney(this.getMoney() - game.getMinBet());
-//
                 return game.getMinBet();
             }
-            int returnAmt = this.getMoney();
+            int returnAmt = this.getMoney(); //If the player doesn't have enough to call, they just put in their max amount.
             this.setMoney(0);
-//
             return returnAmt;
         }
         //raise
@@ -49,7 +41,6 @@ public abstract class AbsPlayer {
                 int betAmt = rand.nextInt(((raiseAmt)-Math.round(raiseAmt*percentKeep))  + 1) + game.getMinBet();
                 game.setMinBet(betAmt);
                 this.setMoney(this.getMoney() - game.getMinBet());
-//                        sigmaStringset(rand.nextInt(10) + 1);
                 return betAmt;
             }
         }
@@ -67,7 +58,6 @@ public abstract class AbsPlayer {
         }
 
     }
-    //Board, gameDeck not needed for Human. Remove if not needed for other players
 
     public String getName() {
         return name;

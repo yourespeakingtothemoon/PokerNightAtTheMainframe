@@ -15,13 +15,12 @@ public class GamePlay {
         Game game = new Game();
         UI ui = new UI();
         Random rand = new Random();
-        game.getPlayers().add(new Human()); //for testing
-        game.getPlayers().add(DAPoker.playerPull("omega",(rand.nextInt(3)+1))); //for testing
-        game.getPlayers().add(DAPoker.playerPull("alpha",(rand.nextInt(3)+1))); //for testing
-        game.getPlayers().add(DAPoker.playerPull("beta",(rand.nextInt(3)+1))); //for testing
-        game.getPlayers().add(DAPoker.playerPull("sigma",(rand.nextInt(3)+1))); //for testing
         //Select players (one bot of each archetype) as well as the Human player
-        //Add them to players
+        game.getPlayers().add(new Human());
+        game.getPlayers().add(DAPoker.playerPull("omega",(rand.nextInt(3)+1)));
+        game.getPlayers().add(DAPoker.playerPull("alpha",(rand.nextInt(3)+1)));
+        game.getPlayers().add(DAPoker.playerPull("beta",(rand.nextInt(3)+1)));
+        game.getPlayers().add(DAPoker.playerPull("sigma",(rand.nextInt(3)+1)));
 
         MainGamePlayLoop(game, ui);
     }
@@ -37,7 +36,7 @@ public class GamePlay {
             RemovePlayers(game); //Permanent removal of players
 
             for (int i = 0; i < game.getPlayers().size(); i++) {
-                if (game.getPlayers().get(i).getMoney() == 50000 || playersInGame(game) == 1) { //If one player has all money
+                if (game.getPlayers().get(i).getMoney() >= 50000) { //If one player has all money=
                     ui.DisplayWinner(game.getPlayers().get(i));
                     return;
                 }
@@ -46,8 +45,11 @@ public class GamePlay {
             game.NewRound(); //Resets just about everything
 
             for (int x = 0; x < game.getRemainingPlayers().size(); x++) { //Give each player 2 (pocket) cards
-                game.getPlayers().get(x).setPocket(new ArrayList<>(DrawCard(2, game.getGameDeck())));
-                game.getPlayers().get(x).setSkipRound(false);
+                game.getRemainingPlayers().get(x).getPocket().clear();
+                if (!game.getRemainingPlayers().get(x).isOutOfGame()) {
+                    game.getRemainingPlayers().get(x).setPocket(new ArrayList<>(DrawCard(2, game.getGameDeck())));
+                    game.getRemainingPlayers().get(x).setSkipRound(false);
+                }
             }
 
             ui.DisplayGame(game);
@@ -58,9 +60,9 @@ public class GamePlay {
             }
             //Do checks, pay out the winner, end round
             //Still need to implement checks
-            for (int y = 0; y < game.getRemainingPlayers().size(); y++) {
-                if (!game.getRemainingPlayers().get(y).isOutOfGame()) {
-                    game.setWinner(game.getRemainingPlayers().get(y));
+            for (int y = 0; y < game.getRemainingPlayers().size(); y++) { //Go through all players
+                if (!game.getRemainingPlayers().get(y).isOutOfGame()) { //For each player that isn't out...
+                    game.setWinner(game.getRemainingPlayers().get(y));//This needs to be replaced with actual checks, lol
                 }
             }
             game.getWinner().setMoney(game.getWinner().getMoney() + game.getPot()); //Gives the winner the pot
@@ -86,9 +88,9 @@ public class GamePlay {
 
     }
 
-    public void BettingRound(Game game, UI ui) throws IOException, ParseException { //Loops through players, doing turns, then does flop
+    public void BettingRound(Game game, UI ui) throws IOException, ParseException { //Loops through players, doing turns, then adds cards to the board
         game.setRound(game.getRound() + 1); //Adds 1 to the round
-        if (game.getRemainingPlayers().size() <= 1) {
+        if (game.getRemainingPlayers().size() <= 1) { //Quickly ends the round if one player wins
             return;
         }
         for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
@@ -101,7 +103,7 @@ public class GamePlay {
             game.setBoard(DrawCard(3, game.getGameDeck())); //The Flop
         } else if (game.getRound() < 4) { //If it's any other round besides the final betting round, only add 1 card
             game.getMuck().add(DrawCard(1, game.getGameDeck()).get(0));
-            game.getBoard().add(DrawCard(1, game.getGameDeck()).get(0)); //Draws 1 card, adds it to the board
+            game.getBoard().add(DrawCard(1, game.getGameDeck()).get(0)); //Draws 1 card, adds it to the board -- River or Turn
         }
     }
 
