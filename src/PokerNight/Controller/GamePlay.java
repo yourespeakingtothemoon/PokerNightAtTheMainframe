@@ -61,6 +61,7 @@ public class GamePlay {
             //Do checks, pay out the winner, end round
             int winningScore=0;
             for (int y = 0; y < game.getRemainingPlayers().size(); y++) { //Go through all players
+                System.out.println(Checks.probScore(5,game.getRemainingPlayers().get(y).getPocket(),game.getBoard()));
                 if (!game.getRemainingPlayers().get(y).isOutOfGame()) { //For each player that isn't out...
                     if(Checks.probScore(5,game.getRemainingPlayers().get(y).getPocket(),game.getBoard())>winningScore){
                         game.setWinner(game.getRemainingPlayers().get(y));

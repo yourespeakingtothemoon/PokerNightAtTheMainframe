@@ -95,15 +95,13 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
         OAKArray.add(OAKr);
         for (int position = 0; position < opnCard.size(); position++) {
             ArrayList<Card> OAK = new ArrayList<>();
-            int ofA = 0;
             for (int pos = 0; pos < opnCard.size(); pos++) {
 
                 if (opnCard.get(position).getRank() == opnCard.get(pos).getRank()) {
-                    ofA++;
+                    OAK.add(opnCard.get(position));
+                    OAK.add(opnCard.get(pos));
                 }
-            }
-            if (ofA >= 2) {
-                OAK.add(opnCard.get(position));
+
             }
             OAKArray.add(OAK);
         }
@@ -145,11 +143,11 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
     //check boolean returns
     private static int highCard(ArrayList<Rank> opnCardRanks) {
         Collections.sort(opnCardRanks);
-        if (opnCardRanks.get(0).getNumVal() == 1) {
-            return 14;
+        if (opnCardRanks.get(0)==Rank.ACE) {
+            return 13;
         } else {
             int highestIndex = opnCardRanks.size()-1;
-            return opnCardRanks.get(highestIndex).getNumVal();
+            return opnCardRanks.get(highestIndex).getNumVal()-1;
         }
     }
 
