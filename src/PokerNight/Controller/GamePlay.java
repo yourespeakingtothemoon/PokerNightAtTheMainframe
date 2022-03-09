@@ -45,11 +45,11 @@ public class GamePlay {
 
             game.NewRound(); //Resets just about everything
             AnteUp(game, ui); //Forces every player to bet money before the round
+
             for (int x = 0; x < game.getRemainingPlayers().size(); x++) { //Give each player 2 (pocket) cards
                 game.getRemainingPlayers().get(x).getPocket().clear();
                 if (!game.getRemainingPlayers().get(x).isOutOfGame()) {
                     game.getRemainingPlayers().get(x).setPocket(new ArrayList<>(DrawCard(2, game.getGameDeck())));
-                    //System.out.println(game.getRemainingPlayers().get(x).getPocket()); -- test code
                     game.getRemainingPlayers().get(x).setSkipRound(false);
                 }
             }
@@ -63,16 +63,16 @@ public class GamePlay {
             //Do checks, pay out the winner, end round
             int winningScore = 0;
             ArrayList<AbsPlayer> tiedWinners = new ArrayList<>();
-            for (int y = 0; y < game.getRemainingPlayers().size(); y++) { //Go through all players
-                int probScore = Checks.probScore(5, game.getRemainingPlayers().get(y).getPocket(), game.getBoard());
+            for (int y = 0; y < game.getPlayers().size(); y++) { //Go through all players
+                int probScore = Checks.probScore(5, game.getPlayers().get(y).getPocket(), game.getBoard());
                 //System.out.println(probScore); -- testcode
-                if (!game.getRemainingPlayers().get(y).isOutOfGame()) { //For each player that isn't out...
+                if (!game.getPlayers().get(y).isOutOfGame()) { //For each player that isn't out...
                     if (probScore > winningScore) {
                         winningScore = probScore;
-                        tiedWinners.add(game.getRemainingPlayers().get(y));
+                        tiedWinners.add(game.getgPlayers().get(y));
                     }
                     if (probScore == winningScore) {
-                        tiedWinners.add(game.getRemainingPlayers().get(y));
+                        tiedWinners.add(game.getPlayers().get(y));
                     }
                 }
             }

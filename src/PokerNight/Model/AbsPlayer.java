@@ -26,13 +26,13 @@ public abstract class AbsPlayer {
     protected int decide(int fold, int check, int raise, Game game, UI ui, float percentKeep) throws IOException, ParseException {
         int raiseAmt = this.getMoney() - game.getMinBet();
         int probabilityScore = Checks.probScore(game.getRound(), this.pocket, game.getBoard());
-        if(flipACoin()>=50){
+        if(rand.nextInt(2)==1){
             Dialogue.printDialogue(this.DialogueID,rand.nextInt(8-5)+5,this.personalityID,this.name);
         }
         //Call
         if (probabilityScore > check && probabilityScore < raise) {
-            if (this.getMoney() >= game.getMinBet()) {
-                this.setMoney(this.getMoney() - game.getMinBet());
+            if (this.money >= game.getMinBet()) {
+                this.money = (this.money - game.getMinBet());
                 ui.printAction(this.name, "calls");
                 return game.getMinBet();
             }
@@ -40,10 +40,10 @@ public abstract class AbsPlayer {
         //raise
         if (probabilityScore >= raise) {
 
-            if (this.getMoney() >= game.getMinBet()) {
+            if (this.money >= game.getMinBet()) {
                 int betAmt = rand.nextInt(((raiseAmt) - Math.round(raiseAmt * percentKeep)) + 1) + game.getMinBet();
                 game.setMinBet(betAmt);
-                this.setMoney(this.getMoney() - game.getMinBet());
+                this.money = (this.money - game.getMinBet());
                 ui.printAction(this.name, "raises to " + betAmt);
                 return betAmt;
             }
@@ -61,7 +61,7 @@ public abstract class AbsPlayer {
         }
         //If a bot tries to bet or call but doesn't have the money to do it, they will just go all in
         ui.printAction(this.name, "calls and says, \"all in.\"");
-        int returnAmt = this.getMoney(); //If the player doesn't have enough to call, they just put in their max amount.
+        int returnAmt = this.money; //If the player doesn't have enough to call, they just put in their max amount.
         this.money=(0);
         return returnAmt;
     }
@@ -113,15 +113,8 @@ public abstract class AbsPlayer {
     public void setPocket(ArrayList<Card> pocket) {
         this.pocket = pocket;
     }
-
     public int getPersonalityID() {
         return personalityID;
-    }
-
-    //flip a coin any coin for deciding if character is gonna speak or not
-    protected int flipACoin() {
-        Random rand=new Random();
-        return rand.nextInt(100)+1;
     }
 }
 
