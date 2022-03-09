@@ -34,6 +34,10 @@ public class UI {
         System.out.println(name+" "+action+".\n");
     }
 
+    public void printError() {
+        System.out.println("You don't have enough money to do that!");
+    }
+
     public void DisplayWinner(AbsPlayer player) {
         System.out.println(player.getName() + " wins the tournament!");
     }

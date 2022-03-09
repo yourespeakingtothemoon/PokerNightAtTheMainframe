@@ -23,47 +23,45 @@ public abstract class AbsPlayer {
     abstract public int turn(Game game, UI ui) throws IOException, ParseException; //Implemented in each concrete class
 
     protected int decide(int fold,int check, int raise, Game game, UI ui, float percentKeep){
-        while (true) {
-            int raiseAmt = this.getMoney() - game.getMinBet();
-            //Call
-            int probabilityScore = Checks.probScore(game.getRound(), this.pocket, game.getBoard());
+        int raiseAmt = this.getMoney() - game.getMinBet();
+        //Call
+        int probabilityScore = Checks.probScore(game.getRound(), this.pocket, game.getBoard());
 
-            if (probabilityScore > check && probabilityScore < raise) {
-                ui.printAction(this.name, "calls");
-                if (this.getMoney() >= game.getMinBet()) {
-                    this.setMoney(this.getMoney() - game.getMinBet());
-                    return game.getMinBet();
-                }
-                int returnAmt = this.getMoney(); //If the player doesn't have enough to call, they just put in their max amount.
-                this.setMoney(0);
-
-                return returnAmt;
-
-            }
-            //raise
-            if (probabilityScore >= raise) {
-                System.out.println(this.getName() + " bets"); //For testing
-
-                if (this.getMoney() >= game.getMinBet()) {
-                    int betAmt = rand.nextInt(((raiseAmt) - Math.round(raiseAmt * percentKeep)) + 1) + game.getMinBet();
-                    game.setMinBet(betAmt);
-                    this.setMoney(this.getMoney() - game.getMinBet());
-                    ui.printAction(this.name, "raises to " + betAmt);
-                    return betAmt;
-                }
-            }
-            //fold
-            if (probabilityScore <= fold) {
-                System.out.println(this.getName() + " folds");
-                this.setSkipRound(true);
-                return 0;
-            }
-            //Check
-            if (game.getRound() > 1) {
-                return 0; //exit round without folding
+        if (probabilityScore > check && probabilityScore < raise) {
+            ui.printAction(this.name, "calls");
+            if (this.getMoney() >= game.getMinBet()) {
+                this.setMoney(this.getMoney() - game.getMinBet());
+                return game.getMinBet();
             }
         }
+        //raise
+        if (probabilityScore >= raise) {
 
+            if (this.getMoney() >= game.getMinBet()) {
+                int betAmt = rand.nextInt(((raiseAmt) - Math.round(raiseAmt * percentKeep)) + 1) + game.getMinBet();
+                game.setMinBet(betAmt);
+                this.setMoney(this.getMoney() - game.getMinBet());
+                ui.printAction(this.name, "raises to " + betAmt);
+                return betAmt;
+            }
+        }
+        //fold
+        if (probabilityScore <= fold) {
+            ui.printAction(this.name, "folds");
+            this.setSkipRound(true);
+            return 0;
+        }
+        //Check
+        if (game.getRound() > 1) {
+            ui.printAction(this.name, "checks");
+            return 0; //exit round without folding
+        }
+        //If a bot tries to bet or call but doesn't have the money to do it, they will just go all in
+        ui.printAction(this.name, "calls");
+        int returnAmt = this.getMoney(); //If the player doesn't have enough to call, they just put in their max amount.
+        this.setMoney(0);
+
+        return returnAmt;
     }
 
     public String getName() {

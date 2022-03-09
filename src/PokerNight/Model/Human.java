@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Human extends AbsPlayer {
 
     public Human() {
-        this.name = ConsoleIO.promptForString("Please enter your name!",false);
+        this.name = ConsoleIO.promptForString("Please enter your name!\n",false);
         this.money = 0;
         this.pocket = new ArrayList<>();
         this.skipRound = false;
@@ -33,9 +33,13 @@ public class Human extends AbsPlayer {
                     return returnAmt;
                 case "b": //Bet
                     //Bet an amount that is set as the new minBet
-                    game.setMinBet(ui.GetInt("How much would you like to bet?\n", game.getMinBet() * 2, this.getMoney() + game.getMinBet())); //No smaller than min bet, no larger than player money
+                    if (this.getMoney() < game.getMinBet()) {
+                        ui.printError(); //You don't have enough money for that!
+                        break;
+                    }
+                    game.setMinBet(ui.GetInt("How much would you like to bet?\n", game.getMinBet(), this.getMoney() + game.getMinBet())); //No smaller than min bet, no larger than player money
                     this.setMoney(this.getMoney() - game.getMinBet());
-                    return game.getMinBet(); //Hopefully sets minBet to whatever the player bets -- NEEDS TESTING --
+                    return game.getMinBet(); //Hopefully sets minBet to whatever the player bets
                 case "c": //Fold
                     // Player skips round, is skipped for remaining turns
                     // Allow player to skip to next round -- OPTIONAL
