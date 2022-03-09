@@ -26,7 +26,11 @@ public class Game {
         deck.GenerateDeck(gameDeck);
         Collections.shuffle(gameDeck);
         this.remainingPlayers.clear(); //Fuck this, dude
-        this.remainingPlayers.addAll(this.players); //Sets players for the turn. This list can be changed while leaving the overall players ArrayList alone
+        for (int x = 0; x < this.players.size(); x++) { //Sets players for the turn
+            if (!this.players.get(x).isOutOfGame()) {
+                this.remainingPlayers.add(this.players.get(x));
+            }
+        }
         this.winner = null;
         this.board = new ArrayList<>();
         this.muck = new ArrayList<>();

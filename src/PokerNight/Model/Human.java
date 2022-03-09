@@ -15,7 +15,7 @@ public class Human extends AbsPlayer {
     }
 
     @Override
-    public int turn(Game game, UI ui) { //Might return the amount the player bets instead of nothing
+    public int turn(Game game, UI ui) {
         while (true) {
             String prompt = "a: Call\nb: Bet\nc: Fold\n";
             if (!(game.getRound() == 1)) {
@@ -37,9 +37,9 @@ public class Human extends AbsPlayer {
                         ui.printError(); //You don't have enough money for that!
                         break;
                     }
-                    game.setMinBet(ui.GetInt("How much would you like to bet?\n", game.getMinBet(), this.getMoney() + game.getMinBet())); //No smaller than min bet, no larger than player money
+                    game.setMinBet(ui.GetInt("How much would you like to bet?\n", game.getMinBet(), this.getMoney())); //No smaller than min bet, no larger than player money
                     this.setMoney(this.getMoney() - game.getMinBet());
-                    return game.getMinBet(); //Hopefully sets minBet to whatever the player bets
+                    return game.getMinBet(); //Sets minBet to whatever the player bets
                 case "c": //Fold
                     // Player skips round, is skipped for remaining turns
                     // Allow player to skip to next round -- OPTIONAL

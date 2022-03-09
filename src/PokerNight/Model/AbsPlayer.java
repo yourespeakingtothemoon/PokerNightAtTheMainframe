@@ -27,9 +27,9 @@ public abstract class AbsPlayer {
         int probabilityScore = Checks.probScore(game.getRound(), this.pocket, game.getBoard());
         //Call
         if (probabilityScore > check && probabilityScore < raise) {
-            ui.printAction(this.name, "calls");
             if (this.getMoney() >= game.getMinBet()) {
                 this.setMoney(this.getMoney() - game.getMinBet());
+                ui.printAction(this.name, "calls");
                 return game.getMinBet();
             }
         }

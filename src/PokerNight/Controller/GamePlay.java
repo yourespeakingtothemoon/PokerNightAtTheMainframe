@@ -59,7 +59,6 @@ public class GamePlay {
                 ui.DisplayGame(game);
             }
             //Do checks, pay out the winner, end round
-            //Still need to implement checks
             int winningScore=0;
             for (int y = 0; y < game.getRemainingPlayers().size(); y++) { //Go through all players
                 System.out.println(Checks.probScore(5,game.getRemainingPlayers().get(y).getPocket(),game.getBoard()));
@@ -99,6 +98,12 @@ public class GamePlay {
             return;
         }
         for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
+            if (SetRemainingPlayers(game)) { //Sets remaining players before each player's turn
+                x = Math.max(x - 1, 0);
+            }
+            if (game.getRemainingPlayers().size() <= 1) { //Quickly ends the round if one player wins
+                return;
+            }
             if (!game.getRemainingPlayers().get(x).isOutOfGame()) {
                 game.setPot(game.getPot() + game.getRemainingPlayers().get(x).turn(game, ui));
             }
@@ -122,12 +127,14 @@ public class GamePlay {
     }
 
     //May move these to the Game class
-    public void SetRemainingPlayers(Game game) { //Sets the remaining players for the TURN, not the game
+    public boolean SetRemainingPlayers(Game game) { //Sets the remaining players for the TURN, not the game
         for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
             if (game.getRemainingPlayers().get(x).isSkipRound()) {
                 game.getRemainingPlayers().remove(x);
+                return true;
             }
         }
+        return false;
     }
 
     public void RemovePlayers(Game game) { //Permanently removes players from the game if their money is 0
