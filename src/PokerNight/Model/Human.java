@@ -12,6 +12,7 @@ public class Human extends AbsPlayer {
         this.money = 0;
         this.pocket = new ArrayList<>();
         this.skipRound = false;
+        super.personalityID=8;
     }
 
     @Override

@@ -113,5 +113,8 @@ public abstract class AbsPlayer {
     public void setPocket(ArrayList<Card> pocket) {
         this.pocket = pocket;
     }
+    public int getPersonalityID() {
+        return personalityID;
+    }
 }
 
