@@ -20,33 +20,42 @@
 
 
 
-"Poker Night" OOP Final - Christian Dahl & Brandon Smith
+**"Poker Night" OOP Final - Christian Dahl & Brandon Smith**
 
-Epic: We will create a (console based) poker game against a range of recognizable pop culture robots
 
-User Stories:
+**Epic:** We will create a (console based) poker game against a range of recognizable pop culture robots
+
+
+**User Stories:**
   1. Console Based Poker Game against 4 AI opponents.
   2. fun dialogue from characters in pop culture and literature.
 
-Packages:\n
-  Model:\n
+
+**Packages:**
+
+  *Model:*
+  
   //insert model info
 
-  Controller:\n
+  *Controller:*
+  
   //insert controller info
   
-  View:\n
+  *View:*
+  
   //insert view info
   
-  DAL:\n
+ *DAL:*
+  
   //insert DAL info
 
-json files\n
-  About dialogue.json\n
-  //insert info about changing, adding or editing dialogue\n
-  About players.json\n
-  //insert info about changing, adding or editing players\n
+
+**json files**
+  About dialogue.json
+  //insert info about changing, adding or editing dialogue
+  About players.json
+  //insert info about changing, adding or editing players
   
-Instructions on how to build a custom version\n
+Instructions on how to build a custom version
 //insert here
 
