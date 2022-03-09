@@ -126,14 +126,11 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
         }
         int sequenceCount=0;
         for (int pos = 1; pos < opnCardRanks.size(); pos++) {
-            if (opnCardRanks.get(pos - 1).getNumVal() != opnCardRanks.get(pos).getNumVal() - 1) {
-                break;
-            }else{
+            if (opnCardRanks.get(pos - 1).getNumVal() == opnCardRanks.get(pos).getNumVal() - 1) {
                 sequenceCount++;
             }
         }
-
-        return true;
+        return sequenceCount == size;
     }
 
     private static boolean sameSuit(ArrayList<Card> opnCard) {
@@ -160,29 +157,45 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
         //first of a kind (OAK) set to find
         ArrayList<Card> oakOne;
         oakOne = ofAKind(opnCard);
+
+        if(oakOne.size()==4){
+            return "fourOAK";
+        }
+
         //remove intersection of oakOne and the master set of open cards
-        for (int pos = 0; pos < opnCard.size(); pos++) {
+       /* for (int pos = 0; pos < opnCard.size(); pos++) {
             for (int posit = 0; pos < oakOne.size(); posit++) {
                 if (oakOne.get(posit) == opnCard.get(pos)) {
-                    opnCard.remove(pos);
+                    //opnCard.remove(pos);
                     break;
                 }
             }
-        }
+        }*/
+        opnCard.removeAll(oakOne);
         //second of a kind set
         ArrayList<Card> oakTwo = new ArrayList<>();
-        //only do if the first actually produced a set
-        if (opnCard.size() >= 2) {
             oakTwo = ofAKind(opnCard);
-
+        //check for oak type
+        if(oakOne.size()==2&&oakTwo.size()<2){
+            return "pair";
+        }if(oakOne.size()==2&&oakTwo.size()==2){
+            return "two pairs";
+        }if(oakOne.size()==3&&oakTwo.size()!=2){
+            return "threeOAK";
         }
-        //make union of oakOne and oakTwo
-        ArrayList<Card> oakR = new ArrayList<>();
+        if(oakOne.size()+oakTwo.size()==5){
+            return "full house";
+        }else{
+            return "none";
+        }
 
-        oakR.addAll(oakOne);
-        oakR.addAll(oakTwo);
+        //make union of oakOne and oakTwo old code
+//        ArrayList<Card> oakR = new ArrayList<>();
+//
+//        oakR.addAll(oakOne);
+//        oakR.addAll(oakTwo);
         //use "return" version of card set (OAKr)'s size to determine what kind of "of a kind" is on the board and in the pocket of the player inquiring
-        switch (oakR.size()) {
+        /*switch (oakR.size()) {
             case 2:
                 return "pair";
             case 3:
@@ -197,7 +210,7 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
                 return "full house";
             default:
                 return "none";
-        }
+        }*/
         //plan: get two arraylists determine if its two pairs,
         // a full house or a single of a kind and send back an String value based on that
     }

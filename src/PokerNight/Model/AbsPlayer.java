@@ -22,11 +22,10 @@ public abstract class AbsPlayer {
 
     abstract public int turn(Game game, UI ui) throws IOException, ParseException; //Implemented in each concrete class
 
-    protected int decide(int fold,int check, int raise, Game game, UI ui, float percentKeep){
+    protected int decide(int fold, int check, int raise, Game game, UI ui, float percentKeep) {
         int raiseAmt = this.getMoney() - game.getMinBet();
-        //Call
         int probabilityScore = Checks.probScore(game.getRound(), this.pocket, game.getBoard());
-
+        //Call
         if (probabilityScore > check && probabilityScore < raise) {
             ui.printAction(this.name, "calls");
             if (this.getMoney() >= game.getMinBet()) {
@@ -57,10 +56,9 @@ public abstract class AbsPlayer {
             return 0; //exit round without folding
         }
         //If a bot tries to bet or call but doesn't have the money to do it, they will just go all in
-        ui.printAction(this.name, "calls");
+        ui.printAction(this.name, "calls and says, \"all in.\"");
         int returnAmt = this.getMoney(); //If the player doesn't have enough to call, they just put in their max amount.
         this.setMoney(0);
-
         return returnAmt;
     }
 
