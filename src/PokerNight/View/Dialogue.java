@@ -26,7 +26,7 @@ public class Dialogue {
 //insane misanthrope
                     switch (new Random().nextInt(2) + 1) {
                         case 1:
-                            dialogue = "\"" + quoteToAppend + "\"," + name + " said, malice dripping from its canned voice";
+                            dialogue = "\"" + quoteToAppend + "\", " + name + " said, malice dripping from its canned voice";
                             break;
                         case 2:
                             dialogue = "Shaking the table with anything it has to do so, " + name + " laughed out,\n" + "\"" + quoteToAppend.toUpperCase() + "\"";
