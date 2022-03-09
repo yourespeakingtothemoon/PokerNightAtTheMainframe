@@ -4,6 +4,7 @@ import PokerNight.View.UI;
 import lib.ConsoleIO;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Human extends AbsPlayer {
 
@@ -22,7 +23,7 @@ public class Human extends AbsPlayer {
             if (!(game.getRound() == 1)) {
                 prompt += "d: Check\n";
             }
-            switch(ConsoleIO.promptForString(prompt, false)) {
+            switch(ConsoleIO.promptForString(prompt, false).toLowerCase()) {
                 case "a": //Call
                     //Stay in the game, equal the bet of the previous player
                     if (this.getMoney() >= game.getMinBet()) {

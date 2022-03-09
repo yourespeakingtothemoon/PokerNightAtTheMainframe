@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PokerNightAtTheMainframe:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PokerNightAtTheMainframe_jar</output-path>
+    <root id="archive" name="PokerNightAtTheMainframe.jar">
+      <element id="module-output" name="PokerNightAtTheMainframe" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/PokerNight/lib/json-simple-1.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/PokerNight/lib/ConsoleIO.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
