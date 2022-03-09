@@ -24,7 +24,7 @@ public class Sigma extends AbsPlayer {
     @Override
     public int turn(Game game, UI ui) throws IOException, ParseException { //sigma grindset
         //#heboughtthebank
-        if(flipACoin()>=50){
+        if(rand.nextInt(2)==1){
         sigmaStringset(super.rand.nextInt(10 + 1));}
         while (true) {
             switch (super.rand.nextInt(4)) {
