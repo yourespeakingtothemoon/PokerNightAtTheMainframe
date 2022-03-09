@@ -12,7 +12,7 @@ public class Game {
     private ArrayList<Card> gameDeck = new ArrayList<>();
     private ArrayList<AbsPlayer> players = new ArrayList<>();
     private ArrayList<AbsPlayer> remainingPlayers = new ArrayList<>();
-    private AbsPlayer winner;
+    private ArrayList<AbsPlayer> winners;
     private ArrayList<Card> board = new ArrayList<>();
     private ArrayList<Card> muck = new ArrayList<>();
     private Deck deck = new Deck();
@@ -31,7 +31,7 @@ public class Game {
                 this.remainingPlayers.add(this.players.get(x));
             }
         }
-        this.winner = null;
+        this.winners = null;
         this.board = new ArrayList<>();
         this.muck = new ArrayList<>();
     }
@@ -92,12 +92,12 @@ public class Game {
         this.remainingPlayers = remainingPlayers;
     }
 
-    public AbsPlayer getWinner() {
-        return winner;
+    public ArrayList<AbsPlayer> getWinners() {
+        return winners;
     }
 
-    public void setWinner(AbsPlayer winner) {
-        this.winner = winner;
+    public void setWinner(ArrayList<AbsPlayer> winners) {
+        this.winners = winners;
     }
 
     public ArrayList<Card> getBoard() {

@@ -1,8 +1,6 @@
 package PokerNight.Controller;
 
-import PokerNight.Model.Card;
-import PokerNight.Model.Rank;
-import PokerNight.Model.Suit;
+import PokerNight.Model.*;
 
 import java.util.*;
 
@@ -78,18 +76,70 @@ public class Checks {
         }
         return probabilityPoints;
     }
+//ties
+    //ties - check for high card
+   public static ArrayList<AbsPlayer> tieBreakHigh(ArrayList<AbsPlayer> players) {
+        ArrayList<AbsPlayer> winners=new ArrayList<>();
+        int highestCard=0;
+      for(int pos=0; pos<players.size();pos++){
+          int value = highCard(players.get(pos).getPocket());
+         if(value>highestCard){
+             highestCard=value;
+         }
+      }
+      //add winners to list
+       for(int pos=0; pos<players.size();pos++){
+          // int value = highCard(players.get(pos).getPocket());
+           if(highCard(players.get(pos).getPocket())==highestCard){
+               winners.add(players.get(pos));
+           }
+       }
+       return winners;
+//      //check for ties and add additonal winner(s)
+//       for(int pos=0; pos<players.size();pos++){
+//           int value = highCard(players.get(pos).getPocket());
+//           int winValue = highCard(winners.get(0).getPocket());
+//           if(value==winValue){
+//              winners.add(players.get(pos));
+//           }
+//       }
 
-    //pair tie
-   /* public static String tieBreak(String name1, ArrayList<Card> hand1, String name2, ArrayList<Card> hand2) {
-        if (highCard(ranksList(ofAKind(hand1))) > highCard(ranksList(ofAKind(hand2)))) {
-            return name1;
+
+    }
+    //ties - check for best pair
+    public static ArrayList<AbsPlayer> tieBreakPair(ArrayList<AbsPlayer> players, Game game){
+        ArrayList<AbsPlayer> winners=new ArrayList<>();
+        ArrayList<ArrayList<Integer>> pairs=new ArrayList<>();
+        //find unique pair yes this is insane
+        for(int pos=0;pos<players.size();pos++){
+            ArrayList<Integer> thisPair=new ArrayList<>();
+            for(int position=0;position<players.get(pos).getPocket().size();position++){
+                for(int posit=0;posit<game.getBoard().size();posit++){
+                    if(players.get(pos).getPocket().get(position)==game.getBoard().get(posit)){
+                        winners.add(players.get(pos));
+                        thisPair.add(players.get(pos).getPocket().get(position).getRank().getNumVal());
+                        thisPair.add(game.getBoard().get(posit).getRank().getNumVal());
+                        pairs.add(thisPair);
+                        break;
+                    }
+                }
+            }
         }
-        if (highCard(ranksList(ofAKind(hand1))) < highCard(ranksList(ofAKind(hand2)))) {
-            return name2;
-        } else {
-            return "tie";
+        if(winners.size()==0){
+            return tieBreakHigh(players);
+        }else {
+            //find best winners
+            ArrayList<AbsPlayer> returnWinner=new ArrayList<>();
+            int bestIdx=0;
+        for(int pos=0;pos< winners.size();pos++){
+            if(pairs.get(pos).get(0)>bestIdx){
+                returnWinner.add(winners.get(pos));
+            }
         }
-    }*/
+        //return winners
+            return returnWinner;
+        }
+    }
 
     //Detect methods
     //foundational
@@ -169,8 +219,11 @@ public class Checks {
     private static String OAKofAKind(ArrayList<Card> opnCard) {
         //first of a kind (OAK) set to find
         ArrayList<Card> oakOne;
-        oakOne = ofAKind(opnCard);
+        //completely new array list so cards can be removed and what not without affecting the original array list
 
+        ArrayList<Card> open = new ArrayList<>();
+        open.addAll(opnCard);
+        oakOne = ofAKind(open);
         if (oakOne.size() == 4) {
             return "fourOAK";
         }
@@ -184,10 +237,10 @@ public class Checks {
                 }
             }
         }*/
-        opnCard.removeAll(oakOne);
+        open.removeAll(oakOne);
         //second of a kind set
         ArrayList<Card> oakTwo = new ArrayList<>();
-        oakTwo = ofAKind(opnCard);
+        oakTwo = ofAKind(open);
         //check for oak type
         if (oakOne.size() == 2 && oakTwo.size() < 2) {
             return "pair";

@@ -2,6 +2,7 @@ package PokerNight.Controller;
 
 import PokerNight.DAL.DAPoker;
 import PokerNight.Model.*;
+import PokerNight.View.Dialogue;
 import PokerNight.View.UI;
 import org.json.simple.parser.ParseException;
 
@@ -32,7 +33,7 @@ public class GamePlay {
         }
 
         while (true) {
-                //If they're human, save high score, etc.
+            //If they're human, save high score, etc.
             RemovePlayers(game); //Permanent removal of players
 
             for (int i = 0; i < game.getPlayers().size(); i++) {
@@ -48,7 +49,7 @@ public class GamePlay {
                 game.getRemainingPlayers().get(x).getPocket().clear();
                 if (!game.getRemainingPlayers().get(x).isOutOfGame()) {
                     game.getRemainingPlayers().get(x).setPocket(new ArrayList<>(DrawCard(2, game.getGameDeck())));
-                    System.out.println(game.getRemainingPlayers().get(x).getPocket());
+                    //System.out.println(game.getRemainingPlayers().get(x).getPocket()); -- test code
                     game.getRemainingPlayers().get(x).setSkipRound(false);
                 }
             }
@@ -60,21 +61,42 @@ public class GamePlay {
                 ui.DisplayGame(game);
             }
             //Do checks, pay out the winner, end round
-            int winningScore=0;
+            int winningScore = 0;
+            ArrayList<AbsPlayer> tiedWinners = new ArrayList<>();
             for (int y = 0; y < game.getRemainingPlayers().size(); y++) { //Go through all players
-                System.out.println(Checks.probScore(5,game.getRemainingPlayers().get(y).getPocket(),game.getBoard()));
+                int probScore = Checks.probScore(5, game.getRemainingPlayers().get(y).getPocket(), game.getBoard());
+                //System.out.println(probScore); -- testcode
                 if (!game.getRemainingPlayers().get(y).isOutOfGame()) { //For each player that isn't out...
-                    if(Checks.probScore(5,game.getRemainingPlayers().get(y).getPocket(),game.getBoard())>winningScore){
-                        game.setWinner(game.getRemainingPlayers().get(y));
-                        winningScore=Checks.probScore(5,game.getWinner().getPocket(),game.getBoard());
+                    if (probScore > winningScore) {
+                        winningScore = probScore;
+                        tiedWinners.add(game.getRemainingPlayers().get(y));
+                    }
+                    if (probScore == winningScore) {
+                        tiedWinners.add(game.getRemainingPlayers().get(y));
                     }
                 }
             }
+            ArrayList<AbsPlayer> roundWinners = new ArrayList<>();
 
-            game.getWinner().setMoney(game.getWinner().getMoney() + game.getPot()); //Gives the winner the pot
+            if (winningScore == 14 || winningScore == 15) {
+                roundWinners = Checks.tieBreakPair(tiedWinners, game);
+            } else {
+                roundWinners = Checks.tieBreakHigh(tiedWinners);
+            }
+            //check for duplicate players in winner list
+            for(int pos=1;pos<roundWinners.size();pos++){
+                if(roundWinners.get(pos-1)==roundWinners.get(pos)){
+                    roundWinners.remove(roundWinners.get(pos));
+                }
+            }
+            //Gives the winner(s) the pot
+            game.setWinner(roundWinners);
+            for(int pos=0;pos<game.getWinners().size();pos++){
+            game.getWinners().get(pos).setMoney(game.getWinners().get(0).getMoney() + game.getPot()/game.getWinners().size());}
+            Dialogue.printWinLose(game);
             ui.DisplayEndRound(game);
         }
-
+    }
         //Choose person to start, make 2 starting players pay big and small blind
             //Sort players in game.getPlayers() so they start at a specific person? --CANNOT - human player has to stay index 0--
         //Drop players (probably from a new ArrayList like remainingPlayers) when they fold --DONE--
@@ -92,7 +114,7 @@ public class GamePlay {
 
         //Return to main menu
 
-    }
+
 
     public void BettingRound(Game game, UI ui) throws IOException, ParseException { //Loops through players, doing turns, then adds cards to the board
         game.setRound(game.getRound() + 1); //Adds 1 to the round

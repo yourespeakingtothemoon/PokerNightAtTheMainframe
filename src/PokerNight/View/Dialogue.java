@@ -1,9 +1,12 @@
 package PokerNight.View;
 
 import PokerNight.DAL.DAPoker;
+import PokerNight.Model.AbsPlayer;
+import PokerNight.Model.Game;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Dialogue {
@@ -86,6 +89,35 @@ public class Dialogue {
         return dialogue+"\n";
     }
 
+    public static void printWinLose(Game game) throws IOException, ParseException {
+        //create list of losers
+        ArrayList<AbsPlayer> losers = new ArrayList<>();
+        losers.addAll(game.getRemainingPlayers());
+        losers.remove(losers.get(0));
+        losers.removeAll(game.getWinners());
+        //check if human won
+        boolean hmnWin;
+        hmnWin= game.getWinners().contains(game.getPlayers().get(0));
+        //print lose lines
+        int loseQuote;
+        if(hmnWin){
+            loseQuote = 9;
+        }else{
+            loseQuote =10;
+        }
+        for(int pos=0;pos<losers.size();pos++){
+            printDialogue(losers.get(pos).getDialogueID(),loseQuote,losers.get(pos).getPersonalityID(),losers.get(pos).getName());
+        }
+        for(int pos=0;pos<game.getWinners().size();pos++){
+            if(game.getWinners().get(pos).getPersonalityID()==8) {
+                System.out.println("You win the Round!");
+            }
+            else{
+                    printDialogue(game.getWinners().get(pos).getDialogueID(),loseQuote,game.getWinners().get(pos).getPersonalityID(),game.getWinners().get(pos).getName());}
+            }
+        }
+
+    }
 
 
 
@@ -93,4 +125,4 @@ public class Dialogue {
 
 
 
-}
+
