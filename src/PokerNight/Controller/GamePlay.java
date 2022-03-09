@@ -48,6 +48,7 @@ public class GamePlay {
                 game.getRemainingPlayers().get(x).getPocket().clear();
                 if (!game.getRemainingPlayers().get(x).isOutOfGame()) {
                     game.getRemainingPlayers().get(x).setPocket(new ArrayList<>(DrawCard(2, game.getGameDeck())));
+                    System.out.println(game.getRemainingPlayers().get(x).getPocket());
                     game.getRemainingPlayers().get(x).setSkipRound(false);
                 }
             }
@@ -69,6 +70,7 @@ public class GamePlay {
                     }
                 }
             }
+
             game.getWinner().setMoney(game.getWinner().getMoney() + game.getPot()); //Gives the winner the pot
             ui.DisplayEndRound(game);
         }
