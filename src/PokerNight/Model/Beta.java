@@ -21,7 +21,7 @@ public class Beta extends AbsPlayer{
 
     @Override
 
-    public int turn(Game game, UI ui) {
+    public int turn(Game game, UI ui) throws IOException, ParseException {
         int raise;
         int fold;
         int check;

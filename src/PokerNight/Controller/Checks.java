@@ -3,10 +3,7 @@ package PokerNight.Controller;
 import PokerNight.Model.Card;
 import PokerNight.Model.Rank;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static PokerNight.Model.Rank.*;
 
@@ -16,62 +13,63 @@ public class Checks {
         ArrayList<Card> openCard = new ArrayList<>();
         openCard.addAll(pocket);
         openCard.addAll(board);
-        switch(turnNum){
+        switch (turnNum) {
             //pre-flop
             case 1:
-                return probScoreCalc(13,0,15,16,0,0,0,0,pocket,pocket);
+                return probScoreCalc(13, 13, 13, 13, 16, 16, 16, 20, pocket, pocket);
             //flop
             case 2:
                 //turn/fourth street
             case 3:
                 //final betting round before showdown
             case 4:
-                return probScoreCalc(13,16,19,22,24,27,30,33,openCard,pocket);
+                return probScoreCalc(13, 16, 19, 22, 24, 27, 30, 33, openCard, pocket);
             //winner determination case
             case 5:
-                return probScoreCalc(14,16,18,20,22,24,26,28,openCard,pocket);
-                //this dont need be but hey incase error
+                return probScoreCalc(14, 16, 18, 20, 22, 24, 26, 28, openCard, pocket);
+            //this dont need be but hey incase error
             default:
                 return 0;
         }
     }
-//method that pulls valuations for every check that turn. and returns their sum to the main probScore method
-    private static int probScoreCalc( int pairVal, int threeOAKVal, int straightVal, int flushVal, int fullHouseVal, int fourOAKVal, int strFlushVal, int royalVal, ArrayList<Card> opnCards, ArrayList<Card> pocket){
-        int probabilityPoints=highCard(ranksList(pocket));
+
+    //method that pulls valuations for every check that turn. and returns their sum to the main probScore method
+    private static int probScoreCalc(int pairVal, int threeOAKVal, int straightVal, int flushVal, int fullHouseVal, int fourOAKVal, int strFlushVal, int royalVal, ArrayList<Card> opnCards, ArrayList<Card> pocket) {
+        int probabilityPoints = highCard(ranksList(pocket));
         //add points for Of a Kinds
-        switch(OAKofAKind(opnCards)){
+        switch (OAKofAKind(opnCards)) {
             case "pair":
-                probabilityPoints=pairVal;
+                probabilityPoints = pairVal;
                 break;
             case "two pairs":
-                probabilityPoints=pairVal+1;
+                probabilityPoints = pairVal + 1;
                 break;
-            case"threeOAK":
-                probabilityPoints=threeOAKVal;
+            case "threeOAK":
+                probabilityPoints = threeOAKVal;
                 break;
             case "fourOAK":
-                probabilityPoints=fourOAKVal;
+                probabilityPoints = fourOAKVal;
                 break;
             case "full house":
-                probabilityPoints=fullHouseVal;
+                probabilityPoints = fullHouseVal;
                 break;
-            case"none":
+            case "none":
             default:
                 break;
         }
         //add points for sequences and flushes
-        switch(straightFlush(opnCards)){
+        switch (straightFlush(opnCards)) {
             case "straight":
-                probabilityPoints=straightVal;
+                probabilityPoints = straightVal;
                 break;
             case "flush":
-                probabilityPoints=flushVal;
+                probabilityPoints = flushVal;
                 break;
             case "straightFlush":
-                probabilityPoints=strFlushVal;
+                probabilityPoints = strFlushVal;
                 break;
             case "royalFlush":
-                probabilityPoints=royalVal;
+                probabilityPoints = royalVal;
                 break;
             case "none":
             default:
@@ -79,17 +77,19 @@ public class Checks {
         }
         return probabilityPoints;
     }
-//pair tie
-public static String tieBreak(String name1, ArrayList<Card> hand1, String name2, ArrayList<Card> hand2){
-        if(highCard(ranksList(ofAKind(hand1))) > highCard(ranksList(ofAKind(hand2)))){
+
+    //pair tie
+    public static String tieBreak(String name1, ArrayList<Card> hand1, String name2, ArrayList<Card> hand2) {
+        if (highCard(ranksList(ofAKind(hand1))) > highCard(ranksList(ofAKind(hand2)))) {
             return name1;
+        }
+        if (highCard(ranksList(ofAKind(hand1))) < highCard(ranksList(ofAKind(hand2)))) {
+            return name2;
+        } else {
+            return "tie";
+        }
     }
-    if(highCard(ranksList(ofAKind(hand1))) < highCard(ranksList(ofAKind(hand2)))){
-        return name2;
-    }else{
-        return "tie";
-    }
-}
+
     //Detect methods
     //foundational
     private static ArrayList<Card> ofAKind(ArrayList<Card> opnCard) {
@@ -99,14 +99,14 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
         for (int position = 0; position < opnCard.size(); position++) {
             ArrayList<Card> OAK = new ArrayList<>();
             for (int pos = 0; pos < opnCard.size(); pos++) {
-               // OAK.add(opnCard.get(position));
+                // OAK.add(opnCard.get(position));
                 if (opnCard.get(position).getRank() == opnCard.get(pos).getRank()) {
                     OAK.add(opnCard.get(pos));
                 }
             }
 
-            if(OAK.size()>OAKr.size()){
-                OAKr=OAK;
+            if (OAK.size() > OAKr.size()) {
+                OAKr = OAK;
             }
         }
         return OAKr;
@@ -115,39 +115,39 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
     private static boolean sequence(ArrayList<Rank> opnCardRanks) {
         Collections.sort(opnCardRanks);
         int size = Math.min(opnCardRanks.size(), 5);
-        int sequenceCount=0;
+        int sequenceCount = 0;
         for (int pos = 1; pos < opnCardRanks.size(); pos++) {
-            if (opnCardRanks.get(pos-1).getNumVal()+1 == opnCardRanks.get(pos).getNumVal()) {
+            if (opnCardRanks.get(pos - 1).getNumVal() + 1 == opnCardRanks.get(pos).getNumVal()) {
                 sequenceCount++;
                 // for testing only System.out.println("sequence add!");
             }
         }
-        return sequenceCount >= size-1;
+        return sequenceCount >= size - 1;
     }
 
     private static boolean sameSuit(ArrayList<Card> opnCard) {
-        int size=Math.min(opnCard.size(), 5);
-        int sameSuitCount=0;
+        int size = Math.min(opnCard.size(), 5);
+        int sameSuitCount = 0;
         for (int pos = 0; pos < opnCard.size(); pos++) {
-            int currentSSCount=0;
-            for(int position = 0;position< opnCard.size();position++){
+            int currentSSCount = 0;
+            for (int position = 0; position < opnCard.size(); position++) {
                 currentSSCount++;
             }
-            if(currentSSCount>sameSuitCount){
-                sameSuitCount=currentSSCount;
+            if (currentSSCount > sameSuitCount) {
+                sameSuitCount = currentSSCount;
             }
         }
-       return sameSuitCount>=size;
+        return sameSuitCount >= size;
     }
 
     //check boolean returns
     private static int highCard(ArrayList<Rank> opnCardRanks) {
         Collections.sort(opnCardRanks);
-        if(opnCardRanks.contains(ACE)){
+        if (opnCardRanks.contains(ACE)) {
             return 13;
         } else {
-            int highestIndex = opnCardRanks.size()-1;
-            return opnCardRanks.get(highestIndex).getNumVal()-1;
+            int highestIndex = opnCardRanks.size() - 1;
+            return opnCardRanks.get(highestIndex).getNumVal() - 1;
         }
     }
 
@@ -156,7 +156,7 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
         ArrayList<Card> oakOne;
         oakOne = ofAKind(opnCard);
 
-        if(oakOne.size()==4){
+        if (oakOne.size() == 4) {
             return "fourOAK";
         }
 
@@ -172,18 +172,20 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
         opnCard.removeAll(oakOne);
         //second of a kind set
         ArrayList<Card> oakTwo = new ArrayList<>();
-            oakTwo = ofAKind(opnCard);
+        oakTwo = ofAKind(opnCard);
         //check for oak type
-        if(oakOne.size()==2&&oakTwo.size()<2){
+        if (oakOne.size() == 2 && oakTwo.size() < 2) {
             return "pair";
-        }if(oakOne.size()==2&&oakTwo.size()==2){
+        }
+        if (oakOne.size() == 2 && oakTwo.size() == 2) {
             return "two pairs";
-        }if(oakOne.size()==3&&oakTwo.size()!=2){
+        }
+        if (oakOne.size() == 3 && oakTwo.size() != 2) {
             return "threeOAK";
         }
-        if(oakOne.size()+oakTwo.size()==5){
+        if (oakOne.size() + oakTwo.size() == 5) {
             return "full house";
-        }else{
+        } else {
             return "none";
         }
 
@@ -216,14 +218,14 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
     private static String straightFlush(ArrayList<Card> opnCard) {
         //check for sequence if straight return "straight"
         ArrayList<Rank> ranks = ranksList(opnCard);
-        Rank[] royals= new Rank[]{TEN, JACK, QUEEN, KING, ACE};
+        Rank[] royals = new Rank[]{TEN, JACK, QUEEN, KING, ACE};
         boolean seq = sequence(ranks);
         //check for same suit if straightFlush return "straightFlush"
         boolean flush = sameSuit(opnCard);
 
         //if sequence and same suit check pass, then check lowest card value post sort, if 10, return "royalFlush"
         Collections.sort(ranks);
-        if (ranks.containsAll(Arrays.asList(royals))&&flush) {
+        if (ranks.containsAll(Arrays.asList(royals)) && flush) {
             return "royalFlush";
         }
         if (seq && flush) {
@@ -231,15 +233,16 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
         }
         if (flush) {
             return "flush";
-        } if(seq) {
+        }
+        if (seq) {
             return "straight";
-        }else{
+        } else {
             return "none";
         }
     }
 
     //other stuff
-    private static ArrayList<Rank> ranksList(ArrayList<Card> opnCard){
+    private static ArrayList<Rank> ranksList(ArrayList<Card> opnCard) {
         //make list of ranks from the open cards
         ArrayList<Rank> ranks = new ArrayList<>();
         for (int pos = 0; pos < opnCard.size(); pos++) {
@@ -249,8 +252,8 @@ public static String tieBreak(String name1, ArrayList<Card> hand1, String name2,
         return ranks;
     }
 
-}
 
+}
 
 
 

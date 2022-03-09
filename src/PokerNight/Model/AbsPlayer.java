@@ -1,6 +1,7 @@
 package PokerNight.Model;
 
 import PokerNight.Controller.Checks;
+import PokerNight.View.Dialogue;
 import PokerNight.View.UI;
 import org.json.simple.parser.ParseException;
 
@@ -22,9 +23,12 @@ public abstract class AbsPlayer {
 
     abstract public int turn(Game game, UI ui) throws IOException, ParseException; //Implemented in each concrete class
 
-    protected int decide(int fold, int check, int raise, Game game, UI ui, float percentKeep) {
+    protected int decide(int fold, int check, int raise, Game game, UI ui, float percentKeep) throws IOException, ParseException {
         int raiseAmt = this.getMoney() - game.getMinBet();
         int probabilityScore = Checks.probScore(game.getRound(), this.pocket, game.getBoard());
+        if(flipACoin()>=50){
+            Dialogue.printDialogue(this.DialogueID,rand.nextInt(8-5)+5,this.personalityID,this.name);
+        }
         //Call
         if (probabilityScore > check && probabilityScore < raise) {
             if (this.getMoney() >= game.getMinBet()) {
@@ -109,4 +113,11 @@ public abstract class AbsPlayer {
     public void setPocket(ArrayList<Card> pocket) {
         this.pocket = pocket;
     }
+
+    //flip a coin any coin for deciding if character is gonna speak or not
+    protected int flipACoin() {
+        Random rand=new Random();
+        return rand.nextInt(100)+1;
+    }
 }
+
