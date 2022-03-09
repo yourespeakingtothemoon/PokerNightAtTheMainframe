@@ -21,7 +21,7 @@ public class UI {
     }
 
     public void DisplayEndRound(Game game) { //Displays the end of a game -- the hands of every player still in and the winner
-        if (game.getRound() == 5) { //Only display board, hands, etc. if the full round is played -- not if ended early from folds
+        if (game.getRound() == 4) { //Only display board, hands, etc. if the full round is played -- not if ended early from folds
             System.out.println("Board: " + game.getBoard());
             for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
                 if (!game.getRemainingPlayers().get(x).isOutOfGame() && !game.getRemainingPlayers().get(x).isSkipRound()) {
