@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Human extends AbsPlayer {
 
     public Human() {
-        this.name = "The Player";
+        this.name = ConsoleIO.promptForString("Please enter your name!",false);
         this.money = 0;
         this.pocket = new ArrayList<>();
         this.skipRound = false;
