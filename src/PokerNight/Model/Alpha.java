@@ -20,7 +20,7 @@ public class Alpha extends AbsPlayer {
     }
 
     @Override
-    public int turn(Game game, UI ui) {
+    public int turn(Game game, UI ui) throws IOException, ParseException {
         int raise;
         int fold;
         int check;
@@ -35,11 +35,11 @@ public class Alpha extends AbsPlayer {
             case 3:
             case 4:
                 raise = 13;
-                fold = 5;
+                fold = 4;
                 check = 7;
                 break;
             default:
-                raise = 11;
+                raise = 13;
                 fold = 4;
                 check = 6;
                 break;
