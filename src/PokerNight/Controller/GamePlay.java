@@ -31,7 +31,6 @@ public class GamePlay {
             game.getPlayers().get(x).setPocket(new ArrayList<>()); //this could be added to a constructor instead for new AbsPlayers
             game.getPlayers().get(x).setMoney(10000);
         }
-
         while (true) {
             //If they're human, save high score, etc.
             RemovePlayers(game); //Permanent removal of players
@@ -63,16 +62,16 @@ public class GamePlay {
             //Do checks, pay out the winner, end round
             int winningScore = 0;
             ArrayList<AbsPlayer> tiedWinners = new ArrayList<>();
-            for (int y = 0; y < game.getPlayers().size(); y++) { //Go through all players
-                int probScore = Checks.probScore(5, game.getPlayers().get(y).getPocket(), game.getBoard());
+            for (int y = 0; y < game.getRemainingPlayers().size(); y++) { //Go through all players
+                int probScore = Checks.probScore(5, game.getRemainingPlayers().get(y).getPocket(), game.getBoard());
                 //System.out.println(probScore); -- testcode
-                if (!game.getPlayers().get(y).isOutOfGame()) { //For each player that isn't out...
+                if (!game.getRemainingPlayers().get(y).isOutOfGame()) { //For each player that isn't out...
                     if (probScore > winningScore) {
                         winningScore = probScore;
-                        tiedWinners.add(game.getPlayers().get(y));
+                        tiedWinners.add(game.getRemainingPlayers().get(y));
                     }
                     if (probScore == winningScore) {
-                        tiedWinners.add(game.getPlayers().get(y));
+                        tiedWinners.add(game.getRemainingPlayers().get(y));
                     }
                 }
             }
@@ -83,16 +82,29 @@ public class GamePlay {
             } else {
                 roundWinners = Checks.tieBreakHigh(tiedWinners);
             }
-            //check for duplicate players in winner list
-            for(int pos=1;pos<roundWinners.size();pos++){
-                if(roundWinners.get(pos-1).getName().equals(roundWinners.get(pos).getName())){
-                    roundWinners.remove(roundWinners.get(pos));
-                }
-            }
+
+//            for(int pos=0;pos<roundWinners.size();pos++){
+//            if(roundWinners.get(pos).getSkipRound()){
+//                roundWinners.remove(roundWinners.get(pos));
+//            }
+            //}
             //Gives the winner(s) the pot
             game.setWinner(roundWinners);
+            //check for duplicate and not in round players in winner list
+            for(int pos=1;pos<game.getWinners().size();pos++){
+                if(game.getWinners().get(0).getName().equals(game.getWinners().get(pos).getName())){
+                    game.getWinners().remove(roundWinners.get(pos));
+                }
+            }
+
+            int potSplit =game.getPot()/game.getWinners().size();
             for(int pos=0;pos<game.getWinners().size();pos++){
-            game.getWinners().get(pos).setMoney(game.getWinners().get(0).getMoney() + game.getPot()/game.getWinners().size());}
+                if(game.getPot()-potSplit<potSplit){
+                    game.getWinners().get(pos).setMoney(game.getPot()+game.getWinners().get(pos).getMoney());
+                }else{
+            game.getWinners().get(pos).setMoney(potSplit+game.getWinners().get(pos).getMoney());}
+            game.setPot(game.getPot()-potSplit);
+            }
             Dialogue.printWinLose(game);
             ui.DisplayEndRound(game);
         }

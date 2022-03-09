@@ -30,14 +30,18 @@ public class UI {
         if(game.getWinners().size()==1){
             System.out.println(game.getWinners().get(0).getName() + " wins the round!\n");
         }else{
-            String winnerList="";
+            StringBuilder winnerList= new StringBuilder();
         for(int pos=0;pos<game.getWinners().size();pos++) {
             if(pos==0){
-                winnerList+=game.getWinners().get(pos).getName();
-            }
-            winnerList+=" and "+game.getWinners().get(pos).getName();
-        }
-            System.out.println(winnerList+" all win the round, and split the pot.\n");
+                winnerList.append(game.getWinners().get(pos).getName());
+            }else{
+            winnerList.append(" and "+game.getWinners().get(pos).getName());
+        }}
+        if(game.getWinners().size()==2) {
+            System.out.println(winnerList+" both win the round, and split the pot.\n");
+        }else{
+            System.out.println(winnerList+" all win the round, and split the pot.\n");}
+
         }
     }
 

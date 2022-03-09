@@ -116,5 +116,8 @@ public abstract class AbsPlayer {
     public int getPersonalityID() {
         return personalityID;
     }
+    public boolean getSkipRound(){
+        return this.skipRound;
+    }
 }
 
