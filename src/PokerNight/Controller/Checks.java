@@ -125,19 +125,27 @@ public class Checks {
                 }
             }
         }
-        if(winners.size()==0){
-            return tieBreakHigh(players);
-        }else {
+
+//        //eliminate any that are too low
+//        ArrayList<Integer> pairCards= new ArrayList<>();
+//        for(int pos=0;pos<pairs.size();pos++){
+//            pairCards.add(pairs.get(pos).get(0));
+//        }
+        if(winners.size()!=0){
             //find best winners
             ArrayList<AbsPlayer> returnWinner=new ArrayList<>();
             int bestIdx=0;
-        for(int pos=0;pos< winners.size();pos++){
-            if(pairs.get(pos).get(0)>bestIdx){
-                returnWinner.add(winners.get(pos));
+            for(int pos=0;pos< winners.size();pos++){
+                if(pairs.get(pos).get(0)>=bestIdx){
+                    returnWinner.add(winners.get(pos));
+                }
             }
-        }
-        //return winners
+            //return winners
             return returnWinner;
+
+        }
+        else {
+            return tieBreakHigh(players);
         }
     }
 
@@ -145,8 +153,8 @@ public class Checks {
     //foundational
     private static ArrayList<Card> ofAKind(ArrayList<Card> opnCard) {
         ArrayList<Card> OAKr = new ArrayList<>();
-        ArrayList<ArrayList<Card>> OAKArray = new ArrayList<>();
-        OAKArray.add(OAKr);
+       // ArrayList<ArrayList<Card>> OAKArray = new ArrayList<>();
+        //OAKArray.add(OAKr);
         for (int position = 0; position < opnCard.size(); position++) {
             ArrayList<Card> OAK = new ArrayList<>();
             for (int pos = 0; pos < opnCard.size(); pos++) {

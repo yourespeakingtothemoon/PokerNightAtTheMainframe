@@ -85,7 +85,7 @@ public class GamePlay {
             }
             //check for duplicate players in winner list
             for(int pos=1;pos<roundWinners.size();pos++){
-                if(roundWinners.get(pos-1)==roundWinners.get(pos)){
+                if(roundWinners.get(pos-1).getName().equals(roundWinners.get(pos).getName())){
                     roundWinners.remove(roundWinners.get(pos));
                 }
             }

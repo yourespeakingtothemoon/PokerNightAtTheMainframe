@@ -24,9 +24,10 @@ public abstract class AbsPlayer {
     abstract public int turn(Game game, UI ui) throws IOException, ParseException; //Implemented in each concrete class
 
     protected int decide(int fold, int check, int raise, Game game, UI ui, float percentKeep) throws IOException, ParseException {
+
         int raiseAmt = this.getMoney() - game.getMinBet();
         int probabilityScore = Checks.probScore(game.getRound(), this.pocket, game.getBoard());
-        if(flipACoin()>=50){
+        if(rand.nextInt(2)==1){
             Dialogue.printDialogue(this.DialogueID,rand.nextInt(8-5)+5,this.personalityID,this.name);
         }
         //Call
@@ -118,10 +119,10 @@ public abstract class AbsPlayer {
         return personalityID;
     }
 
-    //flip a coin any coin for deciding if character is gonna speak or not
-    protected int flipACoin() {
-        Random rand=new Random();
-        return rand.nextInt(100)+1;
-    }
+//    //flip a coin any coin for deciding if character is gonna speak or not
+//    protected int flipACoin() {
+//        Random rand=new Random();
+//        return rand.nextInt(100)+1;
+//    }
 }
 
