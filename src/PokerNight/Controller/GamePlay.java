@@ -97,7 +97,6 @@ public class GamePlay {
             return;
         }
         for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
-            System.out.println(game.getRemainingPlayers().size());
             if (SetRemainingPlayers(game)) { //Sets remaining players before each player's turn
                 x = Math.max(x - 1, 0);
             }
