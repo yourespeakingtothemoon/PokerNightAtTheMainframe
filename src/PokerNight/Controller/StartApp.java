@@ -1,5 +1,6 @@
 package PokerNight.Controller;
 
+import PokerNight.View.UI;
 import lib.ConsoleIO;
 import org.json.simple.parser.ParseException;
 
@@ -13,6 +14,8 @@ public class StartApp {
 
     public void MainMenu() throws InterruptedException, IOException, ParseException {
         GamePlay gamePlay = new GamePlay();
+        UI ui = new UI();
+        ui.titleScreen();
         while (true) {
             switch(ConsoleIO.promptForString("Welcome to Poker Night at the Mainframe! Please input a letter to select an option:\n" +
                     "a: Start Game\n" +
