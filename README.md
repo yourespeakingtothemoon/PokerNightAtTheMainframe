@@ -28,25 +28,25 @@ User Stories:
   1. Console Based Poker Game against 4 AI opponents.
   2. fun dialogue from characters in pop culture and literature.
 
-Packages:
-  Model:
+Packages:\n
+  Model:\n
   //insert model info
 
-  Controller:
+  Controller:\n
   //insert controller info
   
-  View:
+  View:\n
   //insert view info
   
-  DAL:
+  DAL:\n
   //insert DAL info
 
-json files
-  About dialogue.json
-  //insert info about changing, adding or editing dialogue
-  About players.json
-  //insert info about changing, adding or editing players
+json files\n
+  About dialogue.json\n
+  //insert info about changing, adding or editing dialogue\n
+  About players.json\n
+  //insert info about changing, adding or editing players\n
   
-Instructions on how to build a custom version
+Instructions on how to build a custom version\n
 //insert here
 
