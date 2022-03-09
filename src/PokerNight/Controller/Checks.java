@@ -2,6 +2,7 @@ package PokerNight.Controller;
 
 import PokerNight.Model.Card;
 import PokerNight.Model.Rank;
+import PokerNight.Model.Suit;
 
 import java.util.*;
 
@@ -35,7 +36,7 @@ public class Checks {
 
     //method that pulls valuations for every check that turn. and returns their sum to the main probScore method
     private static int probScoreCalc(int pairVal, int threeOAKVal, int straightVal, int flushVal, int fullHouseVal, int fourOAKVal, int strFlushVal, int royalVal, ArrayList<Card> opnCards, ArrayList<Card> pocket) {
-        int probabilityPoints = highCard(ranksList(pocket));
+        int probabilityPoints = highCard(pocket);
         //add points for Of a Kinds
         switch (OAKofAKind(opnCards)) {
             case "pair":
@@ -79,7 +80,7 @@ public class Checks {
     }
 
     //pair tie
-    public static String tieBreak(String name1, ArrayList<Card> hand1, String name2, ArrayList<Card> hand2) {
+   /* public static String tieBreak(String name1, ArrayList<Card> hand1, String name2, ArrayList<Card> hand2) {
         if (highCard(ranksList(ofAKind(hand1))) > highCard(ranksList(ofAKind(hand2)))) {
             return name1;
         }
@@ -88,7 +89,7 @@ public class Checks {
         } else {
             return "tie";
         }
-    }
+    }*/
 
     //Detect methods
     //foundational
@@ -127,29 +128,43 @@ public class Checks {
 
     private static boolean sameSuit(ArrayList<Card> opnCard) {
         int size = Math.min(opnCard.size(), 5);
-        int sameSuitCount = 0;
-        for (int pos = 0; pos < opnCard.size(); pos++) {
-            int currentSSCount = 0;
-            for (int position = 0; position < opnCard.size(); position++) {
-                currentSSCount++;
-            }
-            if (currentSSCount > sameSuitCount) {
-                sameSuitCount = currentSSCount;
+        //intialize counts for each suit
+        int returnCount=0;
+        int spadeCount = 0;
+        int clubCount = 0;
+        int heartCount=0;
+        int diamondCount = 0;
+        for(int pos=0; pos< opnCard.size();pos++){
+            if(opnCard.get(pos).getSuit()== Suit.SPADES){spadeCount++;}
+            if(opnCard.get(pos).getSuit()== Suit.CLUBS){clubCount++;}
+            if(opnCard.get(pos).getSuit()== Suit.HEARTS){heartCount++;}
+            if(opnCard.get(pos).getSuit()== Suit.DIAMONDS){diamondCount++;}
+        }
+        //finds largest same suit count sum.
+        int[] countArray = new int[]{spadeCount,clubCount,heartCount,diamondCount};
+        for(int pos=0; pos<countArray.length;pos++){
+            if(countArray[pos]>returnCount){
+                returnCount=countArray[pos];
             }
         }
-        return sameSuitCount >= size;
+        return returnCount >= size;
     }
 
     //check boolean returns
-    private static int highCard(ArrayList<Rank> opnCardRanks) {
-        Collections.sort(opnCardRanks);
-        if (opnCardRanks.contains(ACE)) {
-            return 13;
-        } else {
-            int highestIndex = opnCardRanks.size() - 1;
-            return opnCardRanks.get(highestIndex).getNumVal() - 1;
+    private static int highCard(ArrayList<Card> opnCard) {
+        int returnAmt=0;
+           for(int pos=0;pos<opnCard.size();pos++){
+               if(opnCard.get(pos).getRank()==ACE) {
+               returnAmt=13;
+               }
+               if(opnCard.get(pos).getRank().getNumVal()>returnAmt){
+                   returnAmt=opnCard.get(pos).getRank().getNumVal();
+               }
+           }
+        return returnAmt;
         }
-    }
+
+
 
     private static String OAKofAKind(ArrayList<Card> opnCard) {
         //first of a kind (OAK) set to find

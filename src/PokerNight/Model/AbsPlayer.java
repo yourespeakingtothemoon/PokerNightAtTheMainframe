@@ -62,7 +62,7 @@ public abstract class AbsPlayer {
         //If a bot tries to bet or call but doesn't have the money to do it, they will just go all in
         ui.printAction(this.name, "calls and says, \"all in.\"");
         int returnAmt = this.getMoney(); //If the player doesn't have enough to call, they just put in their max amount.
-        this.setMoney(0);
+        this.money=(0);
         return returnAmt;
     }
 
