@@ -113,7 +113,7 @@ public class Dialogue {
                 System.out.println("You win the Round!");
             }
             else{
-                    printDialogue(game.getWinners().get(pos).getDialogueID(),loseQuote,game.getWinners().get(pos).getPersonalityID(),game.getWinners().get(pos).getName());}
+                    printDialogue(game.getWinners().get(pos).getDialogueID(),11,game.getWinners().get(pos).getPersonalityID(),game.getWinners().get(pos).getName());}
             }
         }
 

@@ -181,7 +181,7 @@ public class Checks {
                 // for testing only System.out.println("sequence add!");
             }
         }
-        return sequenceCount >= size - 1;
+        return sequenceCount >= size;
     }
 
     private static boolean sameSuit(ArrayList<Card> opnCard) {
@@ -216,7 +216,7 @@ public class Checks {
                returnAmt=13;
                }
                if(opnCard.get(pos).getRank().getNumVal()>returnAmt){
-                   returnAmt=opnCard.get(pos).getRank().getNumVal();
+                   returnAmt=opnCard.get(pos).getRank().getNumVal()-1;
                }
            }
         return returnAmt;
@@ -247,8 +247,7 @@ public class Checks {
         }*/
         open.removeAll(oakOne);
         //second of a kind set
-        ArrayList<Card> oakTwo = new ArrayList<>();
-        oakTwo = ofAKind(open);
+        ArrayList<Card> oakTwo = ofAKind(open);
         //check for oak type
         if (oakOne.size() == 2 && oakTwo.size() < 2) {
             return "pair";
@@ -256,7 +255,7 @@ public class Checks {
         if (oakOne.size() == 2 && oakTwo.size() == 2) {
             return "two pairs";
         }
-        if (oakOne.size() == 3 && oakTwo.size() != 2) {
+        if (oakOne.size() >= 3 && oakTwo.size() != 2) {
             return "threeOAK";
         }
         if (oakOne.size() + oakTwo.size() == 5) {

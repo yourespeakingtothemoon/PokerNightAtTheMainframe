@@ -1,5 +1,6 @@
 package PokerNight.View;
 
+import PokerNight.Controller.Checks;
 import PokerNight.Model.AbsPlayer;
 import PokerNight.Model.Game;
 import lib.ConsoleIO;
@@ -24,7 +25,8 @@ public class UI {
         System.out.println("Board: " + game.getBoard());
         for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
             if (!game.getRemainingPlayers().get(x).isOutOfGame() && !game.getRemainingPlayers().get(x).isSkipRound()) {
-                System.out.println(game.getRemainingPlayers().get(x).getName() + " had: " + game.getRemainingPlayers().get(x).getPocket()); //Add what their hand is
+                System.out.println(game.getRemainingPlayers().get(x).getName() + " had: " + game.getRemainingPlayers().get(x).getPocket()+
+                        " ("+handName(Checks.probScore(5,game.getRemainingPlayers().get(x).getPocket(),game.getBoard()))+")"); //Add what their hand is
             }
         }
         if(game.getWinners().size()==1){
@@ -83,5 +85,48 @@ public class UI {
 
 
 
+    }
+
+    private String handName(int idx){
+        switch(idx){
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+                return String.valueOf(idx+1)+" High";
+            case 10:
+                return "Jack High";
+            case 11:
+                return "Queen High";
+            case 12:
+                return "King High";
+            case 13:
+                return "Ace High";
+            case 14:
+                return "Pair";
+            case 15:
+                return "Two Pairs";
+            case 16:
+                return "Three of a Kind";
+            case 18:
+                return "Straight";
+            case 20:
+                return "Flush";
+            case 22:
+                return "Full House";
+            case 24:
+                return "Four of a Kind";
+            case 26:
+                return "Straight Flush";
+            case 28:
+                return "Royal Flush!";
+            default:
+                return "nothing!";
+        }
     }
 }
