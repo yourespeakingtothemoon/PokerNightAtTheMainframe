@@ -12,7 +12,7 @@ public class Main {
 
        /* Dialogue.printDialogue(1,9,1,"AM");
         Dialogue.printDialogue(1,3,1,"AM");*/
-        Dialogue.printDialogue(3,6,4,"NORM");
+        //Dialogue.printDialogue(3,6,4,"NORM");
         StartApp startApp = new StartApp();
         startApp.MainMenu();
     }
