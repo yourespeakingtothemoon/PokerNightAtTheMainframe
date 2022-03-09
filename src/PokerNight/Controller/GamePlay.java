@@ -69,7 +69,7 @@ public class GamePlay {
                 if (!game.getPlayers().get(y).isOutOfGame()) { //For each player that isn't out...
                     if (probScore > winningScore) {
                         winningScore = probScore;
-                        tiedWinners.add(game.getgPlayers().get(y));
+                        tiedWinners.add(game.getPlayers().get(y));
                     }
                     if (probScore == winningScore) {
                         tiedWinners.add(game.getPlayers().get(y));
