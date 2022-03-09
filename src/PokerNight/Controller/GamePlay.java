@@ -44,7 +44,6 @@ public class GamePlay {
 
             game.NewRound(); //Resets just about everything
             AnteUp(game, ui); //Forces every player to bet money before the round
-
             for (int x = 0; x < game.getRemainingPlayers().size(); x++) { //Give each player 2 (pocket) cards
                 game.getRemainingPlayers().get(x).getPocket().clear();
                 if (!game.getRemainingPlayers().get(x).isOutOfGame()) {
@@ -62,6 +61,7 @@ public class GamePlay {
             //Do checks, pay out the winner, end round
             int winningScore=0;
             for (int y = 0; y < game.getRemainingPlayers().size(); y++) { //Go through all players
+                System.out.println(Checks.probScore(5,game.getRemainingPlayers().get(y).getPocket(),game.getBoard()));
                 if (!game.getRemainingPlayers().get(y).isOutOfGame()) { //For each player that isn't out...
                     if(Checks.probScore(5,game.getRemainingPlayers().get(y).getPocket(),game.getBoard())>winningScore){
                         game.setWinner(game.getRemainingPlayers().get(y));
@@ -125,8 +125,7 @@ public class GamePlay {
         }
         return returnArrayList;
     }
-
-    public void AnteUp(Game game, UI ui) {
+ public void AnteUp(Game game, UI ui) {
         for (int x = 0; x < game.getPlayers().size(); x++) {
             if (!game.getPlayers().get(x).isOutOfGame()) {
                 int anteAmount = Math.min(game.getMinBet(), game.getPlayers().get(x).getMoney());
