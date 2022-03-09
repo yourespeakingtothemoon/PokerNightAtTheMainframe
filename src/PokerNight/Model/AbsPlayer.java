@@ -114,6 +114,10 @@ public abstract class AbsPlayer {
         this.pocket = pocket;
     }
 
+    public int getPersonalityID() {
+        return personalityID;
+    }
+
     //flip a coin any coin for deciding if character is gonna speak or not
     protected int flipACoin() {
         Random rand=new Random();

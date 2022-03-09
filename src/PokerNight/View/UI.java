@@ -29,7 +29,18 @@ public class UI {
                 }
             }
         }
-        System.out.println(game.getWinner().getName() + " wins the round!\n");
+        if(game.getWinners().size()==1){
+            System.out.println(game.getWinners().get(0).getName() + " wins the round!\n");
+        }else{
+            String winnerList="";
+        for(int pos=0;pos<game.getWinners().size();pos++) {
+            if(pos==0){
+                winnerList+=game.getWinners().get(pos).getName();
+            }
+            winnerList+=" and "+game.getWinners().get(pos).getName();
+        }
+            System.out.println(winnerList+" all win the round, and split the pot.\n");
+        }
     }
 
     public void printAction(String name, String action){
