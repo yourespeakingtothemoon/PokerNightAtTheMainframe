@@ -43,7 +43,7 @@ public class GamePlay {
             }
 
             game.NewRound(); //Resets just about everything
-
+            AnteUp(game, ui); //Forces every player to bet money before the round
             for (int x = 0; x < game.getRemainingPlayers().size(); x++) { //Give each player 2 (pocket) cards
                 game.getRemainingPlayers().get(x).getPocket().clear();
                 if (!game.getRemainingPlayers().get(x).isOutOfGame()) {
@@ -124,6 +124,16 @@ public class GamePlay {
             gameDeck.remove(0); //Removes top card from deck
         }
         return returnArrayList;
+    }
+ public void AnteUp(Game game, UI ui) {
+        for (int x = 0; x < game.getPlayers().size(); x++) {
+            if (!game.getPlayers().get(x).isOutOfGame()) {
+                int anteAmount = Math.min(game.getMinBet(), game.getPlayers().get(x).getMoney());
+                game.setPot(game.getPot() + anteAmount);
+                game.getPlayers().get(x).setMoney(game.getPlayers().get(x).getMoney() - anteAmount);
+            }
+        }
+        ui.printAction("Everyone", "antes up");
     }
 
     //May move these to the Game class
