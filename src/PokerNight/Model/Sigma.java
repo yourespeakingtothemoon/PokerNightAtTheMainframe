@@ -24,33 +24,31 @@ public class Sigma extends AbsPlayer {
     @Override
     public int turn(Game game, UI ui) throws IOException, ParseException { //sigma grindset
         //#heboughtthebank
-
+        if(flipACoin()>=50){
+        sigmaStringset(super.rand.nextInt(10 + 1));}
         while (true) {
             switch (super.rand.nextInt(4)) {
                 case 0: //Call
                     if (this.getMoney() >= game.getMinBet()) {
                         this.setMoney(this.getMoney() - game.getMinBet());
-                        sigmaStringset(super.rand.nextInt(10) + 1);
                         ui.printAction(this.getName(), "calls");
                         return game.getMinBet();
                     }
                     int returnAmt = this.getMoney();
                     this.setMoney(0);
-                    sigmaStringset(super.rand.nextInt(10 + 1));
-                    ui.printAction(this.getName(), "calls");
+
+                    ui.printAction(this.getName(), "calls and says, \"all in.\"");
                     return returnAmt;
                 case 1: //raise
                     if (this.getMoney() >= game.getMinBet()) { //Disallows the Sigma to bet more than they have
                         int betAmt = super.rand.nextInt((this.getMoney() - game.getMinBet()) + 1) + game.getMinBet();
                         game.setMinBet(betAmt);
                         this.setMoney(this.getMoney() - game.getMinBet());
-                        sigmaStringset(super.rand.nextInt(10) + 1);
                         ui.printAction(this.getName(), "raises to " + betAmt);
                         return betAmt;
                     }
                 case 2: //fold
                     this.setSkipRound(true);
-                    sigmaStringset(super.rand.nextInt(10) + 1);
                     ui.printAction(this.getName(), "folds");
                     return 0;
                 case 3: //Check

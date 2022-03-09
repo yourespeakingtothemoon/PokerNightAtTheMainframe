@@ -78,6 +78,9 @@ public class Dialogue {
                     break;
             }
             break;
+            //wall-e and rob type characters
+            case 5:
+                dialogue=quoteToAppend;
                 }
         }
         return dialogue+"\n";
