@@ -19,29 +19,30 @@ public class DAPoker {
     - create a persistent high score system using another JSON file.
      */
 
-    public static String pullDialogue(int ID,int val) throws IOException, ParseException {
+    public static String pullDialogue(int ID, int val) throws IOException, ParseException {
         FileReader file = new FileReader("dialogue.json");
         JSONObject line = (JSONObject) new JSONParser().parse(file);
-        JSONObject set = (JSONObject) line.get("set-"+ID);
+        JSONObject set = (JSONObject) line.get("set-" + ID);
         return (String) set.get(String.valueOf(val));
 
     }
-//character gen take in archetype and a random number 1- however many players in that archetype are available.
+
+    //character gen take in archetype and a random number 1- however many players in that archetype are available.
     public static AbsPlayer playerPull(String archetype, int playerNumber) throws IOException, ParseException {
-            FileReader file = new FileReader("players.json");
-            JSONObject set = (JSONObject) new JSONParser().parse(file);
-            JSONObject playerInfo = (JSONObject) set.get(archetype+playerNumber);
-            Long longDialogue = (Long) playerInfo.get("ID");
-            Long longPersonality=(Long) playerInfo.get("PID");
-        switch(archetype){
+        FileReader file = new FileReader("players.json");
+        JSONObject set = (JSONObject) new JSONParser().parse(file);
+        JSONObject playerInfo = (JSONObject) set.get(archetype + playerNumber);
+        Long longDialogue = (Long) playerInfo.get("ID");
+        Long longPersonality = (Long) playerInfo.get("PID");
+        switch (archetype) {
             case "alpha":
-                return new Alpha((String) playerInfo.get("name"), longDialogue.intValue(),longPersonality.intValue());
+                return new Alpha((String) playerInfo.get("name"), longDialogue.intValue(), longPersonality.intValue());
             case "beta":
-                return new Beta((String) playerInfo.get("name"), longDialogue.intValue(),longPersonality.intValue());
+                return new Beta((String) playerInfo.get("name"), longDialogue.intValue(), longPersonality.intValue());
             case "omega":
-                return new Omega((String) playerInfo.get("name"), longDialogue.intValue(),longPersonality.intValue());
+                return new Omega((String) playerInfo.get("name"), longDialogue.intValue(), longPersonality.intValue());
             default:
-                return new Sigma((String) playerInfo.get("name"), longDialogue.intValue(),longPersonality.intValue());
+                return new Sigma((String) playerInfo.get("name"), longDialogue.intValue(), longPersonality.intValue());
         }
     }
 

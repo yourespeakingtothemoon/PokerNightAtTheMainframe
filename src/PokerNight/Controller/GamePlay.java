@@ -21,10 +21,10 @@ public class GamePlay {
         Random rand = new Random();
         //Select players (one bot of each archetype) as well as the Human player
         game.getPlayers().add(new Human());
-        game.getPlayers().add(DAPoker.playerPull("alpha",(rand.nextInt(3)+1)));
-        game.getPlayers().add(DAPoker.playerPull("beta",(rand.nextInt(3)+1)));
-        game.getPlayers().add(DAPoker.playerPull("sigma",(rand.nextInt(3)+1)));
-        game.getPlayers().add(DAPoker.playerPull("omega",(rand.nextInt(3)+1)));
+        game.getPlayers().add(DAPoker.playerPull("alpha", (rand.nextInt(3) + 1)));
+        game.getPlayers().add(DAPoker.playerPull("beta", (rand.nextInt(3) + 1)));
+        game.getPlayers().add(DAPoker.playerPull("sigma", (rand.nextInt(3) + 1)));
+        game.getPlayers().add(DAPoker.playerPull("omega", (rand.nextInt(3) + 1)));
 
         MainGamePlayLoop(game, ui);
     }
@@ -94,41 +94,41 @@ public class GamePlay {
             //Gives the winner(s) the pot
             game.setWinner(roundWinners);
             //check for duplicate and not in round players in winner list
-            for(int pos=1;pos<game.getWinners().size();pos++){
-                if(game.getWinners().get(0).getName().equals(game.getWinners().get(pos).getName())){
+            for (int pos = 1; pos < game.getWinners().size(); pos++) {
+                if (game.getWinners().get(0).getName().equals(game.getWinners().get(pos).getName())) {
                     game.getWinners().remove(roundWinners.get(pos));
                 }
             }
 
-            int potSplit =game.getPot()/game.getWinners().size();
-            for(int pos=0;pos<game.getWinners().size();pos++){
-                if(game.getPot()-potSplit<potSplit){
-                    game.getWinners().get(pos).setMoney(game.getPot()+game.getWinners().get(pos).getMoney());
-                }else{
-            game.getWinners().get(pos).setMoney(potSplit+game.getWinners().get(pos).getMoney());}
-            game.setPot(game.getPot()-potSplit);
+            int potSplit = game.getPot() / game.getWinners().size();
+            for (int pos = 0; pos < game.getWinners().size(); pos++) {
+                if (game.getPot() - potSplit < potSplit) {
+                    game.getWinners().get(pos).setMoney(game.getPot() + game.getWinners().get(pos).getMoney());
+                } else {
+                    game.getWinners().get(pos).setMoney(potSplit + game.getWinners().get(pos).getMoney());
+                }
+                game.setPot(game.getPot() - potSplit);
             }
             Dialogue.printWinLose(game);
             ui.DisplayEndRound(game);
         }
     }
-        //Choose person to start, make 2 starting players pay big and small blind
-            //Sort players in game.getPlayers() so they start at a specific person? --CANNOT - human player has to stay index 0--
-        //Drop players (probably from a new ArrayList like remainingPlayers) when they fold --DONE--
-        //Keep track of money --DONE--
-        //Check each player's hand by combining board and pocket to determine best hand ****
-        //After first betting round, do flop --DONE--
-        //Do another betting round, do turn --DONE--
-        //Do another betting round, do river --DONE--
-        //Do another betting round, show cards and determine winner of pot --MOSTLY DONE--
-        //Loop, resetting remainingPlayers to every player that still has money and increasing blinds --DONE--
-        //Check at the beginning of a round if only one player has money, throw win condition --DONE--
-            //If Human is the last remaining player, allow them to add acronym to save high score
-            //We need to figure out how or if we want to do score lmao
-            //If human player is out, allow them to spectate or leave the game --MAYBE--
+    //Choose person to start, make 2 starting players pay big and small blind
+    //Sort players in game.getPlayers() so they start at a specific person? --CANNOT - human player has to stay index 0--
+    //Drop players (probably from a new ArrayList like remainingPlayers) when they fold --DONE--
+    //Keep track of money --DONE--
+    //Check each player's hand by combining board and pocket to determine best hand ****
+    //After first betting round, do flop --DONE--
+    //Do another betting round, do turn --DONE--
+    //Do another betting round, do river --DONE--
+    //Do another betting round, show cards and determine winner of pot --MOSTLY DONE--
+    //Loop, resetting remainingPlayers to every player that still has money and increasing blinds --DONE--
+    //Check at the beginning of a round if only one player has money, throw win condition --DONE--
+    //If Human is the last remaining player, allow them to add acronym to save high score
+    //We need to figure out how or if we want to do score lmao
+    //If human player is out, allow them to spectate or leave the game --MAYBE--
 
-        //Return to main menu
-
+    //Return to main menu
 
 
     public void BettingRound(Game game, UI ui) throws IOException, ParseException { //Loops through players, doing turns, then adds cards to the board
@@ -164,7 +164,8 @@ public class GamePlay {
         }
         return returnArrayList;
     }
- public void AnteUp(Game game, UI ui) {
+
+    public void AnteUp(Game game, UI ui) {
         for (int x = 0; x < game.getPlayers().size(); x++) {
             if (!game.getPlayers().get(x).isOutOfGame()) {
                 int anteAmount = Math.min(game.getMinBet(), game.getPlayers().get(x).getMoney());
@@ -188,7 +189,7 @@ public class GamePlay {
 
     public void RemovePlayers(Game game) { //Permanently removes players from the game if their money is 0
         for (int x = 0; x < game.getPlayers().size(); x++) {
-            if (game.getPlayers().get(x).getMoney() <= 0 ) { //Should never be less than 0, but just in case
+            if (game.getPlayers().get(x).getMoney() <= 0) { //Should never be less than 0, but just in case
                 game.getPlayers().get(x).setOutOfGame(true);
             }
         }

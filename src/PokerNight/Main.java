@@ -7,14 +7,10 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {
-
-
         StartApp startApp = new StartApp();
         startApp.MainMenu();
     }
-    //mrmoon reporting for duty
 }
-
 
 
 //code for testing

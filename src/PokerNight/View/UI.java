@@ -25,30 +25,32 @@ public class UI {
         System.out.println("Board: " + game.getBoard());
         for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
             if (!game.getRemainingPlayers().get(x).isOutOfGame() && !game.getRemainingPlayers().get(x).isSkipRound()) {
-                System.out.println(game.getRemainingPlayers().get(x).getName() + " had: " + game.getRemainingPlayers().get(x).getPocket()+
-                        " ("+handName(Checks.probScore(5,game.getRemainingPlayers().get(x).getPocket(),game.getBoard()))+")"); //Add what their hand is
+                System.out.println(game.getRemainingPlayers().get(x).getName() + " had: " + game.getRemainingPlayers().get(x).getPocket() +
+                        " (" + handName(Checks.probScore(5, game.getRemainingPlayers().get(x).getPocket(), game.getBoard())) + ")"); //Add what their hand is
             }
         }
-        if(game.getWinners().size()==1){
+        if (game.getWinners().size() == 1) {
             System.out.println(game.getWinners().get(0).getName() + " wins the round!\n");
-        }else{
-            StringBuilder winnerList= new StringBuilder();
-        for(int pos=0;pos<game.getWinners().size();pos++) {
-            if(pos==0){
-                winnerList.append(game.getWinners().get(pos).getName());
-            }else{
-            winnerList.append(" and "+game.getWinners().get(pos).getName());
-        }}
-        if(game.getWinners().size()==2) {
-            System.out.println(winnerList+" both win the round, and split the pot.\n");
-        }else{
-            System.out.println(winnerList+" all win the round, and split the pot.\n");}
+        } else {
+            StringBuilder winnerList = new StringBuilder();
+            for (int pos = 0; pos < game.getWinners().size(); pos++) {
+                if (pos == 0) {
+                    winnerList.append(game.getWinners().get(pos).getName());
+                } else {
+                    winnerList.append(" and " + game.getWinners().get(pos).getName());
+                }
+            }
+            if (game.getWinners().size() == 2) {
+                System.out.println(winnerList + " both win the round, and split the pot.\n");
+            } else {
+                System.out.println(winnerList + " all win the round, and split the pot.\n");
+            }
 
         }
     }
 
-    public void printAction(String name, String action){
-        System.out.println(name+" "+action+".\n");
+    public void printAction(String name, String action) {
+        System.out.println(name + " " + action + ".\n");
     }
 
     public void printError() {
@@ -63,7 +65,7 @@ public class UI {
         return ConsoleIO.promptForInt(prompt, min, max);
     }
 
-    public void titleScreen(){
+    public void titleScreen() {
         System.out.println("                 ____        __                         __  __              __      __            ");
         System.out.println("                /\\  _`\\     /\\ \\                       /\\ \\/\\ \\  __        /\\ \\    /\\ \\__          ");
         System.out.println("                \\ \\ \\L\\ \\___\\ \\ \\/'\\      __   _ __    \\ \\ `\\\\ \\/\\_\\     __\\ \\ \\___\\ \\ ,_\\       ");
@@ -83,12 +85,10 @@ public class UI {
         System.out.println("       \\/__/\\/_/ \\/__/     \\/__/ \\/_/\\/_/\\/____/     \\/_/ \\/_/\\/__/\\/_/ \\/_/\\/_/\\/_/\\/_/   \\/_/ \\/__/\\/_/\\/_/\\/_/\\/_/\\/____/");
 
 
-
-
     }
 
-    private String handName(int idx){
-        switch(idx){
+    private String handName(int idx) {
+        switch (idx) {
             case 1:
             case 2:
             case 3:
@@ -98,7 +98,7 @@ public class UI {
             case 7:
             case 8:
             case 9:
-                return String.valueOf(idx+1)+" High";
+                return String.valueOf(idx + 1) + " High";
             case 10:
                 return "Jack High";
             case 11:

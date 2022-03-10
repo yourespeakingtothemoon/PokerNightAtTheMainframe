@@ -17,9 +17,9 @@ public class StartApp {
         UI ui = new UI();
         ui.titleScreen();
         while (true) {
-            switch(ConsoleIO.promptForString("Welcome to Poker Night at the Mainframe! Please input a letter to select an option:\n" +
-                    "a: Start Game\n" +
-                    "b: Exit\n",
+            switch (ConsoleIO.promptForString("Welcome to Poker Night at the Mainframe! Please input a letter to select an option:\n" +
+                            "a: Start Game\n" +
+                            "b: Exit\n",
                     false)) {
                 case "a": //Start Game
                     gamePlay.StartGame();

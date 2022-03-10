@@ -80,25 +80,26 @@ public class Checks {
         }
         return probabilityPoints;
     }
-//ties
+
+    //ties
     //ties - check for high card
-   public static ArrayList<AbsPlayer> tieBreakHigh(ArrayList<AbsPlayer> players) {
-        ArrayList<AbsPlayer> winners=new ArrayList<>();
-        int highestCard=0;
-      for(int pos=0; pos<players.size();pos++){
-          int value = highCard(players.get(pos).getPocket());
-         if(value>highestCard){
-             highestCard=value;
-         }
-      }
-      //add winners to list
-       for(int pos=0; pos<players.size();pos++){
-          // int value = highCard(players.get(pos).getPocket());
-           if(highCard(players.get(pos).getPocket())==highestCard){
-               winners.add(players.get(pos));
-           }
-       }
-       return winners;
+    public static ArrayList<AbsPlayer> tieBreakHigh(ArrayList<AbsPlayer> players) {
+        ArrayList<AbsPlayer> winners = new ArrayList<>();
+        int highestCard = 0;
+        for (int pos = 0; pos < players.size(); pos++) {
+            int value = highCard(players.get(pos).getPocket());
+            if (value > highestCard) {
+                highestCard = value;
+            }
+        }
+        //add winners to list
+        for (int pos = 0; pos < players.size(); pos++) {
+            // int value = highCard(players.get(pos).getPocket());
+            if (highCard(players.get(pos).getPocket()) == highestCard) {
+                winners.add(players.get(pos));
+            }
+        }
+        return winners;
 //      //check for ties and add additonal winner(s)
 //       for(int pos=0; pos<players.size();pos++){
 //           int value = highCard(players.get(pos).getPocket());
@@ -110,16 +111,17 @@ public class Checks {
 
 
     }
+
     //ties - check for best pair
-    public static ArrayList<AbsPlayer> tieBreakPair(ArrayList<AbsPlayer> players, Game game){
-        ArrayList<AbsPlayer> winners=new ArrayList<>();
-        ArrayList<ArrayList<Integer>> pairs=new ArrayList<>();
+    public static ArrayList<AbsPlayer> tieBreakPair(ArrayList<AbsPlayer> players, Game game) {
+        ArrayList<AbsPlayer> winners = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> pairs = new ArrayList<>();
         //find unique pair yes this is insane
-        for(int pos=0;pos<players.size();pos++){
-            ArrayList<Integer> thisPair=new ArrayList<>();
-            for(int position=0;position<players.get(pos).getPocket().size();position++){
-                for(int posit=0;posit<game.getBoard().size();posit++){
-                    if(players.get(pos).getPocket().get(position)==game.getBoard().get(posit)){
+        for (int pos = 0; pos < players.size(); pos++) {
+            ArrayList<Integer> thisPair = new ArrayList<>();
+            for (int position = 0; position < players.get(pos).getPocket().size(); position++) {
+                for (int posit = 0; posit < game.getBoard().size(); posit++) {
+                    if (players.get(pos).getPocket().get(position) == game.getBoard().get(posit)) {
                         winners.add(players.get(pos));
                         thisPair.add(players.get(pos).getPocket().get(position).getRank().getNumVal());
                         thisPair.add(game.getBoard().get(posit).getRank().getNumVal());
@@ -135,20 +137,19 @@ public class Checks {
 //        for(int pos=0;pos<pairs.size();pos++){
 //            pairCards.add(pairs.get(pos).get(0));
 //        }
-        if(winners.size()!=0){
+        if (winners.size() != 0) {
             //find best winners
-            ArrayList<AbsPlayer> returnWinner=new ArrayList<>();
-            int bestIdx=0;
-            for(int pos=0;pos< winners.size();pos++){
-                if(pairs.get(pos).get(0)>=bestIdx){
+            ArrayList<AbsPlayer> returnWinner = new ArrayList<>();
+            int bestIdx = 0;
+            for (int pos = 0; pos < winners.size(); pos++) {
+                if (pairs.get(pos).get(0) >= bestIdx) {
                     returnWinner.add(winners.get(pos));
                 }
             }
             //return winners
             return returnWinner;
 
-        }
-        else {
+        } else {
             return tieBreakHigh(players);
         }
     }
@@ -157,7 +158,7 @@ public class Checks {
     //foundational
     private static ArrayList<Card> ofAKind(ArrayList<Card> opnCard) {
         ArrayList<Card> OAKr = new ArrayList<>();
-       // ArrayList<ArrayList<Card>> OAKArray = new ArrayList<>();
+        // ArrayList<ArrayList<Card>> OAKArray = new ArrayList<>();
         //OAKArray.add(OAKr);
         for (int position = 0; position < opnCard.size(); position++) {
             ArrayList<Card> OAK = new ArrayList<>();
@@ -191,22 +192,30 @@ public class Checks {
     private static boolean sameSuit(ArrayList<Card> opnCard) {
         int size = Math.min(opnCard.size(), 5);
         //intialize counts for each suit
-        int returnCount=0;
+        int returnCount = 0;
         int spadeCount = 0;
         int clubCount = 0;
-        int heartCount=0;
+        int heartCount = 0;
         int diamondCount = 0;
-        for(int pos=0; pos< opnCard.size();pos++){
-            if(opnCard.get(pos).getSuit()== Suit.SPADES){spadeCount++;}
-            if(opnCard.get(pos).getSuit()== Suit.CLUBS){clubCount++;}
-            if(opnCard.get(pos).getSuit()== Suit.HEARTS){heartCount++;}
-            if(opnCard.get(pos).getSuit()== Suit.DIAMONDS){diamondCount++;}
+        for (int pos = 0; pos < opnCard.size(); pos++) {
+            if (opnCard.get(pos).getSuit() == Suit.SPADES) {
+                spadeCount++;
+            }
+            if (opnCard.get(pos).getSuit() == Suit.CLUBS) {
+                clubCount++;
+            }
+            if (opnCard.get(pos).getSuit() == Suit.HEARTS) {
+                heartCount++;
+            }
+            if (opnCard.get(pos).getSuit() == Suit.DIAMONDS) {
+                diamondCount++;
+            }
         }
         //finds largest same suit count sum.
-        int[] countArray = new int[]{spadeCount,clubCount,heartCount,diamondCount};
-        for(int pos=0; pos<countArray.length;pos++){
-            if(countArray[pos]>returnCount){
-                returnCount=countArray[pos];
+        int[] countArray = new int[]{spadeCount, clubCount, heartCount, diamondCount};
+        for (int pos = 0; pos < countArray.length; pos++) {
+            if (countArray[pos] > returnCount) {
+                returnCount = countArray[pos];
             }
         }
         return returnCount >= size;
@@ -214,18 +223,17 @@ public class Checks {
 
     //check boolean returns
     private static int highCard(ArrayList<Card> opnCard) {
-        int returnAmt=0;
-           for(int pos=0;pos<opnCard.size();pos++){
-               if(opnCard.get(pos).getRank()==ACE) {
-               returnAmt=13;
-               }
-               if(opnCard.get(pos).getRank().getNumVal()>returnAmt){
-                   returnAmt=opnCard.get(pos).getRank().getNumVal()-1;
-               }
-           }
-        return returnAmt;
+        int returnAmt = 0;
+        for (int pos = 0; pos < opnCard.size(); pos++) {
+            if (opnCard.get(pos).getRank() == ACE) {
+                returnAmt = 13;
+            }
+            if (opnCard.get(pos).getRank().getNumVal() > returnAmt) {
+                returnAmt = opnCard.get(pos).getRank().getNumVal() - 1;
+            }
         }
-
+        return returnAmt;
+    }
 
 
     private static String OAKofAKind(ArrayList<Card> opnCard) {
