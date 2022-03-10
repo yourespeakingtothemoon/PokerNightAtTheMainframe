@@ -1,10 +1,10 @@
-package PokerNight.Model;
+package PokerNight.Model.Players;
 
+import PokerNight.Model.Game;
 import PokerNight.View.UI;
 import lib.ConsoleIO;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class Human extends AbsPlayer {
 

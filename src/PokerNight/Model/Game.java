@@ -1,5 +1,9 @@
 package PokerNight.Model;
 
+import PokerNight.Model.Cards.Card;
+import PokerNight.Model.Cards.Deck;
+import PokerNight.Model.Players.AbsPlayer;
+
 import java.util.ArrayList;
 import java.util.Collections;
 

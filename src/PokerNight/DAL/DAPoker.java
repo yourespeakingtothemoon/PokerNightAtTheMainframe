@@ -1,11 +1,11 @@
 package PokerNight.DAL;
 
 
-import PokerNight.Model.*;
+import PokerNight.Model.Players.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -27,7 +27,7 @@ public class DAPoker {
 
     }
 //character gen take in archetype and a random number 1- however many players in that archetype are available.
-    public static AbsPlayer playerPull(String archetype,int playerNumber) throws IOException, ParseException {
+    public static AbsPlayer playerPull(String archetype, int playerNumber) throws IOException, ParseException {
             FileReader file = new FileReader("players.json");
             JSONObject set = (JSONObject) new JSONParser().parse(file);
             JSONObject playerInfo = (JSONObject) set.get(archetype+playerNumber);

@@ -1,10 +1,14 @@
 package PokerNight.Controller;
 
 import PokerNight.Model.*;
+import PokerNight.Model.Cards.Card;
+import PokerNight.Model.Cards.Rank;
+import PokerNight.Model.Cards.Suit;
+import PokerNight.Model.Players.AbsPlayer;
 
 import java.util.*;
 
-import static PokerNight.Model.Rank.*;
+import static PokerNight.Model.Cards.Rank.*;
 
 public class Checks {
     //Calculate win Probability via finding if hand and board have certain win cond available

@@ -1,10 +1,10 @@
-package PokerNight.Model;
+package PokerNight.Model.Cards;
 
 public enum Suit {
-    HEARTS("♥"),
-    DIAMONDS("♦"),
-    SPADES("♠"),
-    CLUBS("♣");
+    HEARTS("\u2665"),
+    DIAMONDS("\u2666"),
+    SPADES("\u2660"),
+    CLUBS("\u2663");
     private String value;
 
     Suit(String s) {

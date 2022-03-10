@@ -1,7 +1,7 @@
 package PokerNight.View;
 
 import PokerNight.Controller.Checks;
-import PokerNight.Model.AbsPlayer;
+import PokerNight.Model.Players.AbsPlayer;
 import PokerNight.Model.Game;
 import lib.ConsoleIO;
 

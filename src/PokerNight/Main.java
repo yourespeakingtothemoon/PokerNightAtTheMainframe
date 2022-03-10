@@ -1,15 +1,9 @@
 package PokerNight;
 
-import PokerNight.Controller.Checks;
 import PokerNight.Controller.StartApp;
-import PokerNight.DAL.DAPoker;
-import PokerNight.Model.Card;
-import PokerNight.Model.Deck;
-import PokerNight.View.Dialogue;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {

@@ -1,7 +1,7 @@
 package PokerNight.View;
 
 import PokerNight.DAL.DAPoker;
-import PokerNight.Model.AbsPlayer;
+import PokerNight.Model.Players.AbsPlayer;
 import PokerNight.Model.Game;
 import org.json.simple.parser.ParseException;
 

@@ -1,4 +1,4 @@
-package PokerNight.Model;
+package PokerNight.Model.Cards;
 
 public class Card {
     private Suit suit; //HEARTS, DIAMONDS, SPADES, CLUBS

@@ -1,4 +1,4 @@
-package PokerNight.Model;
+package PokerNight.Model.Cards;
 
 import java.util.ArrayList;
 

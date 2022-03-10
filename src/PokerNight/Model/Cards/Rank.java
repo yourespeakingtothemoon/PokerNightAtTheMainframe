@@ -1,4 +1,4 @@
-package PokerNight.Model;
+package PokerNight.Model.Cards;
 
 public enum Rank {
     ACE("A",1),

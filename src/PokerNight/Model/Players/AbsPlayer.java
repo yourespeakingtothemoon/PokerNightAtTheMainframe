@@ -1,6 +1,8 @@
-package PokerNight.Model;
+package PokerNight.Model.Players;
 
 import PokerNight.Controller.Checks;
+import PokerNight.Model.Cards.Card;
+import PokerNight.Model.Game;
 import PokerNight.View.Dialogue;
 import PokerNight.View.UI;
 import org.json.simple.parser.ParseException;
