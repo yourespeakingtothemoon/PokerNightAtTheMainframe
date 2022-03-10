@@ -5,9 +5,12 @@ import PokerNight.Model.Players.AbsPlayer;
 import PokerNight.Model.Game;
 import lib.ConsoleIO;
 
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+
 public class UI {
 
-    public void DisplayGame(Game game) { //Display all players' money, board, player hand, pot, blinds, etc.
+    public void DisplayGame(Game game) throws UnsupportedEncodingException { //Display all players' money, board, player hand, pot, blinds, etc.
         for (int x = 0; x < game.getPlayers().size(); x++) {
             System.out.print(game.getPlayers().get(x).getName() + ": " + game.getPlayers().get(x).getMoney() + "\t\t");
         } //Needs testing
@@ -15,17 +18,19 @@ public class UI {
         if (game.getBoard() != null) {
             System.out.print(game.getBoard());
         }
-        System.out.print("\t Your hand: " + game.getPlayers().get(0).getPocket() + "\t");
+        PrintStream out = new PrintStream(System.out, true, "UTF-8");
+        out.print("\t Your hand: " + game.getPlayers().get(0).getPocket() + "\t");
         System.out.print("Your money: " + game.getPlayers().get(0).getMoney() + "\t");
         System.out.print("Current pot: " + game.getPot() + "\t");
         System.out.print("Minimum bet: " + game.getMinBet() + "\n \n");
     }
 
-    public void DisplayEndRound(Game game) { //Displays the end of a game -- the hands of every player still in and the winner
-        System.out.println("Board: " + game.getBoard());
+    public void DisplayEndRound(Game game) throws UnsupportedEncodingException { //Displays the end of a game -- the hands of every player still in and the winner
+        PrintStream out = new PrintStream(System.out, true, "UTF-8");
+        out.println("Board: " + game.getBoard());
         for (int x = 0; x < game.getRemainingPlayers().size(); x++) {
             if (!game.getRemainingPlayers().get(x).isOutOfGame() && !game.getRemainingPlayers().get(x).isSkipRound()) {
-                System.out.println(game.getRemainingPlayers().get(x).getName() + " had: " + game.getRemainingPlayers().get(x).getPocket()+
+                out.println(game.getRemainingPlayers().get(x).getName() + " had: " + game.getRemainingPlayers().get(x).getPocket()+
                         " ("+handName(Checks.probScore(5,game.getRemainingPlayers().get(x).getPocket(),game.getBoard()))+")"); //Add what their hand is
             }
         }

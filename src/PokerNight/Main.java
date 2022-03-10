@@ -7,8 +7,9 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {
-
-
+        //for windows command line to accept Unicode Char.
+        Runtime rt = Runtime.getRuntime();
+        rt.exec("cmd c chcp 65001");
         StartApp startApp = new StartApp();
         startApp.MainMenu();
     }

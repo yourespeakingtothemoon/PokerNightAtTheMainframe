@@ -1,7 +1,7 @@
 package PokerNight.Model.Cards;
 
 public enum Suit {
-    HEARTS("\u2665"),
+    HEARTS("\ue299a0"),
     DIAMONDS("\u2666"),
     SPADES("\u2660"),
     CLUBS("\u2663");
