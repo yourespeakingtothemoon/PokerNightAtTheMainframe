@@ -11,14 +11,15 @@ import java.io.UnsupportedEncodingException;
 public class UI {
 
     public void DisplayGame(Game game) throws UnsupportedEncodingException { //Display all players' money, board, player hand, pot, blinds, etc.
+        PrintStream out = new PrintStream(System.out, true, "UTF-8");
         for (int x = 0; x < game.getPlayers().size(); x++) {
             System.out.print(game.getPlayers().get(x).getName() + ": " + game.getPlayers().get(x).getMoney() + "\t\t");
         } //Needs testing
         System.out.print("\nBoard: ");
         if (game.getBoard() != null) {
-            System.out.print(game.getBoard());
+            out.print(game.getBoard());
         }
-        PrintStream out = new PrintStream(System.out, true, "UTF-8");
+
         out.print("\t Your hand: " + game.getPlayers().get(0).getPocket() + "\t");
         System.out.print("Your money: " + game.getPlayers().get(0).getMoney() + "\t");
         System.out.print("Current pot: " + game.getPot() + "\t");
