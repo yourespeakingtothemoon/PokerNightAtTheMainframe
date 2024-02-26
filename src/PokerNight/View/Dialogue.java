@@ -26,7 +26,7 @@ public class Dialogue {
         } else {
             switch (pID) {
                 case 1:
-//insane misanthrope
+                    //This archetype is an evil aggressive robot, or a robot that is a villain. Dialogue and quotes are meant to be misanthropic and aggressive.
                     switch (new Random().nextInt(2) + 1) {
                         case 1:
                             dialogue = "\"" + quoteToAppend + "\", " + name + " said, malice dripping from its canned voice";
@@ -40,7 +40,7 @@ public class Dialogue {
                     }
                     break;
                 case 2:
-                    //funny robot you'd wanna drink with
+                    //This archetype is usually a witty for funny robot. Sarcastic and humorous quotes are used.
                     switch (new Random().nextInt(2) + 1) {
                         case 1:
                             dialogue = "\"" + quoteToAppend + "\", " + name + " exclaimed.";
@@ -54,7 +54,7 @@ public class Dialogue {
                     }
                     break;
                 case 3:
-                    //non-verbal beep boop type robot
+                    //this archetype is a generally friendly, but non-verbal robot. Actions are emphasized over words.
                     switch (new Random().nextInt(2) + 1) {
                         case 1:
                             dialogue = "\"" + quoteToAppend + "\", sounded out from " + name + "'s chassis";

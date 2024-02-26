@@ -30,7 +30,7 @@ public class Checks {
             //winner determination case
             case 5:
                 return probScoreCalc(14, 16, 18, 20, 22, 24, 26, 28, openCard, pocket);
-            //this dont need be but hey incase error
+            //default case, should normally never be reached, but if it is, return 0
             default:
                 return 0;
         }
